@@ -25,36 +25,21 @@ function Reveal({ children, delay = 0, as: As = "div", className = "", style = {
   );
 }
 
-// Carbomax logo mark (original — shield silhouette with B / 1998)
-function Logo({ size = 36, withWordmark = true }) {
+// Carbomax logo mark — brand badge image
+function Logo({ size = 48 }) {
   return (
-    <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-      <svg width={size} height={size} viewBox="0 0 40 40" aria-hidden="true">
-        <defs>
-          <linearGradient id="lg-g" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stopColor="var(--primary-bright)" />
-            <stop offset="1" stopColor="var(--primary)" />
-          </linearGradient>
-        </defs>
-        <path
-          d="M20 2 L34 7 L34 24 C34 31 27.5 36 20 38 C12.5 36 6 31 6 24 L6 7 Z"
-          fill="url(#lg-g)"
-          stroke="rgba(255,255,255,0.18)" strokeWidth="1"
-        />
-        <text x="20" y="26" textAnchor="middle"
-              fill="#0a120c" fontFamily="Geist, sans-serif" fontWeight="700" fontSize="18"
-              letterSpacing="-0.04em">CX</text>
-      </svg>
-      {withWordmark && (
-        <span style={{
-          fontFamily: "var(--font-display)",
-          fontSize: 22, letterSpacing: "-0.01em",
-          lineHeight: 1
-        }}>
-          Carbomax
-        </span>
-      )}
-    </div>
+    <img
+      src="uploads/photo_2026-05-04_16-33-29.jpg"
+      alt="Carbomax"
+      width={size} height={size}
+      style={{
+        width: size, height: size,
+        borderRadius: "50%",
+        objectFit: "cover",
+        display: "block",
+        flexShrink: 0,
+      }}
+    />
   );
 }
 
