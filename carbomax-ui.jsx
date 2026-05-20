@@ -26,7 +26,7 @@ function Reveal({ children, delay = 0, as: As = "div", className = "", style = {
 }
 
 // Carbomax logo mark — brand badge image
-function Logo({ size = 48 }) {
+function Logo({ size = 60 }) {
   return (
     <img
       src="uploads/photo_2026-05-04_16-33-29.jpg"
