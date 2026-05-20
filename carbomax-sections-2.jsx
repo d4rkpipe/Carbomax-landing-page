@@ -11,7 +11,7 @@ function Gallery({ locale }) {
     { ratio: "4/5", label: "Pollik tayyorlash — laser kesish" },
     { ratio: "1/1", label: "Ustalar jamoasi — 1998-yildan" },
     { ratio: "4/5", label: "Camry salon — premium chexol" },
-    { ratio: "1/1", label: "Ehtiyot qismlar ombori" },
+    { ratio: "1/1", label: "Aksessuarlar ombori" },
   ];
   const [open, setOpen] = useState(null);
 

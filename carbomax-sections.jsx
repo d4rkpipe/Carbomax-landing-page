@@ -310,16 +310,10 @@ function Categories({ locale }) {
       <circle cx="40" cy="40" r="4" fill="currentColor"/>
       <path d="M40 8 L40 16 M40 64 L40 72 M8 40 L16 40 M64 40 L72 40" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
     </svg>,
-    // parts — bolt cross-section
-    <svg viewBox="0 0 80 80" key="3" width="64" height="64" aria-hidden="true">
-      <path d="M40 14 L55 22 L55 40 L40 48 L25 40 L25 22 Z" fill="none" stroke="currentColor" strokeWidth="1.4"/>
-      <path d="M40 48 L40 66" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
-      <path d="M32 56 L48 56" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
-    </svg>,
   ];
   return (
     <Section id="cats" eyebrow="01 · Specialties" title={t("cats.title")} sub={t("cats.sub")}>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }} className="cbx-cats-grid">
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }} className="cbx-cats-grid">
         {items.map((c, i) => (
           <Reveal key={i} delay={i * 70}>
             <a href="#products"
@@ -356,7 +350,6 @@ function Products({ locale, onAddInquiry }) {
     { id: "covers", label: filters.covers },
     { id: "mats", label: filters.mats },
     { id: "acc", label: filters.acc },
-    { id: "parts", label: filters.parts },
   ];
   const [active, setActive] = useState("all");
   const items = useMemo(
