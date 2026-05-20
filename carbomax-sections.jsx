@@ -144,7 +144,7 @@ function Hero({ locale, variant = "split", onCta }) {
 
   const eyebrow = <div className="eyebrow">{t("hero.eyebrow")}</div>;
   const h1 = (
-    <h1 className="display" style={{ fontSize: "clamp(44px, 6vw, 84px)", margin: "16px 0 0", maxWidth: 820 }}>
+    <h1 className="display" style={{ fontSize: "clamp(40px, 5.2vw, 72px)", margin: "16px 0 0", maxWidth: 820 }}>
       <span style={{ display: "block" }}>{t("hero.h1_a")}</span>
       <em style={{ fontStyle: "normal", color: "color-mix(in oklab, var(--primary-bright) 90%, var(--fg))", display: "block" }}>{t("hero.h1_b")}</em>
     </h1>
