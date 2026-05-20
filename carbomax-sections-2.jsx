@@ -170,13 +170,13 @@ function Process({ locale }) {
                 background: "var(--bg)",
                 border: "1px solid var(--border-strong)",
                 display: "flex", alignItems: "center", justifyContent: "center",
-                fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 26, color: "var(--primary-bright)",
+                fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 23, color: "var(--primary-bright)",
                 position: "relative", zIndex: 2,
               }}>
                 {i + 1}
               </div>
               <div>
-                <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 28, margin: "0 0 8px", lineHeight: 1.05 }}>{s.title}</h3>
+                <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 25, margin: "0 0 8px", lineHeight: 1.05 }}>{s.title}</h3>
                 <p style={{ color: "var(--fg-muted)", fontSize: 14, lineHeight: 1.55, margin: 0, maxWidth: 240 }}>{s.desc}</p>
               </div>
             </div>
@@ -240,7 +240,7 @@ function Testimonials({ locale }) {
               <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true">
                 <path d="M4 16 C4 11 7 8 12 7 L12 10 C9 11 8 13 8 16 L12 16 L12 22 L4 22 Z M16 16 C16 11 19 8 24 7 L24 10 C21 11 20 13 20 16 L24 16 L24 22 L16 22 Z" fill="color-mix(in oklab, var(--primary) 40%, transparent)"/>
               </svg>
-              <p style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 22, lineHeight: 1.3, margin: 0, flexGrow: 1 }}>
+              <p style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 20, lineHeight: 1.3, margin: 0, flexGrow: 1 }}>
                 "{it.quote}"
               </p>
               <div style={{ display: "flex", alignItems: "center", gap: 12, marginTop: 8 }}>
@@ -304,7 +304,7 @@ function LeadForm({ locale, prefill, leadFormRef }) {
               <div style={{ width: 56, height: 56, margin: "0 auto 20px", borderRadius: "50%", background: "color-mix(in oklab, var(--primary) 25%, transparent)", color: "var(--primary-bright)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 13 L9 17 L19 7"/></svg>
               </div>
-              <div style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 28, lineHeight: 1.2 }}>{t("lead.success")}</div>
+              <div style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 25, lineHeight: 1.2 }}>{t("lead.success")}</div>
               <button onClick={() => setSent(false)} className="btn btn-ghost btn-sm" style={{ marginTop: 20 }}>↺ Yana yuborish</button>
             </div>
           </Reveal>
@@ -375,7 +375,7 @@ function FAQ({ locale }) {
                   style={{ width: "100%", background: "transparent", border: 0, color: "var(--fg)", textAlign: "left", padding: "22px 0", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, font: "inherit" }}>
                   <span style={{ display: "flex", alignItems: "baseline", gap: 16 }}>
                     <span className="mono" style={{ color: "var(--fg-dim)", fontSize: 11, letterSpacing: "0.08em" }}>{String(i + 1).padStart(2, "0")}</span>
-                    <span style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 22, lineHeight: 1.2 }}>{it.q}</span>
+                    <span style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 20, lineHeight: 1.2 }}>{it.q}</span>
                   </span>
                   <span style={{
                     width: 28, height: 28, borderRadius: "50%", border: "1px solid var(--border)",
@@ -416,11 +416,11 @@ function Contact({ locale }) {
           <div className="card" style={{ padding: 32, display: "flex", flexDirection: "column", gap: 24, height: "100%" }}>
             <div>
               <div className="eyebrow" style={{ fontSize: 10 }}>{t("contact.addressLabel")}</div>
-              <div style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 22, marginTop: 6, lineHeight: 1.25 }}>{t("contact.address")}</div>
+              <div style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 20, marginTop: 6, lineHeight: 1.25 }}>{t("contact.address")}</div>
             </div>
             <div>
               <div className="eyebrow" style={{ fontSize: 10 }}>{t("contact.phoneLabel")}</div>
-              <a href="tel:+998901234567" style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 22, marginTop: 6, lineHeight: 1.25, color: "var(--fg)", textDecoration: "none", display: "block" }}>+998 (90) 123-45-67</a>
+              <a href="tel:+998901234567" style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 20, marginTop: 6, lineHeight: 1.25, color: "var(--fg)", textDecoration: "none", display: "block" }}>+998 (90) 123-45-67</a>
             </div>
             <div>
               <div className="eyebrow" style={{ fontSize: 10 }}>{t("contact.hoursLabel")}</div>
@@ -501,7 +501,7 @@ function TelegramStrip({ locale }) {
               <svg width="280" height="280" viewBox="0 0 240 240"><path d="M120 20 L218 60 L195 175 Q188 215 144 205 L96 187 L96 158 L160 102 L78 152 L26 132 Q14 124 28 110 Z" fill="currentColor" color="var(--fg)"/></svg>
             </div>
             <div style={{ position: "relative", zIndex: 1 }}>
-              <div style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: "clamp(28px, 3.5vw, 40px)", lineHeight: 1.1, maxWidth: 560 }}>{t("telegram.title")}</div>
+              <div style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: "clamp(24px, 3vw, 34px)", lineHeight: 1.1, maxWidth: 560 }}>{t("telegram.title")}</div>
               <div style={{ color: "var(--fg-muted)", fontSize: 15, marginTop: 8 }}>{t("telegram.sub")}</div>
             </div>
             <a href="https://t.me/carbomax" className="btn btn-primary" style={{ position: "relative", zIndex: 1 }}>
@@ -631,13 +631,13 @@ function BookingModal({ locale, open, defaultService, onClose }) {
             <div style={{ width: 56, height: 56, margin: "0 auto 20px", borderRadius: "50%", background: "color-mix(in oklab, var(--primary) 25%, transparent)", color: "var(--primary-bright)", display: "flex", alignItems: "center", justifyContent: "center" }}>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 13 L9 17 L19 7"/></svg>
             </div>
-            <div style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 24, lineHeight: 1.2 }}>{t("booking.success")}</div>
+            <div style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 21, lineHeight: 1.2 }}>{t("booking.success")}</div>
             <button onClick={onClose} className="btn btn-primary btn-sm" style={{ marginTop: 24 }}>OK</button>
           </div>
         ) : (
           <>
             <div className="eyebrow" style={{ fontSize: 10 }}>06 · Booking</div>
-            <div style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 32, lineHeight: 1.1, marginTop: 6 }}>{t("booking.title")}</div>
+            <div style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 29, lineHeight: 1.1, marginTop: 6 }}>{t("booking.title")}</div>
             <div style={{ color: "var(--fg-muted)", fontSize: 14, marginTop: 8 }}>{t("booking.sub")}</div>
             <form onSubmit={(e) => { e.preventDefault(); setSent(true); }} style={{ marginTop: 20, display: "flex", flexDirection: "column", gap: 12 }}>
               <div className="field">

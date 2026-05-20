@@ -239,7 +239,7 @@ function Hero({ locale, variant = "split", onCta }) {
               boxShadow: "var(--shadow-glass)",
             }}>
               <div className="eyebrow" style={{ fontSize: 10 }}>Magicar · M903F</div>
-              <div style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 22, marginTop: 6, lineHeight: 1.15 }}>2-year warranty</div>
+              <div style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 20, marginTop: 6, lineHeight: 1.15 }}>2-year warranty</div>
               <div className="mono" style={{ color: "var(--fg-muted)", fontSize: 11, marginTop: 8 }}>2 350 000 so'm</div>
             </div>
           </div>
@@ -268,7 +268,7 @@ function Stats({ locale }) {
           {items.map((s, i) => (
             <Reveal key={i} delay={i * 80}>
               <div style={{ display: "flex", flexDirection: "column", gap: 6, borderLeft: i === 0 ? "0" : "1px solid var(--border)", paddingLeft: i === 0 ? 0 : 24 }} className={`cbx-stat-${i}`}>
-                <div className="display tnum" style={{ fontSize: "clamp(40px, 4.5vw, 60px)" }}>
+                <div className="display tnum" style={{ fontSize: "clamp(34px, 4vw, 52px)" }}>
                   <CountUp to={s.v} decimals={s.decimals || 0} suffix={s.suffix} />
                 </div>
                 <div className="eyebrow" style={{ fontSize: 11 }}>{s.label}</div>
@@ -330,7 +330,7 @@ function Categories({ locale }) {
               <div style={{ color: "var(--primary-bright)" }}>{visuals[i]}</div>
               <div style={{ display: "flex", flexDirection: "column", gap: 8, flexGrow: 1 }}>
                 <div className="mono" style={{ color: "var(--fg-dim)", fontSize: 10, letterSpacing: "0.1em" }}>0{i + 1} / {c.tag}</div>
-                <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 26, margin: 0, lineHeight: 1.05 }}>{c.name}</h3>
+                <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 23, margin: 0, lineHeight: 1.05 }}>{c.name}</h3>
                 <p style={{ color: "var(--fg-muted)", fontSize: 14, margin: 0, lineHeight: 1.5 }}>{c.desc}</p>
               </div>
               <div style={{ display: "inline-flex", alignItems: "center", gap: 6, color: "var(--primary-bright)", fontSize: 13, fontWeight: 500 }}>
@@ -424,7 +424,7 @@ function Products({ locale, onAddInquiry }) {
               <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginTop: "auto", paddingTop: 12 }}>
                 <div>
                   <div className="mono" style={{ color: "var(--fg-dim)", fontSize: 10, letterSpacing: "0.06em" }}>{t("common.fromPrice")}</div>
-                  <div className="display tnum" style={{ fontSize: 22, lineHeight: 1 }}>
+                  <div className="display tnum" style={{ fontSize: 20, lineHeight: 1 }}>
                     {fmtUZS(p.price)} <span style={{ fontSize: 12, color: "var(--fg-muted)", fontFamily: "var(--font-mono)" }}>{t("common.currency")}</span>
                   </div>
                 </div>
@@ -469,7 +469,7 @@ function Loyalty({ locale }) {
                 <div className="mono" style={{ fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", color: tierStyles[i].accent }}>
                   {tier.name}
                 </div>
-                <div style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 56, color: tierStyles[i].accent, lineHeight: 1 }}>
+                <div style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 48, color: tierStyles[i].accent, lineHeight: 1 }}>
                   {tier.percent}
                 </div>
               </div>
@@ -486,7 +486,7 @@ function Loyalty({ locale }) {
       <Reveal delay={300}>
         <div className="glass" style={{ marginTop: 32, padding: "28px 32px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 24, flexWrap: "wrap" }}>
           <div>
-            <div style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 28, lineHeight: 1.1 }}>{t("loyalty.cta")}</div>
+            <div style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 25, lineHeight: 1.1 }}>{t("loyalty.cta")}</div>
             <div style={{ color: "var(--fg-muted)", fontSize: 14, marginTop: 6 }}>@carbomax_bot</div>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
