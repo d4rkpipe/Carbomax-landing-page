@@ -146,7 +146,7 @@ function Hero({ locale, variant = "split", onCta }) {
   const h1 = (
     <h1 className="display" style={{ fontSize: "clamp(44px, 6vw, 84px)", margin: "16px 0 0", maxWidth: 820 }}>
       <span style={{ display: "block" }}>{t("hero.h1_a")}</span>
-      <em style={{ fontStyle: "italic", color: "color-mix(in oklab, var(--primary-bright) 90%, var(--fg))", display: "block" }}>{t("hero.h1_b")}</em>
+      <em style={{ fontStyle: "normal", color: "color-mix(in oklab, var(--primary-bright) 90%, var(--fg))", display: "block" }}>{t("hero.h1_b")}</em>
     </h1>
   );
   const sub = (
@@ -239,7 +239,7 @@ function Hero({ locale, variant = "split", onCta }) {
               boxShadow: "var(--shadow-glass)",
             }}>
               <div className="eyebrow" style={{ fontSize: 10 }}>Magicar · M903F</div>
-              <div style={{ fontFamily: "var(--font-display)", fontSize: 22, marginTop: 6, lineHeight: 1.15 }}>2-year warranty</div>
+              <div style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 22, marginTop: 6, lineHeight: 1.15 }}>2-year warranty</div>
               <div className="mono" style={{ color: "var(--fg-muted)", fontSize: 11, marginTop: 8 }}>2 350 000 so'm</div>
             </div>
           </div>
@@ -330,7 +330,7 @@ function Categories({ locale }) {
               <div style={{ color: "var(--primary-bright)" }}>{visuals[i]}</div>
               <div style={{ display: "flex", flexDirection: "column", gap: 8, flexGrow: 1 }}>
                 <div className="mono" style={{ color: "var(--fg-dim)", fontSize: 10, letterSpacing: "0.1em" }}>0{i + 1} / {c.tag}</div>
-                <h3 style={{ fontFamily: "var(--font-display)", fontSize: 26, margin: 0, lineHeight: 1.05 }}>{c.name}</h3>
+                <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 26, margin: 0, lineHeight: 1.05 }}>{c.name}</h3>
                 <p style={{ color: "var(--fg-muted)", fontSize: 14, margin: 0, lineHeight: 1.5 }}>{c.desc}</p>
               </div>
               <div style={{ display: "inline-flex", alignItems: "center", gap: 6, color: "var(--primary-bright)", fontSize: 13, fontWeight: 500 }}>
@@ -469,7 +469,7 @@ function Loyalty({ locale }) {
                 <div className="mono" style={{ fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", color: tierStyles[i].accent }}>
                   {tier.name}
                 </div>
-                <div style={{ fontFamily: "var(--font-display)", fontSize: 56, color: tierStyles[i].accent, lineHeight: 1 }}>
+                <div style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 56, color: tierStyles[i].accent, lineHeight: 1 }}>
                   {tier.percent}
                 </div>
               </div>
@@ -486,7 +486,7 @@ function Loyalty({ locale }) {
       <Reveal delay={300}>
         <div className="glass" style={{ marginTop: 32, padding: "28px 32px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 24, flexWrap: "wrap" }}>
           <div>
-            <div style={{ fontFamily: "var(--font-display)", fontSize: 28, lineHeight: 1.1 }}>{t("loyalty.cta")}</div>
+            <div style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 28, lineHeight: 1.1 }}>{t("loyalty.cta")}</div>
             <div style={{ color: "var(--fg-muted)", fontSize: 14, marginTop: 6 }}>@carbomax_bot</div>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
