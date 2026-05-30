@@ -1,7 +1,8 @@
 // sections-2.jsx — second half of page sections + modals
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react'
-import { useT, CAR_BRANDS, fmtUZS, maskPhone } from './i18n.jsx'
+import { useT, CAR_BRANDS, fmtUZS } from './i18n.jsx'
 import { Reveal, Logo, Section } from './ui.jsx'
+import { IMaskInput } from 'react-imask'
 
 // ─── Gallery with lightbox ────────────────────────────────────────────────────
 function Gallery({ locale }) {
@@ -345,7 +346,7 @@ function LeadForm({ locale, prefill, leadFormRef }) {
             </div>
             <div className="field" style={{ gridColumn: "1 / -1" }}>
               <label>{t("lead.phone")} <span style={{ color: "var(--accent)" }}>*</span></label>
-              <input type="tel" required value={phone} onChange={(e) => setPhone(maskPhone(e.target.value))} placeholder="+998 (90) 123-45-67" />
+              <IMaskInput mask="+{998} (00) 000-00-00" value={phone} onAccept={(value) => setPhone(value)} placeholder="+998 (90) 123-45-67" type="tel" required />
             </div>
             <div className="field" style={{ gridColumn: "1 / -1" }}>
               <label>{t("lead.category")}</label>
@@ -682,7 +683,7 @@ function BookingModal({ locale, open, defaultService, onClose }) {
                 <div className="field"><label>{t("booking.time")}</label><input type="time" value={form.time} onChange={(e) => upd("time", e.target.value)} required /></div>
               </div>
               <div className="field"><label>{t("booking.name")}</label><input type="text" value={form.name} onChange={(e) => upd("name", e.target.value)} required /></div>
-              <div className="field"><label>{t("booking.phone")}</label><input type="tel" value={form.phone} onChange={(e) => upd("phone", maskPhone(e.target.value))} placeholder="+998 (XX) XXX-XX-XX" required /></div>
+              <div className="field"><label>{t("booking.phone")}</label><IMaskInput mask="+{998} (00) 000-00-00" value={form.phone} onAccept={(value) => upd("phone", value)} placeholder="+998 (XX) XXX-XX-XX" type="tel" required /></div>
               <div className="field"><label>{t("booking.notes")}</label><textarea value={form.notes} onChange={(e) => upd("notes", e.target.value)} /></div>
               <div style={{ display: "flex", gap: 8, marginTop: 4 }}>
                 <button type="button" onClick={onClose} className="btn btn-ghost" style={{ flex: 1 }}>{t("booking.cancel")}</button>
