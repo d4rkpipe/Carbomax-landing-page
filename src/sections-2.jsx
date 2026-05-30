@@ -1,7 +1,7 @@
 // sections-2.jsx — second half of page sections + modals
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import { useT, CAR_BRANDS, fmtUZS } from './i18n.jsx'
-import { Reveal, Logo, Section } from './ui.jsx'
+import { Reveal, Logo, Section, rafThrottle } from './ui.jsx'
 import { IMaskInput } from 'react-imask'
 
 // ─── Gallery with lightbox ────────────────────────────────────────────────────
@@ -601,7 +601,7 @@ function Footer({ locale }) {
 function FloatingActions() {
   const [showTop, setShowTop] = useState(false);
   useEffect(() => {
-    const onScroll = () => setShowTop(window.scrollY > 400);
+    const onScroll = rafThrottle(() => setShowTop(window.scrollY > 400));
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);

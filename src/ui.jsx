@@ -177,4 +177,21 @@ function ThemeToggle({ theme, setTheme }) {
   );
 }
 
-export { Reveal, Logo, CountUp, Section, LangSwitcher, ThemeToggle }
+// rAF-throttle — coalesces rapid event bursts (scroll, resize, mousemove) into
+// one call per paint frame. Cheaper and smoother than timer-based throttling
+// for anything that drives a re-render.
+function rafThrottle(fn) {
+  let queued = false;
+  let lastArgs;
+  return (...args) => {
+    lastArgs = args;
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(() => {
+      queued = false;
+      fn(...lastArgs);
+    });
+  };
+}
+
+export { Reveal, Logo, CountUp, Section, LangSwitcher, ThemeToggle, rafThrottle }

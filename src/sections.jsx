@@ -1,7 +1,7 @@
 // sections.jsx — top-of-page sections
 import React, { useState, useEffect, useRef, useMemo } from 'react'
 import { useT, fmtUZS, PRODUCTS } from './i18n.jsx'
-import { Reveal, Logo, CountUp, Section, LangSwitcher, ThemeToggle } from './ui.jsx'
+import { Reveal, Logo, CountUp, Section, LangSwitcher, ThemeToggle, rafThrottle } from './ui.jsx'
 
 // ─── Promo banner (dismissible) ───────────────────────────────────────────────
 function PromoBanner({ locale }) {
@@ -41,8 +41,9 @@ function Header({ locale, setLocale, theme, setTheme, onCta }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
-    onScroll();
+    const update = () => setScrolled(window.scrollY > 12);
+    update();
+    const onScroll = rafThrottle(update);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
