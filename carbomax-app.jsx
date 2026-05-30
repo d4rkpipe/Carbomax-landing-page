@@ -56,7 +56,7 @@ function App() {
     }, 80);
   };
   const handleCarFind = (data) => {
-    setPrefill({ brand: data.brand, year: data.year });
+    setPrefill({ brand: data.brand });
     setTimeout(() => {
       if (leadFormRef.current) {
         const y = leadFormRef.current.getBoundingClientRect().top + window.scrollY - 80;

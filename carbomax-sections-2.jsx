@@ -226,22 +226,18 @@ function Process({ locale }) {
 function CarSelector({ locale, onFind }) {
   const t = useT(locale);
   const [brand, setBrand] = useState("");
-  const [year, setYear] = useState("");
   return (
     <Section eyebrow="08 · Match my car" title={t("selector.title")} sub={t("selector.sub")} alignHead="center">
       <Reveal>
         <form
-          onSubmit={(e) => { e.preventDefault(); onFind && onFind({ brand, year }); }}
+          onSubmit={(e) => { e.preventDefault(); onFind && onFind({ brand }); }}
           className="glass"
-          style={{ padding: 16, display: "grid", gridTemplateColumns: "1.2fr 1fr auto", gap: 12, maxWidth: 760, margin: "0 auto", alignItems: "center" }}>
+          style={{ padding: 16, display: "grid", gridTemplateColumns: "1fr auto", gap: 12, maxWidth: 540, margin: "0 auto", alignItems: "center" }}>
           <div className="field">
             <select value={brand} onChange={(e) => setBrand(e.target.value)} required>
               <option value="" disabled>{t("selector.brand")}…</option>
               {CAR_BRANDS.map(b => <option key={b} value={b}>{b}</option>)}
             </select>
-          </div>
-          <div className="field">
-            <input type="number" min="1990" max="2026" placeholder={t("selector.year")} value={year} onChange={(e) => setYear(e.target.value)} required />
           </div>
           <button type="submit" className="btn btn-primary" style={{ height: 46 }}>
             {t("selector.cta")}
@@ -320,7 +316,7 @@ function LeadForm({ locale, prefill, leadFormRef }) {
       setNotes(`${prefill.product.name[locale]} (${prefill.product.sku})`);
     }
     if (prefill && prefill.brand) {
-      setNotes(prev => `${prefill.brand} ${prefill.year || ""}`.trim() + (prev ? `\n${prev}` : ""));
+      setNotes(prev => prefill.brand + (prev ? `\n${prev}` : ""));
     }
   }, [prefill, locale, t]);
 

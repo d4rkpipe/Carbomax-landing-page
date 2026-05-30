@@ -90,7 +90,7 @@ const I18N = {
     },
     selector: {
       title: "Avtomobilingiz modelini ayting — to'g'risini topamiz",
-      sub: "Brend va yilni tanlang, sizga aynan to'g'ri keladigan variantlarni ko'rsatamiz.",
+      sub: "Brendni tanlang, sizga aynan to'g'ri keladigan variantlarni ko'rsatamiz.",
       brand: "Brend", year: "Ishlab chiqarilgan yili", cta: "Mahsulotlarni topish",
     },
     lead: {
@@ -225,7 +225,7 @@ const I18N = {
         { title: "Передача или доставка", desc: "Заберёте в магазине или привезём по адресу." },
       ],
     },
-    selector: { title: "Назовите модель — подберём идеально", sub: "Выберите бренд и год — покажем подходящие варианты.", brand: "Бренд", year: "Год выпуска", cta: "Найти товары" },
+    selector: { title: "Назовите модель — подберём идеально", sub: "Выберите бренд — покажем подходящие варианты.", brand: "Бренд", year: "Год выпуска", cta: "Найти товары" },
     lead: {
       title: "Получите ответ за минуты через Telegram",
       sub: "Заполните форму — свяжемся в течение 24 часов.",
@@ -358,7 +358,7 @@ const I18N = {
         { title: "Handover or delivery", desc: "Pick up at the shop or we deliver to your address." },
       ],
     },
-    selector: { title: "Tell us your model — we'll find the match", sub: "Pick make and year, we'll surface the right products.", brand: "Make", year: "Year", cta: "Find products" },
+    selector: { title: "Tell us your model — we'll find the match", sub: "Pick a make and we'll surface the right products.", brand: "Make", year: "Year", cta: "Find products" },
     lead: {
       title: "Get a quote in minutes via Telegram",
       sub: "Fill the form — we reply within 24 hours.",
