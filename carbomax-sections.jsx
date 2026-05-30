@@ -438,9 +438,9 @@ function Loyalty({ locale }) {
   const t = useT(locale);
   const tiers = t("loyalty.tiers");
   const tierStyles = [
-    { bg: "linear-gradient(160deg, #1c2520 0%, #131a14 100%)", ring: "var(--border-strong)", accent: "var(--fg)" },
+    { bg: "linear-gradient(160deg, #1c2520 0%, #131a14 100%)", ring: "#3a4a3e", accent: "#e8eae0" },
     { bg: "linear-gradient(160deg, #1d3a4a 0%, #0f1f29 100%)", ring: "#4a7a92", accent: "#a8d8ec" },
-    { bg: "linear-gradient(160deg, #4a3514 0%, #2a1d08 100%)", ring: "var(--accent)", accent: "var(--accent)" },
+    { bg: "linear-gradient(160deg, #4a3514 0%, #2a1d08 100%)", ring: "#f5b023", accent: "#f5b023" },
   ];
   return (
     <Section id="loyalty" eyebrow="04 · Loyalty" title={t("loyalty.title")} sub={t("loyalty.sub")}>
@@ -467,8 +467,8 @@ function Loyalty({ locale }) {
                 </div>
               </div>
               <div style={{ marginTop: "auto" }}>
-                <div style={{ fontSize: 16, fontWeight: 500, marginBottom: 4 }}>{tier.desc}</div>
-                <div style={{ fontSize: 13, color: "var(--fg-muted)" }}>{tier.threshold}</div>
+                <div style={{ fontSize: 16, fontWeight: 500, marginBottom: 4, color: "#e8eae0" }}>{tier.desc}</div>
+                <div style={{ fontSize: 13, color: "rgba(232,234,224,0.65)" }}>{tier.threshold}</div>
               </div>
             </div>
           </Reveal>
