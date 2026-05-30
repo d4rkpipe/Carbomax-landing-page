@@ -57,6 +57,18 @@ const I18N = {
       qrLabel: "QR-kodni skanerlang",
     },
     gallery: { title: "Bizning ish", sub: "Haqiqiy ish — har kuni.", caption: "Ish jarayonidan" },
+    ourWork: {
+      title: "Biz qilgan ishlar",
+      sub: "Mijozlar avtomobillaridagi natijalar — bizning ishimiz.",
+      items: [
+        { car: "Chevrolet Cobalt", caption: "Premium chexol o'rnatildi" },
+        { car: "Kia K5", caption: "Eko-charm chexol" },
+        { car: "Hyundai Tucson", caption: "3D pollik va chexol" },
+        { car: "Toyota Camry", caption: "Premium chexol va aksessuar" },
+        { car: "Chevrolet Nexia", caption: "Klassik chexol" },
+        { car: "Ravon R3", caption: "Eko-charm chexol" },
+      ],
+    },
     testimonials: {
       title: "Mijozlar nima deyishadi",
       sub: "Haqiqiy fikrlar, haqiqiy mijozlar.",
@@ -182,6 +194,18 @@ const I18N = {
       qrLabel: "Отсканируйте QR",
     },
     gallery: { title: "Наша работа", sub: "Настоящая работа — каждый день.", caption: "Из процесса работы" },
+    ourWork: {
+      title: "Наши работы",
+      sub: "Результаты на машинах клиентов — наш труд.",
+      items: [
+        { car: "Chevrolet Cobalt", caption: "Премиум чехлы установлены" },
+        { car: "Kia K5", caption: "Эко-кожаные чехлы" },
+        { car: "Hyundai Tucson", caption: "3D коврики и чехлы" },
+        { car: "Toyota Camry", caption: "Премиум чехлы и аксессуары" },
+        { car: "Chevrolet Nexia", caption: "Классические чехлы" },
+        { car: "Ravon R3", caption: "Эко-кожаные чехлы" },
+      ],
+    },
     testimonials: {
       title: "Что говорят клиенты",
       sub: "Реальные отзывы реальных людей.",
@@ -303,6 +327,18 @@ const I18N = {
       qrLabel: "Scan the QR",
     },
     gallery: { title: "Our work", sub: "Real work — every day.", caption: "From our work" },
+    ourWork: {
+      title: "Our completed work",
+      sub: "Results on customer cars — our craft.",
+      items: [
+        { car: "Chevrolet Cobalt", caption: "Premium covers installed" },
+        { car: "Kia K5", caption: "Eco-leather covers" },
+        { car: "Hyundai Tucson", caption: "3D mats and covers" },
+        { car: "Toyota Camry", caption: "Premium covers and accessories" },
+        { car: "Chevrolet Nexia", caption: "Classic covers" },
+        { car: "Ravon R3", caption: "Eco-leather covers" },
+      ],
+    },
     testimonials: {
       title: "What our customers say",
       sub: "Real reviews from real drivers.",

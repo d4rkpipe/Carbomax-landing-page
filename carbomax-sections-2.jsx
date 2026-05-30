@@ -101,6 +101,35 @@ function Gallery({ locale }) {
   );
 }
 
+// ─── Our completed work / portfolio ───────────────────────────────────────────
+function OurWork({ locale }) {
+  const t = useT(locale);
+  const items = t("ourWork.items");
+  return (
+    <Section eyebrow="07 · Portfolio" title={t("ourWork.title")} sub={t("ourWork.sub")}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }} className="cbx-work-grid">
+        {items.map((item, i) => (
+          <Reveal key={i} delay={i * 80}>
+            <div className="card" style={{ padding: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+              <div className="ph" style={{ aspectRatio: "4/3", borderRadius: 0, border: 0 }}>
+                {item.car}
+              </div>
+              <div style={{ padding: "16px 20px 18px" }}>
+                <div style={{ fontFamily: "var(--font-sans)", fontWeight: 500, fontSize: 16, lineHeight: 1.3 }}>{item.car}</div>
+                <div style={{ color: "var(--fg-muted)", fontSize: 13, marginTop: 2, lineHeight: 1.4 }}>{item.caption}</div>
+              </div>
+            </div>
+          </Reveal>
+        ))}
+      </div>
+      <style>{`
+        @media (max-width: 900px) { .cbx-work-grid { grid-template-columns: repeat(2, 1fr) !important; } }
+        @media (max-width: 560px) { .cbx-work-grid { grid-template-columns: 1fr !important; } }
+      `}</style>
+    </Section>
+  );
+}
+
 // ─── Services strip ───────────────────────────────────────────────────────────
 function Services({ locale, onBook }) {
   const t = useT(locale);
@@ -199,7 +228,7 @@ function CarSelector({ locale, onFind }) {
   const [brand, setBrand] = useState("");
   const [year, setYear] = useState("");
   return (
-    <Section eyebrow="07 · Match my car" title={t("selector.title")} sub={t("selector.sub")} alignHead="center">
+    <Section eyebrow="08 · Match my car" title={t("selector.title")} sub={t("selector.sub")} alignHead="center">
       <Reveal>
         <form
           onSubmit={(e) => { e.preventDefault(); onFind && onFind({ brand, year }); }}
@@ -232,7 +261,7 @@ function Testimonials({ locale }) {
   const t = useT(locale);
   const items = t("testimonials.items");
   return (
-    <Section eyebrow="08 · Voices" title={t("testimonials.title")} sub={t("testimonials.sub")}>
+    <Section eyebrow="09 · Voices" title={t("testimonials.title")} sub={t("testimonials.sub")}>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }} className="cbx-test-grid">
         {items.map((it, i) => (
           <Reveal key={i} delay={i * 80}>
@@ -296,7 +325,7 @@ function LeadForm({ locale, prefill, leadFormRef }) {
   }, [prefill, locale, t]);
 
   return (
-    <Section id="lead" eyebrow="09 · Get a quote" title={t("lead.title")} sub={t("lead.sub")} alignHead="center">
+    <Section id="lead" eyebrow="10 · Get a quote" title={t("lead.title")} sub={t("lead.sub")} alignHead="center">
       <div ref={leadFormRef} style={{ maxWidth: 720, margin: "0 auto" }}>
         {sent ? (
           <Reveal>
@@ -363,7 +392,7 @@ function FAQ({ locale }) {
   const items = t("faq.items");
   const [open, setOpen] = useState(0);
   return (
-    <Section eyebrow="10 · FAQ" title={t("faq.title")}>
+    <Section eyebrow="11 · FAQ" title={t("faq.title")}>
       <div style={{ maxWidth: 880, margin: "0 auto", display: "flex", flexDirection: "column", gap: 4, borderTop: "1px solid var(--border)" }}>
         {items.map((it, i) => {
           const isOpen = open === i;
@@ -410,7 +439,7 @@ function FAQ({ locale }) {
 function Contact({ locale }) {
   const t = useT(locale);
   return (
-    <Section id="contact" eyebrow="11 · Visit" title={t("contact.title")} sub={t("contact.sub")}>
+    <Section id="contact" eyebrow="12 · Visit" title={t("contact.title")} sub={t("contact.sub")}>
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 32 }} className="cbx-contact-grid">
         <Reveal>
           <div className="card" style={{ padding: 32, display: "flex", flexDirection: "column", gap: 24, height: "100%" }}>
@@ -663,4 +692,4 @@ function BookingModal({ locale, open, defaultService, onClose }) {
   );
 }
 
-Object.assign(window, { Gallery, Services, Process, CarSelector, Testimonials, LeadForm, FAQ, Contact, TelegramStrip, Footer, FloatingActions, BookingModal });
+Object.assign(window, { Gallery, OurWork, Services, Process, CarSelector, Testimonials, LeadForm, FAQ, Contact, TelegramStrip, Footer, FloatingActions, BookingModal });

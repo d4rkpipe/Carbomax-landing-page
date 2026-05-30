@@ -90,6 +90,7 @@ function App() {
       <Loyalty locale={locale} />
       <Process locale={locale} />
       <Gallery locale={locale} />
+      <OurWork locale={locale} />
       <CarSelector locale={locale} onFind={handleCarFind} />
       <Testimonials locale={locale} />
       <LeadForm locale={locale} prefill={prefill} leadFormRef={leadFormRef} />
