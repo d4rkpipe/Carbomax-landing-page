@@ -38,7 +38,7 @@ const I18N = {
       title: "Biz nima qila olamiz",
       sub: "Boshidan oxirigacha — hammasini biz hal qilamiz.",
       items: [
-        { name: "Joyiga borib o'lchov olish", desc: "Bepul. Toshkent bo'ylab.", cta: "Vaqt belgilash" },
+        { name: "Vizit", desc: "Uyga borib chexol o'rnatamiz — bizdan yoki o'zingizniki.", cta: "Vaqt belgilash" },
         { name: "O'rnatish", desc: "Professional ustaxona, 1 soat ichida.", cta: "Vaqt belgilash" },
         { name: "Yetkazib berish", desc: "Toshkent va viloyatlar bo'ylab.", cta: "Hisoblash" },
         { name: "Maslahat", desc: "Modelingizga aynan nima tushadi — aytamiz.", cta: "Yozish" },
@@ -163,7 +163,7 @@ const I18N = {
       title: "Что мы можем",
       sub: "От первого звонка до установки — всё на нас.",
       items: [
-        { name: "Замер на месте", desc: "Бесплатно. По Ташкенту.", cta: "Записаться" },
+        { name: "Выезд на дом", desc: "Приедем и установим чехлы — наши или ваши.", cta: "Записаться" },
         { name: "Установка", desc: "Профессиональная — за 1 час.", cta: "Записаться" },
         { name: "Доставка", desc: "Ташкент и регионы.", cta: "Рассчитать" },
         { name: "Консультация", desc: "Подберём именно под вашу модель.", cta: "Написать" },
@@ -284,7 +284,7 @@ const I18N = {
       title: "What we can do for you",
       sub: "From first call to install — we handle it.",
       items: [
-        { name: "On-site measurement", desc: "Free. Anywhere in Tashkent.", cta: "Book a slot" },
+        { name: "Home visit", desc: "We come to install covers — ours or yours.", cta: "Book a slot" },
         { name: "Installation", desc: "Professional. Done within the hour.", cta: "Book a slot" },
         { name: "Delivery", desc: "Tashkent and the regions.", cta: "Quote it" },
         { name: "Consultation", desc: "We'll match you to the right product.", cta: "Message us" },

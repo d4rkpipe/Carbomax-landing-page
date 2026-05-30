@@ -107,7 +107,7 @@ function Services({ locale, onBook }) {
   const items = t("services.items");
   // simple line icons
   const icons = [
-    <svg key="0" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 17 L21 17"/><path d="M5 17 L5 14 L7 14 L7 17 M9 17 L9 12 L11 12 L11 17 M13 17 L13 10 L15 10 L15 17 M17 17 L17 8 L19 8 L19 17"/></svg>,
+    <svg key="0" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 11 L12 4 L21 11"/><path d="M5 10 L5 20 L19 20 L19 10"/><path d="M10 20 L10 14 L14 14 L14 20"/></svg>,
     <svg key="1" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14 6 L18 10 L9 19 L5 19 L5 15 Z"/><path d="M13 7 L11 5 L13 3 L19 9 L17 11"/></svg>,
     <svg key="2" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="8" width="12" height="9" rx="1"/><path d="M14 11 L18 11 L21 14 L21 17 L14 17"/><circle cx="6" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/></svg>,
     <svg key="3" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 5 L20 5 L20 16 L13 16 L9 20 L9 16 L4 16 Z"/></svg>,
