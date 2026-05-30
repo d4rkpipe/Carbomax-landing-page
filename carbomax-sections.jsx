@@ -486,23 +486,8 @@ function Loyalty({ locale }) {
             <div style={{ textAlign: "right" }}>
               <div className="eyebrow" style={{ fontSize: 10 }}>{t("loyalty.qrLabel")}</div>
             </div>
-            <div style={{ width: 84, height: 84, padding: 6, background: "#fff", borderRadius: 8 }}>
-              {/* fake QR pattern */}
-              <svg viewBox="0 0 21 21" width="72" height="72">
-                {Array.from({ length: 21 * 21 }).map((_, i) => {
-                  const x = i % 21, y = Math.floor(i / 21);
-                  const isCorner = (x < 7 && y < 7) || (x > 13 && y < 7) || (x < 7 && y > 13);
-                  if (isCorner) {
-                    const cx = x < 7 ? 0 : 14, cy = y < 7 ? 0 : 14;
-                    const lx = x - cx, ly = y - cy;
-                    const outer = lx === 0 || lx === 6 || ly === 0 || ly === 6;
-                    const inner = lx >= 2 && lx <= 4 && ly >= 2 && ly <= 4;
-                    return (outer || inner) ? <rect key={i} x={x} y={y} width="1" height="1" fill="#000"/> : null;
-                  }
-                  const h = (x * 7 + y * 11 + x * y) % 7;
-                  return h < 3 ? <rect key={i} x={x} y={y} width="1" height="1" fill="#000"/> : null;
-                })}
-              </svg>
+            <div style={{ background: "#fff", padding: 6, borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <img src="uploads/photo_2026-05-31_02-41-38.jpg" alt="@CARBOMAX_BOT QR" style={{ width: 110, height: "auto", display: "block" }} />
             </div>
           </div>
         </div>

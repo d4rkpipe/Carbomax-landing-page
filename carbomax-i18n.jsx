@@ -8,13 +8,13 @@ const I18N = {
       eyebrow: "1998-yildan beri · Toshkent",
       h1_a: "Sizning avtomobilingiz",
       h1_b: "uchun mukammal yechim",
-      sub: "Qo'lda tikilgan chexollar, sifatli aksessuarlar va professional ustaxona — bir joyda.",
+      sub: "Qo'lda tikilgan chexollar, sifatli aksessuarlar va professional xizmat — bir joyda.",
       ctaPrimary: "Mahsulotlarni ko'rish",
       ctaSecondary: "Bepul maslahat",
       trustA: "5000+ mijoz",
       trustB: "Kafolatli ish",
       trustC: "Yetkazib berish bor",
-      photo: "Hero — ustaxonadagi haqiqiy fotosurat (chexol tikilayotgan jarayon)",
+      photo: "Hero — chexol tikilayotgan haqiqiy fotosurat",
     },
     stats: {
       a: "Mamnun mijozlar", b: "Yillik tajriba", c: "Avtomobil modeli", d: "O'rtacha baho",
@@ -39,7 +39,7 @@ const I18N = {
       sub: "Boshidan oxirigacha — hammasini biz hal qilamiz.",
       items: [
         { name: "Uyga borib o'rnatish", desc: "Bizdan yoki o'zingizdagi chexolni o'rnatib beramiz.", cta: "Vaqt belgilash" },
-        { name: "O'rnatish", desc: "Professional ustaxona, 1 soat ichida.", cta: "Vaqt belgilash" },
+        { name: "O'rnatish", desc: "Do'konimizda 1 soat ichida o'rnatamiz.", cta: "Vaqt belgilash" },
         { name: "Yetkazib berish", desc: "Toshkent va viloyatlar bo'ylab.", cta: "Hisoblash" },
         { name: "Maslahat", desc: "Modelingizga aynan nima tushadi — aytamiz.", cta: "Yozish" },
         { name: "Olib ketish", desc: "Qulay vaqtda do'kondan.", cta: "Buyurtma berish" },
@@ -56,7 +56,7 @@ const I18N = {
       cta: "Telegram-botda boshlash",
       qrLabel: "QR-kodni skanerlang",
     },
-    gallery: { title: "Bizning ustaxona", sub: "Haqiqiy ish — har kuni.", caption: "Ustaxonadan kadr" },
+    gallery: { title: "Bizning ish", sub: "Haqiqiy ish — har kuni.", caption: "Ish jarayonidan" },
     testimonials: {
       title: "Mijozlar nima deyishadi",
       sub: "Haqiqiy fikrlar, haqiqiy mijozlar.",
@@ -114,7 +114,7 @@ const I18N = {
     },
     telegram: { title: "Telegram kanalimizga obuna bo'ling", sub: "Yangiliklar va eksklyuziv chegirmalar.", cta: "Kanalga o'tish" },
     footer: {
-      tagline: "Toshkentdagi avtomobil ustaxonasi va do'koni. 1998-yildan beri.",
+      tagline: "Toshkentdagi avtomobil chexollari va aksessuarlar do'koni. 1998-yildan beri.",
       site: "Sayt", services: "Xizmatlar", contact: "Aloqa",
       copyright: "© 2026 Carbomax. Barcha huquqlar himoyalangan.",
       privacy: "Maxfiylik", terms: "Shartlar",
@@ -181,7 +181,7 @@ const I18N = {
       cta: "Открыть Telegram-бот",
       qrLabel: "Отсканируйте QR",
     },
-    gallery: { title: "Наша мастерская", sub: "Настоящая работа — каждый день.", caption: "Кадр из мастерской" },
+    gallery: { title: "Наша работа", sub: "Настоящая работа — каждый день.", caption: "Из процесса работы" },
     testimonials: {
       title: "Что говорят клиенты",
       sub: "Реальные отзывы реальных людей.",
@@ -235,7 +235,7 @@ const I18N = {
     },
     telegram: { title: "Подпишитесь на наш Telegram-канал", sub: "Новости и эксклюзивные скидки.", cta: "Перейти в канал" },
     footer: {
-      tagline: "Автомобильная мастерская и магазин в Ташкенте. С 1998 года.",
+      tagline: "Магазин автомобильных чехлов и аксессуаров в Ташкенте. С 1998 года.",
       site: "Сайт", services: "Услуги", contact: "Контакты",
       copyright: "© 2026 Carbomax. Все права защищены.",
       privacy: "Конфиденциальность", terms: "Условия",
@@ -262,7 +262,7 @@ const I18N = {
       trustA: "5000+ customers",
       trustB: "Workmanship warranty",
       trustC: "Delivery available",
-      photo: "Hero — real workshop photo (seat cover stitching or installation)",
+      photo: "Hero — real seat cover stitching photo",
     },
     stats: { a: "Happy customers", b: "Years of practice", c: "Car models served", d: "Average rating" },
     cats: {
@@ -302,7 +302,7 @@ const I18N = {
       cta: "Open the Telegram bot",
       qrLabel: "Scan the QR",
     },
-    gallery: { title: "Our workshop", sub: "Real work — every day.", caption: "Workshop frame" },
+    gallery: { title: "Our work", sub: "Real work — every day.", caption: "From our work" },
     testimonials: {
       title: "What our customers say",
       sub: "Real reviews from real drivers.",
@@ -356,7 +356,7 @@ const I18N = {
     },
     telegram: { title: "Join our Telegram channel", sub: "News and exclusive discounts.", cta: "Open channel" },
     footer: {
-      tagline: "An automotive workshop and shop in Tashkent. Since 1998.",
+      tagline: "An automotive cover and accessory shop in Tashkent. Since 1998.",
       site: "Site", services: "Services", contact: "Contact",
       copyright: "© 2026 Carbomax. All rights reserved.",
       privacy: "Privacy", terms: "Terms",

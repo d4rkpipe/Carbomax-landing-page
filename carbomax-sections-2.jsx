@@ -1,10 +1,10 @@
 // carbomax-sections-2.jsx — second half of page sections + modals
 
-// ─── Workshop gallery with lightbox ───────────────────────────────────────────
+// ─── Gallery with lightbox ────────────────────────────────────────────────────
 function Gallery({ locale }) {
   const t = useT(locale);
   const photos = [
-    { ratio: "4/5", label: "Tikuv ustaxonasi — chexol tikilmoqda" },
+    { ratio: "4/5", label: "Tikuv jarayoni — chexol tikilmoqda" },
     { ratio: "1/1", label: "Tayyor chexol — Cobalt salonida" },
     { ratio: "4/5", label: "Magicar o'rnatish jarayoni" },
     { ratio: "1/1", label: "Avval / keyin: K5 salon" },
@@ -27,7 +27,7 @@ function Gallery({ locale }) {
   }, [open, photos.length]);
 
   return (
-    <Section id="about" eyebrow="06 · Workshop" title={t("gallery.title")} sub={t("gallery.sub")}>
+    <Section id="about" eyebrow="06 · Gallery" title={t("gallery.title")} sub={t("gallery.sub")}>
       <div style={{ columnCount: 3, columnGap: 16 }} className="cbx-masonry">
         {photos.map((p, i) => (
           <button
