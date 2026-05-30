@@ -33,6 +33,24 @@ function App() {
   });
   React.useEffect(() => { try { localStorage.setItem("cbx_locale", locale); } catch (e) {} }, [locale]);
 
+  // Dynamic <title>, <meta description> and <html lang> per locale (for SEO and browser tab)
+  React.useEffect(() => {
+    const titles = {
+      uz: "Carbomax — Avtomobil chexollari va aksessuarlar do'koni · Toshkent",
+      ru: "Carbomax — Магазин автомобильных чехлов и аксессуаров · Ташкент",
+      en: "Carbomax — Auto seat-cover and accessory shop · Tashkent",
+    };
+    const descs = {
+      uz: "Carbomax — Toshkentdagi avtomobil chexollari va aksessuarlar do'koni. Qo'lda tikilgan chexollar, pollik qoplamalari, Magicar signalizatsiyalari. 1998-yildan beri.",
+      ru: "Carbomax — Магазин автомобильных чехлов и аксессуаров в Ташкенте. Чехлы ручной работы, коврики, сигнализации Magicar. С 1998 года.",
+      en: "Carbomax — Auto seat-cover, floor mat and accessory shop in Tashkent. Hand-tailored covers, Magicar alarms. Since 1998.",
+    };
+    document.title = titles[locale] || titles.uz;
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute('content', descs[locale] || descs.uz);
+    document.documentElement.setAttribute('lang', locale);
+  }, [locale]);
+
   const [bookingOpen, setBookingOpen] = React.useState(false);
   const [bookingService, setBookingService] = React.useState("");
   const [prefill, setPrefill] = React.useState(null);
