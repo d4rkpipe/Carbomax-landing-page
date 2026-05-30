@@ -16,6 +16,7 @@ const I18N = {
       trustB: "Kafolatli ish",
       trustC: "Yetkazib berish bor",
       photo: "Hero — chexol tikilayotgan haqiqiy fotosurat",
+      warrantyLabel: "2 yil kafolat",
     },
     stats: {
       a: "Mamnun mijozlar", b: "Yillik tajriba", c: "Avtomobil modeli", d: "O'rtacha baho",
@@ -24,7 +25,7 @@ const I18N = {
       title: "Bizning yo'nalishlarimiz",
       sub: "Avtomobilingizning har bir detali — alohida e'tibor bilan.",
       items: [
-        { name: "Avtomobil chexollari", desc: "30+ modelga moslab tikilgan ekokojaí va premium chexollar.", tag: "3–5 kunlik tikuv" },
+        { name: "Avtomobil chexollari", desc: "30+ modelga moslab tikilgan ekokoja va premium chexollar.", tag: "3–5 kunlik tikuv" },
         { name: "Pollik qoplamalari", desc: "EVA, 3D va klassik kovrolinlar — modelingizga aniq mos.", tag: "Tayyor stockda" },
         { name: "Aksessuarlar", desc: "Magicar signalizatsiyalari, audio, fara va salon yorug'ligi.", tag: "Magicar diler" },
       ],
@@ -34,6 +35,8 @@ const I18N = {
       sub: "Mijozlarimizning sevimli mahsulotlari.",
       addInquiry: "So'rovga qo'shish",
       filters: { all: "Barchasi", covers: "Chexollar", mats: "Pollik", acc: "Aksessuarlar" },
+      photoLabel: "fotosurati",
+      accessoryPhotoLabel: "Aksessuar fotosurati",
     },
     services: {
       title: "Biz nima qila olamiz",
@@ -97,9 +100,11 @@ const I18N = {
     lead: {
       title: "Telegram orqali bir necha daqiqada javob olamiz",
       sub: "Forma to'ldiring — 24 soat ichida bog'lanamiz.",
-      first: "Ism", last: "Familiya", phone: "Telefon raqam", category: "Qiziqtirayotgan yo'nalish", notes: "Qo'shimcha izoh",
+      first: "Ism va familiya", last: "Familiya", phone: "Telefon raqam", category: "Qiziqtirayotgan yo'nalish", notes: "Qo'shimcha izoh",
       submit: "Yuborish",
       success: "Rahmat! 24 soat ichida bog'lanamiz.",
+      resend: "Yana yuborish",
+      formHint: "Telegram orqali yuboriladi · javob 24 soat ichida",
       catOptions: ["Chexollar", "Pollik", "Aksessuarlar", "Boshqa"],
     },
     faq: {
@@ -154,7 +159,8 @@ const I18N = {
       trustA: "5000+ клиентов",
       trustB: "Гарантия на работы",
       trustC: "Доставка по регионам",
-      photo: "Hero — реальное фото мастерской (пошив чехла или установка)",
+      photo: "Hero — реальное фото пошива чехла",
+      warrantyLabel: "2 года гарантии",
     },
     stats: { a: "Довольных клиентов", b: "Лет опыта", c: "Моделей авто", d: "Средняя оценка" },
     cats: {
@@ -171,6 +177,8 @@ const I18N = {
       sub: "Самые востребованные позиции.",
       addInquiry: "В заявку",
       filters: { all: "Все", covers: "Чехлы", mats: "Коврики", acc: "Аксессуары" },
+      photoLabel: "— фото",
+      accessoryPhotoLabel: "Аксессуар — фото",
     },
     services: {
       title: "Что мы можем",
@@ -230,9 +238,11 @@ const I18N = {
     lead: {
       title: "Получите ответ за минуты через Telegram",
       sub: "Заполните форму — свяжемся в течение 24 часов.",
-      first: "Имя", last: "Фамилия", phone: "Телефон", category: "Что интересует", notes: "Дополнительно",
+      first: "Имя и фамилия", last: "Фамилия", phone: "Телефон", category: "Что интересует", notes: "Дополнительно",
       submit: "Отправить",
       success: "Спасибо! Свяжемся в течение 24 часов.",
+      resend: "Отправить ещё",
+      formHint: "Через Telegram · ответ в течение 24 часов",
       catOptions: ["Чехлы", "Коврики", "Аксессуары", "Другое"],
     },
     faq: {
@@ -288,6 +298,7 @@ const I18N = {
       trustB: "Workmanship warranty",
       trustC: "Delivery available",
       photo: "Hero — real seat cover stitching photo",
+      warrantyLabel: "2-year warranty",
     },
     stats: { a: "Happy customers", b: "Years of practice", c: "Car models served", d: "Average rating" },
     cats: {
@@ -304,6 +315,8 @@ const I18N = {
       sub: "Our most-loved products.",
       addInquiry: "Add to inquiry",
       filters: { all: "All", covers: "Covers", mats: "Mats", acc: "Accessories" },
+      photoLabel: "photo",
+      accessoryPhotoLabel: "Accessory photo",
     },
     services: {
       title: "What we can do for you",
@@ -363,9 +376,11 @@ const I18N = {
     lead: {
       title: "Get a quote in minutes via Telegram",
       sub: "Fill the form — we reply within 24 hours.",
-      first: "First name", last: "Last name", phone: "Phone", category: "Interested in", notes: "Notes (optional)",
+      first: "Full name", last: "Last name", phone: "Phone", category: "Interested in", notes: "Notes (optional)",
       submit: "Send",
       success: "Thanks! We'll be in touch within 24 hours.",
+      resend: "Send another",
+      formHint: "Sent via Telegram · reply within 24 hours",
       catOptions: ["Seat covers", "Floor mats", "Accessories", "Other"],
     },
     faq: {

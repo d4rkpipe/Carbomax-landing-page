@@ -242,8 +242,8 @@ function Hero({ locale, variant = "split", onCta }) {
               boxShadow: "var(--shadow-glass)",
             }}>
               <div className="eyebrow" style={{ fontSize: 10 }}>Magicar · M903F</div>
-              <div style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 20, marginTop: 6, lineHeight: 1.15 }}>2-year warranty</div>
-              <div className="mono" style={{ color: "var(--fg-muted)", fontSize: 11, marginTop: 8 }}>2 350 000 so'm</div>
+              <div style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 20, marginTop: 6, lineHeight: 1.15 }}>{t("hero.warrantyLabel")}</div>
+              <div className="mono" style={{ color: "var(--fg-muted)", fontSize: 11, marginTop: 8 }}>{fmtUZS(2350000)} {t("common.currency")}</div>
             </div>
           </div>
         </Reveal>
@@ -412,7 +412,7 @@ function Products({ locale, onAddInquiry }) {
             <div className="ph" style={{
               aspectRatio: "4/3", borderRadius: 0, borderLeft: 0, borderRight: 0, borderTop: 0,
             }}>
-              {p.car === "Universal" ? "Aksessuar fotosurati" : `${p.car} fotosurati`}
+              {p.car === "Universal" ? t("products.accessoryPhotoLabel") : `${p.car} ${t("products.photoLabel")}`}
             </div>
             <div style={{ padding: "18px 20px 20px", display: "flex", flexDirection: "column", gap: 8, flexGrow: 1 }}>
               <div className="mono" style={{ color: "var(--fg-dim)", fontSize: 10, letterSpacing: "0.1em" }}>{p.sku} · {p.car}</div>

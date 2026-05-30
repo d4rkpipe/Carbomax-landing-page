@@ -304,7 +304,6 @@ function Testimonials({ locale }) {
 function LeadForm({ locale, prefill, leadFormRef }) {
   const t = useT(locale);
   const [first, setFirst] = useState("");
-  const [last, setLast] = useState("");
   const [phone, setPhone] = useState("");
   const [cat, setCat] = useState("");
   const [notes, setNotes] = useState("");
@@ -333,20 +332,16 @@ function LeadForm({ locale, prefill, leadFormRef }) {
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 13 L9 17 L19 7"/></svg>
               </div>
               <div style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 25, lineHeight: 1.2 }}>{t("lead.success")}</div>
-              <button onClick={() => setSent(false)} className="btn btn-ghost btn-sm" style={{ marginTop: 20 }}>↺ Yana yuborish</button>
+              <button onClick={() => setSent(false)} className="btn btn-ghost btn-sm" style={{ marginTop: 20 }}>↺ {t("lead.resend")}</button>
             </div>
           </Reveal>
         ) : (
           <form
             onSubmit={(e) => { e.preventDefault(); setSent(true); }}
             className="glass" style={{ padding: 32, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
-            <div className="field">
+            <div className="field" style={{ gridColumn: "1 / -1" }}>
               <label>{t("lead.first")} <span style={{ color: "var(--accent)" }}>*</span></label>
-              <input type="text" required value={first} onChange={(e) => setFirst(e.target.value)} placeholder="Sherzod" />
-            </div>
-            <div className="field">
-              <label>{t("lead.last")} <span style={{ color: "var(--accent)" }}>*</span></label>
-              <input type="text" required value={last} onChange={(e) => setLast(e.target.value)} placeholder="Aliyev" />
+              <input type="text" required value={first} onChange={(e) => setFirst(e.target.value)} />
             </div>
             <div className="field" style={{ gridColumn: "1 / -1" }}>
               <label>{t("lead.phone")} <span style={{ color: "var(--accent)" }}>*</span></label>
@@ -368,7 +363,7 @@ function LeadForm({ locale, prefill, leadFormRef }) {
                    style={{ position: "absolute", left: "-9999px", opacity: 0, pointerEvents: "none" }} />
             <div style={{ gridColumn: "1 / -1", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, marginTop: 8, flexWrap: "wrap" }}>
               <div className="mono" style={{ color: "var(--fg-dim)", fontSize: 11 }}>
-                ☟ Telegram orqali yuboriladi · javob 24 soat ichida
+                ☟ {t("lead.formHint")}
               </div>
               <button type="submit" className="btn btn-primary">
                 {t("lead.submit")}
@@ -457,8 +452,13 @@ function Contact({ locale }) {
             <div style={{ marginTop: "auto" }}>
               <div className="eyebrow" style={{ fontSize: 10, marginBottom: 10 }}>{t("contact.socialsLabel")}</div>
               <div style={{ display: "flex", gap: 8 }}>
-                {["Telegram", "Instagram", "Facebook", "YouTube"].map((s, i) => (
-                  <a key={s} href="#" style={{ padding: "6px 12px", border: "1px solid var(--border)", borderRadius: 999, fontSize: 12, color: "var(--fg-muted)", textDecoration: "none" }}>{s}</a>
+                {[
+                  { name: "Telegram", url: "https://t.me/carbomax" },
+                  { name: "Instagram", url: "https://instagram.com/carbomax" },
+                  { name: "Facebook", url: "https://facebook.com/carbomax" },
+                  { name: "YouTube", url: "https://youtube.com/@carbomax" },
+                ].map((s) => (
+                  <a key={s.name} href={s.url} target="_blank" rel="noopener noreferrer" style={{ padding: "6px 12px", border: "1px solid var(--border)", borderRadius: 999, fontSize: 12, color: "var(--fg-muted)", textDecoration: "none" }}>{s.name}</a>
                 ))}
               </div>
             </div>
@@ -604,28 +604,33 @@ function FloatingActions() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-  const btn = (color, label, svg) => (
-    <a href="#" title={label} aria-label={label}
-       style={{
-         width: 48, height: 48, borderRadius: "50%",
-         background: color, color: "#fff",
-         display: "flex", alignItems: "center", justifyContent: "center",
-         boxShadow: "0 8px 20px rgba(0,0,0,0.35)",
-         textDecoration: "none",
-         transition: "transform .15s ease",
-       }}
-       onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.06)"; }}
-       onMouseLeave={(e) => { e.currentTarget.style.transform = ""; }}>
-      {svg}
-    </a>
-  );
+  const btn = (color, label, href, svg) => {
+    const external = href.startsWith("http");
+    return (
+      <a href={href} title={label} aria-label={label}
+         target={external ? "_blank" : undefined}
+         rel={external ? "noopener noreferrer" : undefined}
+         style={{
+           width: 48, height: 48, borderRadius: "50%",
+           background: color, color: "#fff",
+           display: "flex", alignItems: "center", justifyContent: "center",
+           boxShadow: "0 8px 20px rgba(0,0,0,0.35)",
+           textDecoration: "none",
+           transition: "transform .15s ease",
+         }}
+         onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.06)"; }}
+         onMouseLeave={(e) => { e.currentTarget.style.transform = ""; }}>
+        {svg}
+      </a>
+    );
+  };
   return (
     <div style={{ position: "fixed", right: 20, bottom: 20, zIndex: 30, display: "flex", flexDirection: "column", gap: 10 }}>
-      {btn("#0088cc", "Telegram",
+      {btn("#0088cc", "Telegram", "https://t.me/carbomax",
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M9.5 14.5 L9.3 17.5 c.4 0 .6-.2.8-.4l1.9-1.8 4 2.9 c.7.4 1.3.2 1.5-.7l2.7-12.7 c.3-1.2-.4-1.7-1.1-1.4L2.5 9.4 c-1.1.5-1.1 1-.2 1.3l4.4 1.4 10.2-6.5 c.5-.3.9-.1.5.2"/></svg>)}
-      {btn("#25D366", "WhatsApp",
+      {btn("#25D366", "WhatsApp", "https://wa.me/998901234567",
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.4 4.5 A 9.6 9.6 0 0 0 4.6 17.1 L 3.5 21 l 4.1 -1.1 a 9.6 9.6 0 0 0 11.8 -15.4 z m -7.3 14.6 a 7.9 7.9 0 0 1 -4 -1.1 l -.3 -.2 -2.4 .6 .7 -2.4 -.2 -.3 a 7.9 7.9 0 1 1 6.2 3.4 z m 4.4 -6 c -.2 -.1 -1.4 -.7 -1.6 -.8 -.2 -.1 -.4 -.1 -.5 .1 l -.7 .9 c -.1 .1 -.3 .2 -.5 .1 -.7 -.3 -1.3 -.7 -1.9 -1.4 -.6 -.6 -.9 -1.1 -1 -1.4 0 -.2 0 -.3 .1 -.4 l .3 -.4 .2 -.4 c 0 -.1 0 -.3 0 -.4 l -.6 -1.5 c -.2 -.4 -.4 -.4 -.5 -.4 h -.4 c -.2 0 -.4 .1 -.6 .3 -.2 .2 -.7 .7 -.7 1.7 0 1 .7 1.9 .8 2.1 .1 .2 1.4 2.2 3.5 3.1 1.7 .6 2 .5 2.4 .5 .4 0 1.3 -.5 1.5 -1.1 .2 -.6 .2 -1 .1 -1.1 0 -.1 -.2 -.2 -.4 -.3 z"/></svg>)}
-      {btn("var(--primary)", "Phone",
+      {btn("var(--primary)", "Phone", "tel:+998901234567",
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.9 v3 a2 2 0 0 1 -2.2 2 a 19.8 19.8 0 0 1 -8.6 -3.1 a 19.5 19.5 0 0 1 -6 -6 a 19.8 19.8 0 0 1 -3.1 -8.7 A2 2 0 0 1 4.1 2 h3 a2 2 0 0 1 2 1.7 a 12.8 12.8 0 0 0 .7 2.8 a2 2 0 0 1 -.5 2.1 L8 9.9 a16 16 0 0 0 6 6 l1.3 -1.3 a2 2 0 0 1 2.1 -.5 a 12.8 12.8 0 0 0 2.8 .7 A2 2 0 0 1 22 16.9 z"/></svg>)}
       {showTop && (
         <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} aria-label="Back to top"
