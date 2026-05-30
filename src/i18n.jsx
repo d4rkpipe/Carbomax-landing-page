@@ -1,4 +1,5 @@
-// carbomax-i18n.jsx — translation dictionary for UZ/RU/EN
+// i18n.jsx — translation dictionary for UZ/RU/EN
+import React from 'react'
 
 const I18N = {
   uz: {
@@ -450,4 +451,4 @@ function useT(locale) {
   }, [locale]);
 }
 
-Object.assign(window, { I18N, PRODUCTS, CAR_BRANDS, fmtUZS, maskPhone, useT });
+export { I18N, PRODUCTS, CAR_BRANDS, fmtUZS, maskPhone, useT }

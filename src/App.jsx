@@ -1,4 +1,8 @@
-// carbomax-app.jsx — main composition, state, tweaks
+// App.jsx — main composition, state, tweaks
+import React from 'react'
+import { PromoBanner, Header, Hero, Stats, Categories, Products, Loyalty } from './sections.jsx'
+import { Services, Process, Gallery, OurWork, CarSelector, Testimonials, LeadForm, FAQ, Contact, TelegramStrip, Footer, FloatingActions, BookingModal } from './sections-2.jsx'
+import { TweaksPanel, TweakSection, TweakRadio, TweakColor, useTweaks } from './tweaks-panel.jsx'
 
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "theme": "dark",
@@ -134,5 +138,4 @@ function App() {
   );
 }
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
+export default App

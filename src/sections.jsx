@@ -1,4 +1,7 @@
-// carbomax-sections.jsx — top-of-page sections
+// sections.jsx — top-of-page sections
+import React, { useState, useEffect, useRef, useMemo } from 'react'
+import { useT, fmtUZS, PRODUCTS } from './i18n.jsx'
+import { Reveal, Logo, CountUp, Section, LangSwitcher, ThemeToggle } from './ui.jsx'
 
 // ─── Promo banner (dismissible) ───────────────────────────────────────────────
 function PromoBanner({ locale }) {
@@ -487,7 +490,7 @@ function Loyalty({ locale }) {
               <div className="eyebrow" style={{ fontSize: 10 }}>{t("loyalty.qrLabel")}</div>
             </div>
             <div style={{ background: "#fff", padding: 6, borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <img src="uploads/photo_2026-05-31_02-41-38.jpg" alt="@CARBOMAX_BOT QR" style={{ width: 110, height: "auto", display: "block" }} />
+              <img src="/uploads/photo_2026-05-31_02-41-38.jpg" alt="@CARBOMAX_BOT QR" style={{ width: 110, height: "auto", display: "block" }} />
             </div>
           </div>
         </div>
@@ -498,4 +501,4 @@ function Loyalty({ locale }) {
   );
 }
 
-Object.assign(window, { PromoBanner, Header, Hero, Stats, Categories, Products, Loyalty });
+export { PromoBanner, Header, Hero, Stats, Categories, Products, Loyalty }

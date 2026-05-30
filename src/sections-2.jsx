@@ -1,4 +1,7 @@
-// carbomax-sections-2.jsx — second half of page sections + modals
+// sections-2.jsx — second half of page sections + modals
+import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react'
+import { useT, CAR_BRANDS, fmtUZS, maskPhone } from './i18n.jsx'
+import { Reveal, Logo, Section } from './ui.jsx'
 
 // ─── Gallery with lightbox ────────────────────────────────────────────────────
 function Gallery({ locale }) {
@@ -572,7 +575,7 @@ function Footer({ locale }) {
               <li style={{ color: "var(--fg-muted)", fontSize: 14 }}>+998 (90) 123-45-67</li>
               <li style={{ color: "var(--fg-muted)", fontSize: 14 }}>hello@carbomax.net</li>
               <li style={{ color: "var(--fg-muted)", fontSize: 14 }}>@carbomax</li>
-              <li style={{ color: "var(--fg-muted)", fontSize: 14, fontSize: 13, maxWidth: 220 }}>{t("contact.address")}</li>
+              <li style={{ color: "var(--fg-muted)", fontSize: 13, maxWidth: 220 }}>{t("contact.address")}</li>
             </ul>
           </div>
         </div>
@@ -688,4 +691,4 @@ function BookingModal({ locale, open, defaultService, onClose }) {
   );
 }
 
-Object.assign(window, { Gallery, OurWork, Services, Process, CarSelector, Testimonials, LeadForm, FAQ, Contact, TelegramStrip, Footer, FloatingActions, BookingModal });
+export { Gallery, OurWork, Services, Process, CarSelector, Testimonials, LeadForm, FAQ, Contact, TelegramStrip, Footer, FloatingActions, BookingModal }

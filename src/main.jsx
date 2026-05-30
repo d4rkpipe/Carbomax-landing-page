@@ -1,0 +1,8 @@
+// main.jsx — Vite entry point
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App.jsx'
+import './image-slot.js'
+import './index.css'
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)

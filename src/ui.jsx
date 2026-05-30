@@ -1,6 +1,5 @@
-// carbomax-ui.jsx — small reusable UI primitives
-
-const { useState, useEffect, useRef, useCallback, useMemo } = React;
+// ui.jsx — small reusable UI primitives
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 
 // Reveal on scroll
 function Reveal({ children, delay = 0, as: As = "div", className = "", style = {}, ...rest }) {
@@ -29,7 +28,7 @@ function Reveal({ children, delay = 0, as: As = "div", className = "", style = {
 function Logo({ size = 60 }) {
   return (
     <img
-      src="uploads/photo_2026-05-04_16-33-29.jpg"
+      src="/uploads/photo_2026-05-04_16-33-29.jpg"
       alt="Carbomax"
       width={size} height={size}
       style={{
@@ -178,4 +177,4 @@ function ThemeToggle({ theme, setTheme }) {
   );
 }
 
-Object.assign(window, { Reveal, Logo, CountUp, Section, LangSwitcher, ThemeToggle });
+export { Reveal, Logo, CountUp, Section, LangSwitcher, ThemeToggle }
