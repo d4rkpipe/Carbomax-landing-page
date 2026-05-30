@@ -38,7 +38,7 @@ const I18N = {
       title: "Biz nima qila olamiz",
       sub: "Boshidan oxirigacha — hammasini biz hal qilamiz.",
       items: [
-        { name: "Vizit", desc: "Uyga borib chexol o'rnatamiz — bizdan yoki o'zingizniki.", cta: "Vaqt belgilash" },
+        { name: "Uyga borib o'rnatish", desc: "Bizdan yoki o'zingizdagi chexolni o'rnatib beramiz.", cta: "Vaqt belgilash" },
         { name: "O'rnatish", desc: "Professional ustaxona, 1 soat ichida.", cta: "Vaqt belgilash" },
         { name: "Yetkazib berish", desc: "Toshkent va viloyatlar bo'ylab.", cta: "Hisoblash" },
         { name: "Maslahat", desc: "Modelingizga aynan nima tushadi — aytamiz.", cta: "Yozish" },
