@@ -12,7 +12,7 @@ function Gallery({ locale }) {
     { ratio: "1/1", label: "Tayyor chexol — Cobalt salonida" },
     { ratio: "4/5", label: "Magicar o'rnatish jarayoni" },
     { ratio: "1/1", label: "Avval / keyin: K5 salon" },
-    { ratio: "4/5", label: "Pol qoplamalarini tayyorlash — laser kesish" },
+    { ratio: "4/5", label: "Pollik tayyorlash — laser kesish" },
     { ratio: "1/1", label: "Ustalar jamoasi — 1998-yildan" },
     { ratio: "4/5", label: "Camry salon — premium chexol" },
     { ratio: "1/1", label: "Aksessuarlar ombori" },

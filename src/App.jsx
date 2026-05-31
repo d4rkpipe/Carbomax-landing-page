@@ -41,7 +41,7 @@ function App() {
       en: "Carbomax — Auto seat-cover and accessory shop · Tashkent",
     };
     const descs = {
-      uz: "Carbomax — Toshkentdagi avtomobil chexollari va aksessuarlar do'koni. Qo'lda tikilgan chexollar, pol qoplamalari, Magicar signalizatsiyalari. 1998-yildan beri.",
+      uz: "Carbomax — Toshkentdagi avtomobil chexollari va aksessuarlar do'koni. Qo'lda tikilgan chexollar, pollik qoplamalari, Magicar signalizatsiyalari. 1998-yildan beri.",
       ru: "Carbomax — Магазин автомобильных чехлов и аксессуаров в Ташкенте. Чехлы ручной работы, коврики, сигнализации Magicar. С 1998 года.",
       en: "Carbomax — Auto seat-cover, floor mat and accessory shop in Tashkent. Hand-tailored covers, Magicar alarms. Since 1998.",
     };
