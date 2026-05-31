@@ -137,13 +137,18 @@ function Header({ locale, setLocale, theme, setTheme, onCta }) {
 function Hero({ locale, variant = "split", onCta }) {
   const t = useT(locale);
   const heroPhoto = (
-    <image-slot
-      id="cbx-hero-photo"
-      shape="rounded"
-      radius="16"
-      placeholder={t("hero.photo")}
-      style={{ display: "block", width: "100%", height: "100%", minHeight: 420 }}
-    ></image-slot>
+    <img
+      src="/uploads/hero-interior.png"
+      alt={t("hero.photo")}
+      style={{
+        display: "block",
+        width: "100%",
+        height: "100%",
+        minHeight: 420,
+        objectFit: "cover",
+        borderRadius: 16,
+      }}
+    />
   );
 
   const eyebrow = <div className="eyebrow">{t("hero.eyebrow")}</div>;
@@ -236,16 +241,6 @@ function Hero({ locale, variant = "split", onCta }) {
         <Reveal delay={120} style={{ minWidth: 0 }}>
           <div style={{ position: "relative", aspectRatio: "4/5", maxHeight: 620 }}>
             {heroPhoto}
-            {/* Floating spec card */}
-            <div className="glass" style={{
-              position: "absolute", right: 16, bottom: 16,
-              padding: "16px 18px", maxWidth: 240,
-              boxShadow: "var(--shadow-glass)",
-            }}>
-              <div className="eyebrow" style={{ fontSize: 10 }}>Magicar · M903F</div>
-              <div style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 20, marginTop: 6, lineHeight: 1.15 }}>{t("hero.warrantyLabel")}</div>
-              <div className="mono" style={{ color: "var(--fg-muted)", fontSize: 11, marginTop: 8 }}>{fmtUZS(2350000)} {t("common.currency")}</div>
-            </div>
           </div>
         </Reveal>
       </div>
