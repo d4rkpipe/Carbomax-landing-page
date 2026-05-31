@@ -346,7 +346,7 @@ function LeadForm({ locale, prefill, leadFormRef }) {
             </div>
             <div className="field" style={{ gridColumn: "1 / -1" }}>
               <label>{t("lead.phone")} <span style={{ color: "var(--accent)" }}>*</span></label>
-              <IMaskInput mask="+{998} (00) 000-00-00" value={phone} onAccept={(value) => setPhone(value)} placeholder="+998 (90) 123-45-67" type="tel" required />
+              <IMaskInput mask="+{998} (00) 000-00-00" value={phone} onAccept={(value) => setPhone(value)} placeholder="+998 (77) 013-07-07" type="tel" required />
             </div>
             <div className="field" style={{ gridColumn: "1 / -1" }}>
               <label>{t("lead.category")}</label>
@@ -444,7 +444,7 @@ function Contact({ locale }) {
             </div>
             <div>
               <div className="eyebrow" style={{ fontSize: 10 }}>{t("contact.phoneLabel")}</div>
-              <a href="tel:+998901234567" style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 20, marginTop: 6, lineHeight: 1.25, color: "var(--fg)", textDecoration: "none", display: "block" }}>+998 (90) 123-45-67</a>
+              <a href="tel:+998770130707" style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 20, marginTop: 6, lineHeight: 1.25, color: "var(--fg)", textDecoration: "none", display: "block" }}>+998 (77) 013-07-07</a>
             </div>
             <div>
               <div className="eyebrow" style={{ fontSize: 10 }}>{t("contact.hoursLabel")}</div>
@@ -454,7 +454,7 @@ function Contact({ locale }) {
               <div className="eyebrow" style={{ fontSize: 10, marginBottom: 10 }}>{t("contact.socialsLabel")}</div>
               <div style={{ display: "flex", gap: 8 }}>
                 {[
-                  { name: "Telegram", url: "https://t.me/carbomax" },
+                  { name: "Telegram", url: "https://t.me/CARBOMAX7" },
                   { name: "Instagram", url: "https://instagram.com/carbomax" },
                   { name: "Facebook", url: "https://facebook.com/carbomax" },
                   { name: "YouTube", url: "https://youtube.com/@carbomax" },
@@ -533,7 +533,7 @@ function TelegramStrip({ locale }) {
               <div style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: "clamp(24px, 3vw, 34px)", lineHeight: 1.1, maxWidth: 560 }}>{t("telegram.title")}</div>
               <div style={{ color: "var(--fg-muted)", fontSize: 15, marginTop: 8 }}>{t("telegram.sub")}</div>
             </div>
-            <a href="https://t.me/carbomax" className="btn btn-primary" style={{ position: "relative", zIndex: 1 }}>
+            <a href="https://t.me/CARBOMAX7" className="btn btn-primary" style={{ position: "relative", zIndex: 1 }}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm4.5 6.5l-1.6 7.6c-.1.6-.5.7-1 .4l-2.7-2-1.3 1.2c-.2.2-.3.3-.6.3l.2-2.8 5-4.5c.2-.2-.1-.3-.3-.1L8 12.4l-2.7-.8c-.6-.2-.6-.6.1-.9l10.5-4c.5-.2.9.1.6 1z"/></svg>
               {t("telegram.cta")}
             </a>
@@ -573,9 +573,9 @@ function Footer({ locale }) {
           <div>
             <div className="eyebrow" style={{ marginBottom: 14 }}>{t("footer.contact")}</div>
             <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 8 }}>
-              <li style={{ color: "var(--fg-muted)", fontSize: 14 }}>+998 (90) 123-45-67</li>
+              <li style={{ color: "var(--fg-muted)", fontSize: 14 }}>+998 (77) 013-07-07</li>
               <li style={{ color: "var(--fg-muted)", fontSize: 14 }}>hello@carbomax.net</li>
-              <li style={{ color: "var(--fg-muted)", fontSize: 14 }}>@carbomax</li>
+              <li style={{ color: "var(--fg-muted)", fontSize: 14 }}>@CARBOMAX7</li>
               <li style={{ color: "var(--fg-muted)", fontSize: 13, maxWidth: 220 }}>{t("contact.address")}</li>
             </ul>
           </div>
@@ -627,11 +627,9 @@ function FloatingActions() {
   };
   return (
     <div style={{ position: "fixed", right: 20, bottom: 20, zIndex: 30, display: "flex", flexDirection: "column", gap: 10 }}>
-      {btn("#0088cc", "Telegram", "https://t.me/carbomax",
+      {btn("#0088cc", "Telegram", "https://t.me/CARBOMAX7",
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M9.5 14.5 L9.3 17.5 c.4 0 .6-.2.8-.4l1.9-1.8 4 2.9 c.7.4 1.3.2 1.5-.7l2.7-12.7 c.3-1.2-.4-1.7-1.1-1.4L2.5 9.4 c-1.1.5-1.1 1-.2 1.3l4.4 1.4 10.2-6.5 c.5-.3.9-.1.5.2"/></svg>)}
-      {btn("#25D366", "WhatsApp", "https://wa.me/998901234567",
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.4 4.5 A 9.6 9.6 0 0 0 4.6 17.1 L 3.5 21 l 4.1 -1.1 a 9.6 9.6 0 0 0 11.8 -15.4 z m -7.3 14.6 a 7.9 7.9 0 0 1 -4 -1.1 l -.3 -.2 -2.4 .6 .7 -2.4 -.2 -.3 a 7.9 7.9 0 1 1 6.2 3.4 z m 4.4 -6 c -.2 -.1 -1.4 -.7 -1.6 -.8 -.2 -.1 -.4 -.1 -.5 .1 l -.7 .9 c -.1 .1 -.3 .2 -.5 .1 -.7 -.3 -1.3 -.7 -1.9 -1.4 -.6 -.6 -.9 -1.1 -1 -1.4 0 -.2 0 -.3 .1 -.4 l .3 -.4 .2 -.4 c 0 -.1 0 -.3 0 -.4 l -.6 -1.5 c -.2 -.4 -.4 -.4 -.5 -.4 h -.4 c -.2 0 -.4 .1 -.6 .3 -.2 .2 -.7 .7 -.7 1.7 0 1 .7 1.9 .8 2.1 .1 .2 1.4 2.2 3.5 3.1 1.7 .6 2 .5 2.4 .5 .4 0 1.3 -.5 1.5 -1.1 .2 -.6 .2 -1 .1 -1.1 0 -.1 -.2 -.2 -.4 -.3 z"/></svg>)}
-      {btn("var(--primary)", "Phone", "tel:+998901234567",
+      {btn("var(--primary)", "Phone", "tel:+998770130707",
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.9 v3 a2 2 0 0 1 -2.2 2 a 19.8 19.8 0 0 1 -8.6 -3.1 a 19.5 19.5 0 0 1 -6 -6 a 19.8 19.8 0 0 1 -3.1 -8.7 A2 2 0 0 1 4.1 2 h3 a2 2 0 0 1 2 1.7 a 12.8 12.8 0 0 0 .7 2.8 a2 2 0 0 1 -.5 2.1 L8 9.9 a16 16 0 0 0 6 6 l1.3 -1.3 a2 2 0 0 1 2.1 -.5 a 12.8 12.8 0 0 0 2.8 .7 A2 2 0 0 1 22 16.9 z"/></svg>)}
       {showTop && (
         <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} aria-label="Back to top"
