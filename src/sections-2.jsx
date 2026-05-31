@@ -4,113 +4,12 @@ import { useT, CAR_BRANDS, fmtUZS } from './i18n.jsx'
 import { Reveal, Logo, Section, rafThrottle } from './ui.jsx'
 import { IMaskInput } from 'react-imask'
 
-// ─── Gallery with lightbox ────────────────────────────────────────────────────
-function Gallery({ locale }) {
-  const t = useT(locale);
-  const photos = [
-    { ratio: "4/5", label: "Tikuv jarayoni — chexol tikilmoqda" },
-    { ratio: "1/1", label: "Tayyor chexol — Cobalt salonida" },
-    { ratio: "4/5", label: "Magicar o'rnatish jarayoni" },
-    { ratio: "1/1", label: "Avval / keyin: K5 salon" },
-    { ratio: "4/5", label: "Pollik tayyorlash — laser kesish" },
-    { ratio: "1/1", label: "Ustalar jamoasi — 1998-yildan" },
-    { ratio: "4/5", label: "Camry salon — premium chexol" },
-    { ratio: "1/1", label: "Aksessuarlar ombori" },
-  ];
-  const [open, setOpen] = useState(null);
-
-  useEffect(() => {
-    if (open === null) return;
-    const onKey = (e) => {
-      if (e.key === "Escape") setOpen(null);
-      else if (e.key === "ArrowRight") setOpen((i) => (i + 1) % photos.length);
-      else if (e.key === "ArrowLeft") setOpen((i) => (i - 1 + photos.length) % photos.length);
-    };
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
-  }, [open, photos.length]);
-
-  return (
-    <Section id="about" eyebrow="06 · Gallery" title={t("gallery.title")} sub={t("gallery.sub")}>
-      <div style={{ columnCount: 3, columnGap: 16 }} className="cbx-masonry">
-        {photos.map((p, i) => (
-          <button
-            key={i}
-            onClick={() => setOpen(i)}
-            className="ph"
-            style={{
-              aspectRatio: p.ratio,
-              width: "100%",
-              marginBottom: 16,
-              breakInside: "avoid",
-              display: "flex",
-              cursor: "pointer",
-              border: "1px solid var(--border)",
-              transition: "transform .2s ease, border-color .2s ease",
-              padding: 0,
-              position: "relative",
-              overflow: "hidden",
-            }}
-            onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(0.99)"; e.currentTarget.style.borderColor = "color-mix(in oklab, var(--primary) 50%, var(--border))"; }}
-            onMouseLeave={(e) => { e.currentTarget.style.transform = ""; e.currentTarget.style.borderColor = ""; }}>
-            <span style={{ position: "absolute", bottom: 12, left: 12, right: 12, fontFamily: "var(--font-mono)", fontSize: 10, letterSpacing: "0.08em", color: "var(--fg-muted)", textTransform: "none", textAlign: "left" }}>
-              {String(i + 1).padStart(2, "0")} · {p.label}
-            </span>
-          </button>
-        ))}
-      </div>
-      <style>{`
-        @media (max-width: 900px) { .cbx-masonry { column-count: 2 !important; } }
-        @media (max-width: 560px) { .cbx-masonry { column-count: 1 !important; } }
-      `}</style>
-
-      {/* Lightbox */}
-      {open !== null && (
-        <div
-          onClick={() => setOpen(null)}
-          style={{
-            position: "fixed", inset: 0, background: "rgba(0,0,0,0.85)",
-            backdropFilter: "blur(8px)", zIndex: 100,
-            display: "flex", alignItems: "center", justifyContent: "center",
-            padding: 40,
-          }}>
-          <button
-            onClick={(e) => { e.stopPropagation(); setOpen(null); }}
-            aria-label="Close"
-            style={{ position: "absolute", top: 20, right: 20, background: "transparent", color: "#fff", border: "1px solid rgba(255,255,255,0.3)", borderRadius: 999, width: 40, height: 40, cursor: "pointer", fontSize: 18 }}>×</button>
-          <button
-            onClick={(e) => { e.stopPropagation(); setOpen((i) => (i - 1 + photos.length) % photos.length); }}
-            aria-label="Prev"
-            style={{ position: "absolute", left: 20, top: "50%", transform: "translateY(-50%)", background: "transparent", color: "#fff", border: "1px solid rgba(255,255,255,0.3)", borderRadius: 999, width: 48, height: 48, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <svg width="16" height="16" viewBox="0 0 14 14"><path d="M9 3 L4 7 L9 11" stroke="currentColor" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
-          </button>
-          <button
-            onClick={(e) => { e.stopPropagation(); setOpen((i) => (i + 1) % photos.length); }}
-            aria-label="Next"
-            style={{ position: "absolute", right: 20, top: "50%", transform: "translateY(-50%)", background: "transparent", color: "#fff", border: "1px solid rgba(255,255,255,0.3)", borderRadius: 999, width: 48, height: 48, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <svg width="16" height="16" viewBox="0 0 14 14"><path d="M5 3 L10 7 L5 11" stroke="currentColor" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
-          </button>
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="ph"
-            style={{ width: "min(900px, 90vw)", aspectRatio: photos[open].ratio, background: "#1a1a1a", color: "#9a9a9a", display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center", padding: 24, fontFamily: "var(--font-mono)", fontSize: 13 }}>
-            {photos[open].label}
-          </div>
-          <div style={{ position: "absolute", bottom: 24, left: 0, right: 0, textAlign: "center", color: "rgba(255,255,255,0.7)", fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: "0.08em" }}>
-            {String(open + 1).padStart(2, "0")} / {String(photos.length).padStart(2, "0")}
-          </div>
-        </div>
-      )}
-    </Section>
-  );
-}
-
 // ─── Our completed work / portfolio ───────────────────────────────────────────
 function OurWork({ locale }) {
   const t = useT(locale);
   const items = t("ourWork.items");
   return (
-    <Section eyebrow="07 · Portfolio" title={t("ourWork.title")} sub={t("ourWork.sub")}>
+    <Section id="about" eyebrow="06 · Portfolio" title={t("ourWork.title")} sub={t("ourWork.sub")}>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }} className="cbx-work-grid">
         {items.map((item, i) => (
           <Reveal key={i} delay={i * 80}>
@@ -231,7 +130,7 @@ function CarSelector({ locale, onFind }) {
   const t = useT(locale);
   const [brand, setBrand] = useState("");
   return (
-    <Section eyebrow="08 · Match my car" title={t("selector.title")} sub={t("selector.sub")} alignHead="center">
+    <Section eyebrow="07 · Match my car" title={t("selector.title")} sub={t("selector.sub")} alignHead="center">
       <Reveal>
         <form
           onSubmit={(e) => { e.preventDefault(); onFind && onFind({ brand }); }}
@@ -261,7 +160,7 @@ function Testimonials({ locale }) {
   const t = useT(locale);
   const items = t("testimonials.items");
   return (
-    <Section eyebrow="09 · Voices" title={t("testimonials.title")} sub={t("testimonials.sub")}>
+    <Section eyebrow="08 · Voices" title={t("testimonials.title")} sub={t("testimonials.sub")}>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }} className="cbx-test-grid">
         {items.map((it, i) => (
           <Reveal key={i} delay={i * 80}>
@@ -324,7 +223,7 @@ function LeadForm({ locale, prefill, leadFormRef }) {
   }, [prefill, locale, t]);
 
   return (
-    <Section id="lead" eyebrow="10 · Get a quote" title={t("lead.title")} sub={t("lead.sub")} alignHead="center">
+    <Section id="lead" eyebrow="09 · Get a quote" title={t("lead.title")} sub={t("lead.sub")} alignHead="center">
       <div ref={leadFormRef} style={{ maxWidth: 720, margin: "0 auto" }}>
         {sent ? (
           <Reveal>
@@ -387,7 +286,7 @@ function FAQ({ locale }) {
   const items = t("faq.items");
   const [open, setOpen] = useState(0);
   return (
-    <Section eyebrow="11 · FAQ" title={t("faq.title")}>
+    <Section eyebrow="10 · FAQ" title={t("faq.title")}>
       <div style={{ maxWidth: 880, margin: "0 auto", display: "flex", flexDirection: "column", gap: 4, borderTop: "1px solid var(--border)" }}>
         {items.map((it, i) => {
           const isOpen = open === i;
@@ -434,7 +333,7 @@ function FAQ({ locale }) {
 function Contact({ locale }) {
   const t = useT(locale);
   return (
-    <Section id="contact" eyebrow="12 · Visit" title={t("contact.title")} sub={t("contact.sub")}>
+    <Section id="contact" eyebrow="11 · Visit" title={t("contact.title")} sub={t("contact.sub")}>
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 32 }} className="cbx-contact-grid">
         <Reveal>
           <div className="card" style={{ padding: 32, display: "flex", flexDirection: "column", gap: 24, height: "100%" }}>
@@ -695,4 +594,4 @@ function BookingModal({ locale, open, defaultService, onClose }) {
   );
 }
 
-export { Gallery, OurWork, Services, Process, CarSelector, Testimonials, LeadForm, FAQ, Contact, TelegramStrip, Footer, FloatingActions, BookingModal }
+export { OurWork, Services, Process, CarSelector, Testimonials, LeadForm, FAQ, Contact, TelegramStrip, Footer, FloatingActions, BookingModal }

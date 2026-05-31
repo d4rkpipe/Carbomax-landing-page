@@ -60,7 +60,6 @@ const I18N = {
       cta: "Telegram-botda boshlash",
       qrLabel: "QR-kodni skanerlang",
     },
-    gallery: { title: "Bizning ish", sub: "Haqiqiy ish — har kuni.", caption: "Ish jarayonidan" },
     ourWork: {
       title: "Biz qilgan ishlar",
       sub: "Mijozlar avtomobillaridagi natijalar — bizning ishimiz.",
@@ -202,7 +201,6 @@ const I18N = {
       cta: "Открыть Telegram-бот",
       qrLabel: "Отсканируйте QR",
     },
-    gallery: { title: "Наша работа", sub: "Настоящая работа — каждый день.", caption: "Из процесса работы" },
     ourWork: {
       title: "Наши работы",
       sub: "Результаты на машинах клиентов — наш труд.",
@@ -340,7 +338,6 @@ const I18N = {
       cta: "Open the Telegram bot",
       qrLabel: "Scan the QR",
     },
-    gallery: { title: "Our work", sub: "Real work — every day.", caption: "From our work" },
     ourWork: {
       title: "Our completed work",
       sub: "Results on customer cars — our craft.",

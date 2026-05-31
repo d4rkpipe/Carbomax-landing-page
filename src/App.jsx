@@ -1,7 +1,7 @@
 // App.jsx — main composition, state, tweaks
 import React from 'react'
 import { PromoBanner, Header, Hero, Stats, Categories, Products, Loyalty } from './sections.jsx'
-import { Services, Process, Gallery, OurWork, CarSelector, Testimonials, LeadForm, FAQ, Contact, TelegramStrip, Footer, FloatingActions, BookingModal } from './sections-2.jsx'
+import { Services, Process, OurWork, CarSelector, Testimonials, LeadForm, FAQ, Contact, TelegramStrip, Footer, FloatingActions, BookingModal } from './sections-2.jsx'
 import { TweaksPanel, TweakSection, TweakRadio, TweakColor, useTweaks } from './tweaks-panel.jsx'
 
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
@@ -111,7 +111,6 @@ function App() {
       <Services locale={locale} onBook={handleBook} />
       <Loyalty locale={locale} />
       <Process locale={locale} />
-      <Gallery locale={locale} />
       <OurWork locale={locale} />
       <CarSelector locale={locale} onFind={handleCarFind} />
       <Testimonials locale={locale} />
