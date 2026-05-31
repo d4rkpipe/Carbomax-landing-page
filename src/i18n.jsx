@@ -26,7 +26,7 @@ const I18N = {
       sub: "Avtomobilingizning har bir detali — alohida e'tibor bilan.",
       items: [
         { name: "Avtomobil chexollari", desc: "30+ modelga moslab tikilgan eko-charm va premium chexollar.", tag: "Tayyorlash muddati: 3–5 kun" },
-        { name: "Pollik qoplamalari", desc: "EVA, 3D va klassik kovrolinlar — modelingizga aniq mos.", tag: "Omborda mavjud" },
+        { name: "Pollik qoplamalari", desc: "EVA, 3D va klassik kovriklar — modelingizga aniq mos.", tag: "Omborda mavjud" },
         { name: "Aksessuarlar", desc: "Magicar signalizatsiyalari, audio, fara va salon chiroqlari.", tag: "Rasmiy diler" },
       ],
     },
