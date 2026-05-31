@@ -25,16 +25,16 @@ const I18N = {
       title: "Bizning yo'nalishlarimiz",
       sub: "Avtomobilingizning har bir detali — alohida e'tibor bilan.",
       items: [
-        { name: "Avtomobil chexollari", desc: "30+ modelga moslab tikilgan ekokoja va premium chexollar.", tag: "3–5 kunlik tikuv" },
-        { name: "Pollik qoplamalari", desc: "EVA, 3D va klassik kovrolinlar — modelingizga aniq mos.", tag: "Tayyor stockda" },
-        { name: "Aksessuarlar", desc: "Magicar signalizatsiyalari, audio, fara va salon yorug'ligi.", tag: "Magicar diler" },
+        { name: "Avtomobil chexollari", desc: "30+ modelga moslab tikilgan eko-charm va premium chexollar.", tag: "Tayyorlash muddati: 3–5 kun" },
+        { name: "Pol qoplamalari", desc: "EVA, 3D va klassik kovrolinlar — avtomobilingiz modeliga aniq mos.", tag: "Omborda mavjud" },
+        { name: "Aksessuarlar", desc: "Magicar signalizatsiyalari, audio, fara va salon chiroqlari.", tag: "Rasmiy diler" },
       ],
     },
     products: {
       title: "Eng ko'p tanlanganlar",
       sub: "Mijozlarimizning sevimli mahsulotlari.",
       addInquiry: "So'rovga qo'shish",
-      filters: { all: "Barchasi", covers: "Chexollar", mats: "Pollik", acc: "Aksessuarlar" },
+      filters: { all: "Barchasi", covers: "Chexollar", mats: "Pol qoplamalari", acc: "Aksessuarlar" },
       photoLabel: "fotosurati",
       accessoryPhotoLabel: "Aksessuar fotosurati",
     },
@@ -67,7 +67,7 @@ const I18N = {
       items: [
         { car: "Chevrolet Cobalt", caption: "Premium chexol o'rnatildi" },
         { car: "Kia K5", caption: "Eko-charm chexol" },
-        { car: "Hyundai Tucson", caption: "3D pollik va chexol" },
+        { car: "Hyundai Tucson", caption: "3D pol qoplamasi va chexol" },
         { car: "Toyota Camry", caption: "Premium chexol va aksessuar" },
         { car: "Chevrolet Nexia", caption: "Klassik chexol" },
         { car: "Ravon R3", caption: "Eko-charm chexol" },
@@ -105,7 +105,7 @@ const I18N = {
       success: "Rahmat! 24 soat ichida bog'lanamiz.",
       resend: "Yana yuborish",
       formHint: "Telegram orqali yuboriladi · javob 24 soat ichida",
-      catOptions: ["Chexollar", "Pollik", "Aksessuarlar", "Boshqa"],
+      catOptions: ["Chexollar", "Pol qoplamalari", "Aksessuarlar", "Boshqa"],
     },
     faq: {
       title: "Tez-tez beriladigan savollar",
@@ -427,11 +427,11 @@ const I18N = {
 // Shared data — locale-agnostic
 const PRODUCTS = [
   { id: "p1", cat: "covers", name: { uz: "Cobalt premium chexol", ru: "Чехлы Cobalt Premium", en: "Cobalt premium covers" }, sku: "CBX-CO-PR-002", price: 1450000, car: "Chevrolet Cobalt" },
-  { id: "p2", cat: "covers", name: { uz: "K5 ekokoja to'plam", ru: "K5 Эко-кожа комплект", en: "K5 eco-leather set" }, sku: "CBX-K5-EL-014", price: 1890000, car: "Kia K5" },
-  { id: "p3", cat: "mats", name: { uz: "Tucson 3D pollik", ru: "Tucson 3D коврики", en: "Tucson 3D mats" }, sku: "CBX-TC-3D-007", price: 720000, car: "Hyundai Tucson" },
+  { id: "p2", cat: "covers", name: { uz: "K5 eko-charm to'plam", ru: "K5 Эко-кожа комплект", en: "K5 eco-leather set" }, sku: "CBX-K5-EL-014", price: 1890000, car: "Kia K5" },
+  { id: "p3", cat: "mats", name: { uz: "Tucson 3D pol qoplamasi", ru: "Tucson 3D коврики", en: "Tucson 3D mats" }, sku: "CBX-TC-3D-007", price: 720000, car: "Hyundai Tucson" },
   { id: "p4", cat: "acc", name: { uz: "Magicar M903F", ru: "Magicar M903F", en: "Magicar M903F" }, sku: "MGC-M903F", price: 2350000, car: "Universal" },
   { id: "p6", cat: "covers", name: { uz: "Camry premium chexol", ru: "Camry premium чехлы", en: "Camry premium covers" }, sku: "CBX-CY-PR-018", price: 2100000, car: "Toyota Camry" },
-  { id: "p7", cat: "mats", name: { uz: "Cobalt EVA pollik", ru: "Cobalt EVA коврики", en: "Cobalt EVA mats" }, sku: "CBX-CO-EV-003", price: 480000, car: "Chevrolet Cobalt" },
+  { id: "p7", cat: "mats", name: { uz: "Cobalt EVA pol qoplamasi", ru: "Cobalt EVA коврики", en: "Cobalt EVA mats" }, sku: "CBX-CO-EV-003", price: 480000, car: "Chevrolet Cobalt" },
   { id: "p8", cat: "acc", name: { uz: "LED salon yorug'i", ru: "LED подсветка салона", en: "LED cabin lighting" }, sku: "ACC-LED-CAB-04", price: 320000, car: "Universal" },
 ];
 
