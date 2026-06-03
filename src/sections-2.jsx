@@ -527,7 +527,7 @@ function TelegramStrip({ locale }) {
               <div style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: "clamp(24px, 3vw, 34px)", lineHeight: 1.1, maxWidth: 560 }}>{t("telegram.title")}</div>
               <div style={{ color: "var(--fg-muted)", fontSize: 15, marginTop: 8 }}>{t("telegram.sub")}</div>
             </div>
-            <a href="https://t.me/CARBOMAX7" className="btn btn-primary" style={{ position: "relative", zIndex: 1 }}>
+            <a href="https://t.me/Carbomax_uz" target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ position: "relative", zIndex: 1 }}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm4.5 6.5l-1.6 7.6c-.1.6-.5.7-1 .4l-2.7-2-1.3 1.2c-.2.2-.3.3-.6.3l.2-2.8 5-4.5c.2-.2-.1-.3-.3-.1L8 12.4l-2.7-.8c-.6-.2-.6-.6.1-.9l10.5-4c.5-.2.9.1.6 1z"/></svg>
               {t("telegram.cta")}
             </a>
