@@ -545,7 +545,10 @@ function Footer({ locale }) {
       <div className="wrap">
         <div style={{ display: "grid", gridTemplateColumns: "1.4fr 1fr 1fr 1fr", gap: 32 }} className="cbx-footer-grid">
           <div>
-            <Logo />
+            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+              <Logo />
+              <span style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 22, color: "var(--fg)" }}>Carbomax</span>
+            </div>
             <p style={{ color: "var(--fg-muted)", fontSize: 14, lineHeight: 1.55, margin: "16px 0 0", maxWidth: 280 }}>{t("footer.tagline")}</p>
           </div>
           <div>
@@ -568,8 +571,7 @@ function Footer({ locale }) {
             <div className="eyebrow" style={{ marginBottom: 14 }}>{t("footer.contact")}</div>
             <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 8 }}>
               <li style={{ color: "var(--fg-muted)", fontSize: 14 }}>+998 (77) 013-07-07</li>
-              <li style={{ color: "var(--fg-muted)", fontSize: 14 }}>hello@carbomax.net</li>
-              <li style={{ color: "var(--fg-muted)", fontSize: 14 }}>@CARBOMAX7</li>
+              <li style={{ color: "var(--fg-muted)", fontSize: 14 }}>admin@carbomax.net</li>
               <li style={{ color: "var(--fg-muted)", fontSize: 13, maxWidth: 220 }}>{t("contact.address")}</li>
             </ul>
           </div>
@@ -580,6 +582,13 @@ function Footer({ locale }) {
             <a href="#" style={{ color: "var(--fg-dim)", textDecoration: "none" }}>{t("footer.privacy")}</a>
             <a href="#" style={{ color: "var(--fg-dim)", textDecoration: "none" }}>{t("footer.terms")}</a>
           </div>
+        </div>
+        <div style={{ marginTop: 16, fontSize: 11.5, color: "var(--fg-dim)", fontFamily: "var(--font-mono)", textAlign: "center" }}>
+          {t("footer.builtBy")}{" "}
+          <a href="https://t.me/nozimjon_hamdamov" target="_blank" rel="noopener noreferrer"
+             style={{ color: "var(--fg-muted)", textDecoration: "none", borderBottom: "1px dashed var(--border-strong)", paddingBottom: 1 }}>
+            Nozimjon Hamdamov
+          </a>
         </div>
       </div>
       <style>{`@media (max-width: 800px) {

@@ -64,8 +64,9 @@ function Header({ locale, setLocale, theme, setTheme, onCta }) {
       transition: "background .2s ease, border-color .2s ease",
     }}>
       <div className="wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: 72, gap: 16 }}>
-        <a href="#home" style={{ color: "var(--fg)", textDecoration: "none" }}>
+        <a href="#home" style={{ color: "var(--fg)", textDecoration: "none", display: "flex", alignItems: "center", gap: 10 }}>
           <Logo />
+          <span style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 20 }}>Carbomax</span>
         </a>
 
         {/* Desktop nav */}
