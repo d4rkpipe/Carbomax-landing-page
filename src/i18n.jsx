@@ -87,8 +87,8 @@ const I18N = {
       steps: [
         { title: "Bog'lanish", desc: "Telefon, Telegram yoki sayt orqali." },
         { title: "Maslahat", desc: "Modelingiz uchun eng mos variantni birga tanlaymiz." },
-        { title: "Tayyorlash", desc: "Buyurtma bo'yicha tikamiz yoki ombordan olamiz." },
-        { title: "Topshirish yoki yetkazib berish", desc: "Do'konda topshiramiz yoki manzilingizga yetkazib beramiz." },
+        { title: "Tayyorlash", desc: "Buyurtmangizga moslab chexol tikamiz yoki do'kondagi tayyor variantlardan tanlaysiz." },
+        { title: "Olib ketish yoki yetkazib berish", desc: "Do'kondan o'zingiz olib ketasiz yoki manzilingizga yetkazib beramiz." },
       ],
     },
     selector: {
@@ -228,8 +228,8 @@ const I18N = {
       steps: [
         { title: "Связь", desc: "Телефон, Telegram или сайт." },
         { title: "Консультация", desc: "Подберём вариант, который точно подходит вашей модели." },
-        { title: "Подготовка", desc: "Шьём или достаём со склада." },
-        { title: "Передача или доставка", desc: "Заберёте в магазине или привезём по адресу." },
+        { title: "Подготовка", desc: "Сошьём чехлы под заказ или выберете из готовых в магазине." },
+        { title: "Самовывоз или доставка", desc: "Заберёте сами из магазина или доставим по вашему адресу." },
       ],
     },
     selector: { title: "Назовите модель — подберём идеально", sub: "Выберите бренд — покажем подходящие варианты.", brand: "Бренд", year: "Год выпуска", cta: "Найти товары" },
@@ -365,8 +365,8 @@ const I18N = {
       steps: [
         { title: "Get in touch", desc: "Phone, Telegram, or this site." },
         { title: "Consultation", desc: "We pick the option that fits your model best." },
-        { title: "Prepare", desc: "Tailored to fit, or pulled from stock." },
-        { title: "Handover or delivery", desc: "Pick up at the shop or we deliver to your address." },
+        { title: "Prepare", desc: "We tailor covers to your order, or choose from ready-made ones in the shop." },
+        { title: "Pickup or delivery", desc: "Collect it from the shop, or we deliver to your address." },
       ],
     },
     selector: { title: "Tell us your model — we'll find the match", sub: "Pick a make and we'll surface the right products.", brand: "Make", year: "Year", cta: "Find products" },
