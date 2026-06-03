@@ -98,11 +98,11 @@ const I18N = {
       placeholder: "Mashina modelingizni kiriting",
     },
     lead: {
-      title: "Telegram orqali bir necha daqiqada javob olamiz",
+      title: "Biz siz bilan tezda bog'lanamiz",
       sub: "Forma to'ldiring — 24 soat ichida bog'lanamiz.",
       first: "Ism va familiya", last: "Familiya", phone: "Telefon raqam", category: "Qiziqtirayotgan yo'nalish", notes: "Qo'shimcha izoh",
       submit: "Yuborish",
-      success: "Rahmat! 24 soat ichida bog'lanamiz.",
+      success: "Murojaatingiz qabul qilindi! Tez orada bog'lanamiz.",
       resend: "Yana yuborish",
       formHint: "Telegram orqali yuboriladi · javob 24 soat ichida",
       catOptions: ["Chexollar", "Pollik qoplamalari", "Aksessuarlar", "Boshqa"],
@@ -144,7 +144,7 @@ const I18N = {
       submit: "So'rov yuborish", cancel: "Bekor qilish",
       success: "Yuborildi. Tez orada bog'lanamiz.",
     },
-    common: { fromPrice: "narxidan", currency: "so'm", learnMore: "Batafsil", close: "Yopish", view: "Ko'rish" },
+    common: { fromPrice: "narxidan", currency: "so'm", learnMore: "Batafsil", close: "Yopish", view: "Ko'rish", sending: "Yuborilmoqda…", error: "Xatolik yuz berdi. Telefon yoki Telegram orqali bog'laning." },
   },
   ru: {
     nav: { home: "Главная", products: "Товары", services: "Услуги", about: "О нас", contact: "Контакты", cta: "Связаться" },
@@ -235,11 +235,11 @@ const I18N = {
     },
     selector: { title: "Подберём товары под ваш автомобиль", sub: "Введите модель вашего авто — подберём самые подходящие варианты.", brand: "Бренд", year: "Год выпуска", cta: "Найти товары", placeholder: "Введите модель автомобиля" },
     lead: {
-      title: "Получите ответ за минуты через Telegram",
+      title: "Свяжемся с вами в ближайшее время",
       sub: "Заполните форму — свяжемся в течение 24 часов.",
       first: "Имя и фамилия", last: "Фамилия", phone: "Телефон", category: "Что интересует", notes: "Дополнительно",
       submit: "Отправить",
-      success: "Спасибо! Свяжемся в течение 24 часов.",
+      success: "Ваша заявка принята! Скоро свяжемся.",
       resend: "Отправить ещё",
       formHint: "Через Telegram · ответ в течение 24 часов",
       catOptions: ["Чехлы", "Коврики", "Аксессуары", "Другое"],
@@ -281,7 +281,7 @@ const I18N = {
       submit: "Отправить заявку", cancel: "Отмена",
       success: "Заявка отправлена. Скоро свяжемся.",
     },
-    common: { fromPrice: "от", currency: "сум", learnMore: "Подробнее", close: "Закрыть", view: "Смотреть" },
+    common: { fromPrice: "от", currency: "сум", learnMore: "Подробнее", close: "Закрыть", view: "Смотреть", sending: "Отправка…", error: "Произошла ошибка. Свяжитесь по телефону или Telegram." },
   },
   en: {
     nav: { home: "Home", products: "Products", services: "Services", about: "About", contact: "Contact", cta: "Get in touch" },
@@ -372,11 +372,11 @@ const I18N = {
     },
     selector: { title: "We'll match products to your car", sub: "Enter your car's model — we'll pick the best-fitting options for you.", brand: "Make", year: "Year", cta: "Find products", placeholder: "Enter your car model" },
     lead: {
-      title: "Get a quote in minutes via Telegram",
+      title: "We'll get in touch with you shortly",
       sub: "Fill the form — we reply within 24 hours.",
       first: "Full name", last: "Last name", phone: "Phone", category: "Interested in", notes: "Notes (optional)",
       submit: "Send",
-      success: "Thanks! We'll be in touch within 24 hours.",
+      success: "Your request has been received! We'll be in touch soon.",
       resend: "Send another",
       formHint: "Sent via Telegram · reply within 24 hours",
       catOptions: ["Seat covers", "Floor mats", "Accessories", "Other"],
@@ -418,7 +418,7 @@ const I18N = {
       submit: "Send request", cancel: "Cancel",
       success: "Request sent. We'll be in touch shortly.",
     },
-    common: { fromPrice: "from", currency: "UZS", learnMore: "Learn more", close: "Close", view: "View" },
+    common: { fromPrice: "from", currency: "UZS", learnMore: "Learn more", close: "Close", view: "View", sending: "Sending…", error: "Something went wrong. Please reach us by phone or Telegram." },
   },
 };
 

@@ -70,3 +70,14 @@ model Category {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 }
+
+model Lead {
+  id        Int      @id @default(autoincrement())
+  type      String   @default("quote") // "quote" | "booking"
+  name      String
+  phone     String
+  topic     String?  // quote: interest; booking: service
+  schedule  String?  // booking: date + time
+  notes     String?
+  createdAt DateTime @default(now())
+}

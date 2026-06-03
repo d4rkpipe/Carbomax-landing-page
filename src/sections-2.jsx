@@ -226,6 +226,28 @@ function LeadForm({ locale, prefill, leadFormRef }) {
   const [cat, setCat] = useState("");
   const [notes, setNotes] = useState("");
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [err, setErr] = useState("");
+
+  const submit = async (e) => {
+    e.preventDefault();
+    const company = e.currentTarget.company ? e.currentTarget.company.value : ""; // honeypot
+    setErr("");
+    setSending(true);
+    try {
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type: "quote", name: first, phone, topic: cat, notes, company }),
+      });
+      if (!res.ok) throw new Error();
+      setSent(true);
+    } catch (e2) {
+      setErr(t("common.error"));
+    } finally {
+      setSending(false);
+    }
+  };
 
   useEffect(() => {
     if (prefill && prefill.product) {
@@ -255,7 +277,7 @@ function LeadForm({ locale, prefill, leadFormRef }) {
           </Reveal>
         ) : (
           <form
-            onSubmit={(e) => { e.preventDefault(); setSent(true); }}
+            onSubmit={submit}
             className="glass" style={{ padding: 32, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
             <div className="field" style={{ gridColumn: "1 / -1" }}>
               <label>{t("lead.first")} <span style={{ color: "var(--accent)" }}>*</span></label>
@@ -263,7 +285,7 @@ function LeadForm({ locale, prefill, leadFormRef }) {
             </div>
             <div className="field" style={{ gridColumn: "1 / -1" }}>
               <label>{t("lead.phone")} <span style={{ color: "var(--accent)" }}>*</span></label>
-              <IMaskInput mask="+{998} (00) 000-00-00" value={phone} onAccept={(value) => setPhone(value)} placeholder="+998 (77) 013-07-07" type="tel" required />
+              <IMaskInput mask="+{998} (00) 000-00-00" value={phone} onAccept={(value) => setPhone(value)} placeholder="+99890 1234567" type="tel" required />
             </div>
             <div className="field" style={{ gridColumn: "1 / -1" }}>
               <label>{t("lead.category")}</label>
@@ -279,12 +301,13 @@ function LeadForm({ locale, prefill, leadFormRef }) {
             {/* honeypot */}
             <input type="text" name="company" autoComplete="off" tabIndex="-1"
                    style={{ position: "absolute", left: "-9999px", opacity: 0, pointerEvents: "none" }} />
+            {err && <div style={{ gridColumn: "1 / -1", color: "#e5484d", fontSize: 13, marginTop: 4 }}>{err}</div>}
             <div style={{ gridColumn: "1 / -1", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, marginTop: 8, flexWrap: "wrap" }}>
               <div className="mono" style={{ color: "var(--fg-dim)", fontSize: 11 }}>
                 ☟ {t("lead.formHint")}
               </div>
-              <button type="submit" className="btn btn-primary">
-                {t("lead.submit")}
+              <button type="submit" className="btn btn-primary" disabled={sending}>
+                {sending ? t("common.sending") : t("lead.submit")}
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h7M6 3l3 3-3 3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
               </button>
             </div>
@@ -563,14 +586,36 @@ function BookingModal({ locale, open, defaultService, onClose }) {
   const t = useT(locale);
   const [form, setForm] = useState({ service: "", date: "", time: "", name: "", phone: "", notes: "" });
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [err, setErr] = useState("");
   useEffect(() => {
     if (open) {
       setForm(f => ({ ...f, service: defaultService || "" }));
       setSent(false);
+      setErr("");
     }
   }, [open, defaultService]);
   if (!open) return null;
   const upd = (k, v) => setForm(f => ({ ...f, [k]: v }));
+  const submit = async (e) => {
+    e.preventDefault();
+    setErr("");
+    setSending(true);
+    try {
+      const schedule = [form.date, form.time].filter(Boolean).join(" ");
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type: "booking", name: form.name, phone: form.phone, topic: form.service, schedule, notes: form.notes }),
+      });
+      if (!res.ok) throw new Error();
+      setSent(true);
+    } catch (e2) {
+      setErr(t("common.error"));
+    } finally {
+      setSending(false);
+    }
+  };
   return (
     <div onClick={onClose} style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.7)", backdropFilter: "blur(8px)", zIndex: 110, display: "flex", alignItems: "center", justifyContent: "center", padding: 20 }}>
       <div onClick={(e) => e.stopPropagation()} className="card" style={{ background: "var(--surface)", padding: 32, width: "100%", maxWidth: 480, position: "relative", maxHeight: "92vh", overflowY: "auto" }}>
@@ -588,7 +633,7 @@ function BookingModal({ locale, open, defaultService, onClose }) {
             <div className="eyebrow" style={{ fontSize: 10 }}>06 · Booking</div>
             <div style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 29, lineHeight: 1.1, marginTop: 6 }}>{t("booking.title")}</div>
             <div style={{ color: "var(--fg-muted)", fontSize: 14, marginTop: 8 }}>{t("booking.sub")}</div>
-            <form onSubmit={(e) => { e.preventDefault(); setSent(true); }} style={{ marginTop: 20, display: "flex", flexDirection: "column", gap: 12 }}>
+            <form onSubmit={submit} style={{ marginTop: 20, display: "flex", flexDirection: "column", gap: 12 }}>
               <div className="field">
                 <label>{t("booking.service")}</label>
                 <input type="text" value={form.service} onChange={(e) => upd("service", e.target.value)} required />
@@ -600,9 +645,10 @@ function BookingModal({ locale, open, defaultService, onClose }) {
               <div className="field"><label>{t("booking.name")}</label><input type="text" value={form.name} onChange={(e) => upd("name", e.target.value)} required /></div>
               <div className="field"><label>{t("booking.phone")}</label><IMaskInput mask="+{998} (00) 000-00-00" value={form.phone} onAccept={(value) => upd("phone", value)} placeholder="+998 (XX) XXX-XX-XX" type="tel" required /></div>
               <div className="field"><label>{t("booking.notes")}</label><textarea value={form.notes} onChange={(e) => upd("notes", e.target.value)} /></div>
+              {err && <div style={{ color: "#e5484d", fontSize: 13 }}>{err}</div>}
               <div style={{ display: "flex", gap: 8, marginTop: 4 }}>
                 <button type="button" onClick={onClose} className="btn btn-ghost" style={{ flex: 1 }}>{t("booking.cancel")}</button>
-                <button type="submit" className="btn btn-primary" style={{ flex: 1.5 }}>{t("booking.submit")}</button>
+                <button type="submit" className="btn btn-primary" style={{ flex: 1.5 }} disabled={sending}>{sending ? t("common.sending") : t("booking.submit")}</button>
               </div>
             </form>
           </>

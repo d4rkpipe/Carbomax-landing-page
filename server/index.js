@@ -15,6 +15,7 @@ import productRoutes from './routes/products.js'
 import categoryRoutes from './routes/categories.js'
 import loyaltyRoutes from './routes/loyalty.js'
 import portfolioRoutes from './routes/portfolio.js'
+import leadRoutes from './routes/leads.js'
 import uploadRoutes from './routes/upload.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -58,6 +59,7 @@ await app.register(productRoutes, { prefix: '/api/products' })
 await app.register(categoryRoutes, { prefix: '/api/categories' })
 await app.register(loyaltyRoutes, { prefix: '/api/loyalty' })
 await app.register(portfolioRoutes, { prefix: '/api/portfolio' })
+await app.register(leadRoutes, { prefix: '/api/leads' })
 await app.register(uploadRoutes, { prefix: '/api/upload' })
 
 app.get('/api/health', async () => ({ ok: true }))

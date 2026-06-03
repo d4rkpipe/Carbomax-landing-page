@@ -5,8 +5,9 @@ import { Center, Toast } from './ui.jsx'
 import CatalogManager from './CatalogManager.jsx'
 import LoyaltyManager from './LoyaltyManager.jsx'
 import PortfolioManager from './PortfolioManager.jsx'
+import LeadsManager from './LeadsManager.jsx'
 
-const SECTION_TITLES = { menu: 'Boshqaruv paneli', catalog: 'Katalog', loyalty: 'Keshbek tizimi', portfolio: 'Portfolio' }
+const SECTION_TITLES = { menu: 'Boshqaruv paneli', catalog: 'Katalog', loyalty: 'Keshbek tizimi', portfolio: 'Portfolio', leads: 'Murojaatlar' }
 
 export default function Admin() {
   const [token, setToken] = useState(getToken)
@@ -38,10 +39,11 @@ export default function Admin() {
     <div style={{ minHeight: '100vh' }}>
       <TopBar view={view} onHome={() => setView('menu')} onLogout={logout} />
       <div className="wrap" style={{ maxWidth: 1100, padding: '28px 32px 80px' }}>
-        {view === 'menu' && <Menu onOpen={setView} />}
+        {view === 'menu' && <Menu onOpen={setView} token={token} />}
         {view === 'catalog' && <CatalogManager token={token} notify={notify} />}
         {view === 'loyalty' && <LoyaltyManager token={token} notify={notify} />}
         {view === 'portfolio' && <PortfolioManager token={token} notify={notify} />}
+        {view === 'leads' && <LeadsManager token={token} notify={notify} />}
       </div>
       {toast && <Toast {...toast} />}
       <style>{`@media (max-width: 760px) {
@@ -82,17 +84,18 @@ function TopBar({ view, onHome, onLogout }) {
   )
 }
 
-function Menu({ onOpen }) {
-  const [counts, setCounts] = useState({ catalog: null, loyalty: null, portfolio: null })
+function Menu({ onOpen, token }) {
+  const [counts, setCounts] = useState({ catalog: null, loyalty: null, portfolio: null, leads: null })
   useEffect(() => {
-    Promise.all([api('/products'), api('/loyalty'), api('/portfolio')])
-      .then(([p, l, pf]) => setCounts({ catalog: p.length, loyalty: l.length, portfolio: pf.length }))
+    Promise.all([api('/products'), api('/loyalty'), api('/portfolio'), api('/leads', { token })])
+      .then(([p, l, pf, ld]) => setCounts({ catalog: p.length, loyalty: l.length, portfolio: pf.length, leads: ld.length }))
       .catch(() => {})
-  }, [])
+  }, [token])
   const cards = [
     { id: 'catalog', title: 'Katalog', desc: "Mahsulotlar va kategoriyalar — qo'shish, tahrirlash, rasm, tartiblash.", count: counts.catalog, unit: 'mahsulot' },
     { id: 'loyalty', title: 'Keshbek tizimi', desc: "Keshbek pog'onalari, foizlari va shartlari.", count: counts.loyalty, unit: "pog'ona" },
     { id: 'portfolio', title: 'Portfolio', desc: '“Biz qilgan ishlar” — avtomobil ishlari va rasmlari.', count: counts.portfolio, unit: 'ish' },
+    { id: 'leads', title: 'Murojaatlar', desc: 'Saytdagi formalardan kelgan so‘rov va vaqt belgilashlar.', count: counts.leads, unit: 'murojaat' },
   ]
   return (
     <>
