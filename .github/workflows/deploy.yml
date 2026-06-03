@@ -1,0 +1,28 @@
+name: Deploy to VPS
+
+# main'ga push qilinganda VPS'ga SSH orqali kirib, kodni yangilaydi.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}   # qo'lda ham ishga tushirish mumkin
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            set -e
+            cd /var/www/carbomax-landing
+            git pull origin main
+            npm ci
+            npx prisma generate
+            npx prisma db push
+            npm run build
+            pm2 reload carbomax-landing || pm2 start npm --name carbomax-landing -- start
+            pm2 save

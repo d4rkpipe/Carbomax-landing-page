@@ -442,28 +442,9 @@ const PRODUCTS = [
   { id: "p8", cat: "acc", name: { uz: "LED salon yorug'i", ru: "LED подсветка салона", en: "LED cabin lighting" }, sku: "ACC-LED-CAB-04", price: 320000, car: "Universal" },
 ];
 
-const CAR_BRANDS = ["Chevrolet", "Ravon", "Hyundai", "Kia", "Toyota", "Daewoo", "Nissan", "Lexus", "BMW"];
-
 // Number formatting — UZS with space-separated thousands
 function fmtUZS(n) {
   return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-}
-
-// Phone mask: +998 (XX) XXX-XX-XX
-function maskPhone(raw) {
-  const digits = (raw || "").replace(/\D/g, "");
-  // Strip leading 998 if present, also allow user typing without it
-  let d = digits;
-  if (d.startsWith("998")) d = d.slice(3);
-  d = d.slice(0, 9);
-  if (!d) return "";
-  let out = "+998";
-  if (d.length > 0) out += " (" + d.slice(0, 2);
-  if (d.length >= 2) out += ")";
-  if (d.length > 2) out += " " + d.slice(2, 5);
-  if (d.length > 5) out += "-" + d.slice(5, 7);
-  if (d.length > 7) out += "-" + d.slice(7, 9);
-  return out;
 }
 
 function useT(locale) {
@@ -473,4 +454,4 @@ function useT(locale) {
   }, [locale]);
 }
 
-export { I18N, PRODUCTS, CAR_BRANDS, fmtUZS, maskPhone, useT }
+export { I18N, PRODUCTS, fmtUZS, useT }

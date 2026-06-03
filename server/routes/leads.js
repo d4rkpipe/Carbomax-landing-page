@@ -6,8 +6,8 @@ import { sendTelegram } from '../lib/telegram.js'
 const clean = (s, max = 500) => String(s ?? '').trim().slice(0, max)
 
 export default async function leadRoutes(app) {
-  // POST /api/leads — public submission from the site forms.
-  app.post('/', async (req, reply) => {
+  // POST /api/leads — public submission from the site forms (rate-limited vs spam).
+  app.post('/', { config: { rateLimit: { max: 6, timeWindow: '1 minute' } } }, async (req, reply) => {
     const b = req.body || {}
     // Honeypot: real users never fill the hidden "company" field. Pretend
     // success so bots get no signal, but don't store or notify.

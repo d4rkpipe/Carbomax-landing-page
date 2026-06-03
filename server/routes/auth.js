@@ -4,7 +4,8 @@ import { prisma } from '../lib/prisma.js'
 
 export default async function authRoutes(app) {
   // POST /api/auth/login  { username, password } → { token, username }
-  app.post('/login', async (req, reply) => {
+  // Rate-limited to blunt password brute-force.
+  app.post('/login', { config: { rateLimit: { max: 10, timeWindow: '5 minutes' } } }, async (req, reply) => {
     const { username, password } = req.body || {}
     if (!username || !password) {
       return reply.code(400).send({ error: 'Login va parol kerak' })

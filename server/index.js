@@ -8,6 +8,7 @@ import Fastify from 'fastify'
 import cors from '@fastify/cors'
 import jwt from '@fastify/jwt'
 import multipart from '@fastify/multipart'
+import rateLimit from '@fastify/rate-limit'
 import fastifyStatic from '@fastify/static'
 
 import authRoutes from './routes/auth.js'
@@ -32,11 +33,15 @@ const isProd = process.env.NODE_ENV === 'production'
 // Ensure the upload target exists before @fastify/static tries to read it.
 fs.mkdirSync(path.join(UPLOADS_DIR, 'products'), { recursive: true })
 
-const app = Fastify({ logger: true, bodyLimit: 8 * 1024 * 1024 })
+// trustProxy: behind Nginx, read the real client IP from X-Forwarded-For so
+// rate-limiting works per-visitor (not per-proxy).
+const app = Fastify({ logger: true, bodyLimit: 8 * 1024 * 1024, trustProxy: true })
 
 await app.register(cors, { origin: true })
 await app.register(jwt, { secret: JWT_SECRET })
 await app.register(multipart, { limits: { fileSize: 6 * 1024 * 1024, files: 1 } })
+// Opt-in rate limiting (global: false) — applied per-route on login + leads.
+await app.register(rateLimit, { global: false })
 
 // Auth guard — used as a route preHandler. Defined before route registration so
 // the encapsulated route plugins inherit it.

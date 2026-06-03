@@ -78,6 +78,12 @@ async function main() {
     console.log(`• Admin allaqachon mavjud: ${ADMIN_USER}`)
   }
 
+  // Default — toza baza (faqat admin). Namuna ma'lumot kerak bo'lsa: npm run seed:demo
+  if (process.env.SEED_DEMO !== '1') {
+    console.log("• Toza baza: faqat admin yaratildi. (Namuna uchun: npm run seed:demo)")
+    return
+  }
+
   const catCount = await prisma.category.count()
   if (catCount === 0) {
     for (let i = 0; i < CATEGORIES.length; i++) {
