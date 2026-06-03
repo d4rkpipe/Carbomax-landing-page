@@ -10,6 +10,9 @@ dist/
 *.log
 .vite/
 
+# Secrets (Telegram token, admin creds, JWT secret) — keep .env.example only
+.env
+
 # Server runtime data (SQLite DB + uploaded images — not committed)
 server/data.db
 server/data.db-*
