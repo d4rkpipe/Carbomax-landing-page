@@ -3,9 +3,14 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { api } from './lib.js'
 import { Field, Center, IconBtn, DeleteBtn, ManagerHeader, Overlay } from './ui.jsx'
 
+const DAYS = [
+  ['hoursMon', 'Dushanba'], ['hoursTue', 'Seshanba'], ['hoursWed', 'Chorshanba'],
+  ['hoursThu', 'Payshanba'], ['hoursFri', 'Juma'], ['hoursSat', 'Shanba'], ['hoursSun', 'Yakshanba'],
+]
 const EMPTY = {
   name: '', addressUz: '', addressRu: '', addressEn: '', phone: '',
-  hoursUz: '', hoursRu: '', hoursEn: '', lat: '', lng: '',
+  hoursMon: '', hoursTue: '', hoursWed: '', hoursThu: '', hoursFri: '', hoursSat: '', hoursSun: '',
+  lat: '', lng: '',
   telegram: '', instagram: '', facebook: '', youtube: '',
 }
 
@@ -112,12 +117,14 @@ function BranchForm({ initial, onCancel, onSave, onError }) {
         <Field label="Telefon" required>
           <input value={form.phone} onChange={(e) => upd('phone', e.target.value)} required placeholder="+998 (77) 013-07-07" />
         </Field>
-        <Field label="Ish vaqti (o'zbekcha)">
-          <input value={form.hoursUz} onChange={(e) => upd('hoursUz', e.target.value)} placeholder="Du–Sha 09:00–19:00 · Yak 10:00–17:00" />
-        </Field>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-          <Field label="Ish vaqti (ruscha)"><input value={form.hoursRu} onChange={(e) => upd('hoursRu', e.target.value)} /></Field>
-          <Field label="Ish vaqti (inglizcha)"><input value={form.hoursEn} onChange={(e) => upd('hoursEn', e.target.value)} /></Field>
+        <div className="eyebrow" style={{ fontSize: 10, marginTop: 4 }}>Ish vaqti (bo'sh qoldirsangiz — dam olish)</div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          {DAYS.map(([key, label]) => (
+            <div key={key} style={{ display: 'grid', gridTemplateColumns: '110px 1fr', gap: 12, alignItems: 'center' }}>
+              <span style={{ fontSize: 13, color: 'var(--fg-muted)' }}>{label}</span>
+              <input value={form[key]} onChange={(e) => upd(key, e.target.value)} placeholder="09:00 - 19:00" />
+            </div>
+          ))}
         </div>
 
         <div>

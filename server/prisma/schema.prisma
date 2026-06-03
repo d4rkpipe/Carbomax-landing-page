@@ -89,9 +89,13 @@ model Branch {
   addressRu    String
   addressEn    String
   phone        String
-  hoursUz      String
-  hoursRu      String
-  hoursEn      String
+  hoursMon     String   @default("") // "09:00 - 19:00"; empty = closed (day off)
+  hoursTue     String   @default("")
+  hoursWed     String   @default("")
+  hoursThu     String   @default("")
+  hoursFri     String   @default("")
+  hoursSat     String   @default("")
+  hoursSun     String   @default("")
   lat          String   // map coordinates (for the Yandex embed)
   lng          String
   telegram     String?

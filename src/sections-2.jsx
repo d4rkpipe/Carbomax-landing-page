@@ -395,15 +395,17 @@ function Contact({ locale }) {
   // Fallback single branch (matches the old hard-coded content) until the API
   // resolves, and on static hosting.
   const fallback = useMemo(() => ([{
-    name: "Carbomax", address: t("contact.address"), phone: "+998 (77) 013-07-07", hours: t("contact.hours"),
-    lat: "41.2995", lng: "69.2401",
+    name: "Carbomax", address: t("contact.address"), phone: "+998 (77) 013-07-07",
+    days: ["09:00 - 19:00", "09:00 - 19:00", "09:00 - 19:00", "09:00 - 19:00", "09:00 - 19:00", "09:00 - 19:00", "10:00 - 17:00"],
+    lat: "41.2230", lng: "69.2206",
     telegram: "https://t.me/CARBOMAX7", instagram: "https://instagram.com/carbomax",
     facebook: "https://facebook.com/carbomax", youtube: "https://youtube.com/@carbomax",
   }]), [t]);
 
   const list = useMemo(() => (rows
     ? rows.map(b => ({
-        name: b.name, address: b["address" + L] || b.addressUz, phone: b.phone, hours: b["hours" + L] || b.hoursUz,
+        name: b.name, address: b["address" + L] || b.addressUz, phone: b.phone,
+        days: [b.hoursMon, b.hoursTue, b.hoursWed, b.hoursThu, b.hoursFri, b.hoursSat, b.hoursSun],
         lat: b.lat, lng: b.lng, telegram: b.telegram, instagram: b.instagram, facebook: b.facebook, youtube: b.youtube,
       }))
     : fallback), [rows, L, fallback]);
@@ -444,7 +446,14 @@ function Contact({ locale }) {
             </div>
             <div>
               <div className="eyebrow" style={{ fontSize: 10 }}>{t("contact.hoursLabel")}</div>
-              <div style={{ fontSize: 14, marginTop: 6, color: "var(--fg-muted)" }}>{b.hours}</div>
+              <div style={{ marginTop: 10, display: "flex", flexDirection: "column", gap: 6, maxWidth: 300 }}>
+                {t("contact.days").map((day, i) => (
+                  <div key={i} style={{ display: "flex", justifyContent: "space-between", gap: 16, fontSize: 13.5 }}>
+                    <span style={{ color: "var(--fg-muted)" }}>{day}</span>
+                    <span className="tnum" style={{ color: b.days[i] ? "var(--fg)" : "var(--fg-dim)" }}>{b.days[i] || t("contact.closed")}</span>
+                  </div>
+                ))}
+              </div>
             </div>
             {socials.length > 0 && (
               <div style={{ marginTop: "auto" }}>
@@ -576,19 +585,19 @@ function Footer({ locale }) {
             </ul>
           </div>
         </div>
-        <div style={{ marginTop: 56, paddingTop: 24, borderTop: "1px solid var(--border)", display: "flex", justifyContent: "space-between", gap: 16, flexWrap: "wrap", fontSize: 12, color: "var(--fg-dim)", fontFamily: "var(--font-mono)" }}>
+        <div style={{ marginTop: 56, paddingTop: 24, borderTop: "1px solid var(--border)", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "12px 24px", flexWrap: "wrap", fontSize: 12, color: "var(--fg-dim)", fontFamily: "var(--font-mono)" }}>
           <div>{t("footer.copyright")}</div>
-          <div style={{ display: "flex", gap: 24 }}>
+          <div style={{ display: "flex", gap: 24, alignItems: "center", flexWrap: "wrap" }}>
+            <span>
+              {t("footer.builtBy")}{" "}
+              <a href="https://t.me/nozimjon_hamdamov" target="_blank" rel="noopener noreferrer"
+                 style={{ color: "var(--fg-muted)", textDecoration: "none", borderBottom: "1px dashed var(--border-strong)", paddingBottom: 1 }}>
+                Nozimjon Hamdamov
+              </a>
+            </span>
             <a href="#" style={{ color: "var(--fg-dim)", textDecoration: "none" }}>{t("footer.privacy")}</a>
             <a href="#" style={{ color: "var(--fg-dim)", textDecoration: "none" }}>{t("footer.terms")}</a>
           </div>
-        </div>
-        <div style={{ marginTop: 16, fontSize: 11.5, color: "var(--fg-dim)", fontFamily: "var(--font-mono)", textAlign: "center" }}>
-          {t("footer.builtBy")}{" "}
-          <a href="https://t.me/nozimjon_hamdamov" target="_blank" rel="noopener noreferrer"
-             style={{ color: "var(--fg-muted)", textDecoration: "none", borderBottom: "1px dashed var(--border-strong)", paddingBottom: 1 }}>
-            Nozimjon Hamdamov
-          </a>
         </div>
       </div>
       <style>{`@media (max-width: 800px) {
