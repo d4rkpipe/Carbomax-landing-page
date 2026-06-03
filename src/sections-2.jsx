@@ -1,6 +1,6 @@
 // sections-2.jsx — second half of page sections + modals
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react'
-import { useT, CAR_BRANDS, fmtUZS } from './i18n.jsx'
+import { useT } from './i18n.jsx'
 import { Reveal, Logo, Section, rafThrottle } from './ui.jsx'
 import { IMaskInput } from 'react-imask'
 
@@ -148,19 +148,17 @@ function Process({ locale }) {
 // ─── Car model selector ───────────────────────────────────────────────────────
 function CarSelector({ locale, onFind }) {
   const t = useT(locale);
-  const [brand, setBrand] = useState("");
+  const [model, setModel] = useState("");
   return (
     <Section eyebrow="07 · Match my car" title={t("selector.title")} sub={t("selector.sub")} alignHead="center">
       <Reveal>
         <form
-          onSubmit={(e) => { e.preventDefault(); onFind && onFind({ brand }); }}
+          onSubmit={(e) => { e.preventDefault(); onFind && onFind({ model }); }}
           className="glass"
           style={{ padding: 16, display: "grid", gridTemplateColumns: "1fr auto", gap: 12, maxWidth: 540, margin: "0 auto", alignItems: "center" }}>
           <div className="field">
-            <select value={brand} onChange={(e) => setBrand(e.target.value)} required>
-              <option value="" disabled>{t("selector.brand")}…</option>
-              {CAR_BRANDS.map(b => <option key={b} value={b}>{b}</option>)}
-            </select>
+            <input type="text" value={model} onChange={(e) => setModel(e.target.value)}
+              placeholder={t("selector.placeholder")} required />
           </div>
           <button type="submit" className="btn btn-primary" style={{ height: 46 }}>
             {t("selector.cta")}

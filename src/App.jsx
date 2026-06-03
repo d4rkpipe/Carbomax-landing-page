@@ -77,14 +77,13 @@ function App() {
       }
     }, 80);
   };
-  const handleCarFind = (data) => {
-    setPrefill({ brand: data.brand });
-    setTimeout(() => {
-      if (leadFormRef.current) {
-        const y = leadFormRef.current.getBoundingClientRect().top + window.scrollY - 80;
-        window.scrollTo({ top: y, behavior: "smooth" });
-      }
-    }, 80);
+  // Car selector now sends the visitor to the contact section to get in touch.
+  const handleCarFind = () => {
+    const el = document.getElementById("contact");
+    if (el) {
+      const y = el.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
   };
   const handleGetTouchCta = () => {
     if (leadFormRef.current) {
