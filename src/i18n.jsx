@@ -78,7 +78,7 @@ const I18N = {
       items: [
         { name: "Sherzod A.", car: "Chevrolet Cobalt", quote: "Cobalt'imga Carbomax'dan chexol oldim — 3 yildan beri yangidek turibdi.", initials: "SA" },
         { name: "Bekzod M.", car: "Kia K5", quote: "Magicar o'rnatishdi va kafolat berishdi — boshqa joyda topa olmadim.", initials: "BM" },
-        { name: "Nodira K.", car: "Hyundai Tucson", quote: "Onlayn buyurtma berdim, ertasi kuni o'lcham olishga kelishdi.", initials: "NK" },
+        { name: "Nodira K.", car: "Hyundai Tucson", quote: "Onlayn buyurtma berdim, ertasi kuni chexollarni o'rnatib berib ketishdi.", initials: "NK" },
       ],
     },
     process: {
@@ -220,7 +220,7 @@ const I18N = {
       items: [
         { name: "Шерзод А.", car: "Chevrolet Cobalt", quote: "Взял чехлы на Cobalt — 3 года как новые. Carbomax — топ.", initials: "ША" },
         { name: "Бекзод М.", car: "Kia K5", quote: "Поставили Magicar и дали гарантию — нигде такого не нашёл.", initials: "БМ" },
-        { name: "Нодира К.", car: "Hyundai Tucson", quote: "Заказала онлайн — на следующий день приехали снимать мерки.", initials: "НК" },
+        { name: "Нодира К.", car: "Hyundai Tucson", quote: "Заказала онлайн — на следующий день приехали и установили чехлы.", initials: "НК" },
       ],
     },
     process: {
@@ -357,7 +357,7 @@ const I18N = {
       items: [
         { name: "Sherzod A.", car: "Chevrolet Cobalt", quote: "Got covers from Carbomax for my Cobalt — three years on and they look new.", initials: "SA" },
         { name: "Bekzod M.", car: "Kia K5", quote: "Installed my Magicar and stood behind it with a real warranty. Couldn't find that anywhere else.", initials: "BM" },
-        { name: "Nodira K.", car: "Hyundai Tucson", quote: "Ordered online — the next day someone came to take measurements.", initials: "NK" },
+        { name: "Nodira K.", car: "Hyundai Tucson", quote: "Ordered online — the next day they came and installed the covers.", initials: "NK" },
       ],
     },
     process: {
