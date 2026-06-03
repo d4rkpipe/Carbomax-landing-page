@@ -27,7 +27,7 @@ const I18N = {
       items: [
         { name: "Avtomobil chexollari", desc: "30+ modelga moslab tikilgan eko-charm va premium chexollar.", tag: "Tayyorlash muddati: 3–5 kun" },
         { name: "Pollik qoplamalari", desc: "EVA, 3D va klassik kovriklar — modelingizga aniq mos.", tag: "Omborda mavjud" },
-        { name: "Aksessuarlar", desc: "Magicar signalizatsiyalari, audio, fara va salon chiroqlari.", tag: "Rasmiy diler" },
+        { name: "Aksessuarlar", desc: "Turli avtomobil modellari uchun signalizatsiya, audio, fara va salon aksessuarlari.", tag: "Rasmiy diler" },
       ],
     },
     products: {
@@ -168,7 +168,7 @@ const I18N = {
       items: [
         { name: "Чехлы на сиденья", desc: "30+ моделей. Экокожа и премиум-материалы.", tag: "Пошив 3–5 дней" },
         { name: "Коврики", desc: "EVA, 3D и классические — точно под вашу модель.", tag: "В наличии" },
-        { name: "Аксессуары", desc: "Сигнализации Magicar, аудио, свет салона и фар.", tag: "Дилер Magicar" },
+        { name: "Аксессуары", desc: "Сигнализации, аудио, фары и аксессуары салона для разных моделей авто.", tag: "Дилер Magicar" },
       ],
     },
     products: {
@@ -305,7 +305,7 @@ const I18N = {
       items: [
         { name: "Seat covers", desc: "30+ models. Eco-leather and premium materials.", tag: "3–5 day tailoring" },
         { name: "Floor mats", desc: "EVA, 3D, and classic — precise fit per model.", tag: "In stock" },
-        { name: "Accessories", desc: "Magicar alarms, audio, cabin and headlamp lighting.", tag: "Magicar dealer" },
+        { name: "Accessories", desc: "Alarms, audio, headlights and cabin accessories for a wide range of car models.", tag: "Magicar dealer" },
       ],
     },
     products: {
