@@ -500,8 +500,8 @@ function Loyalty({ locale }) {
           <Reveal key={i} delay={i * 80}>
             <div style={{
               padding: "32px 28px 28px",
-              background: `linear-gradient(160deg, color-mix(in oklab, ${tier.accent} 20%, var(--surface)) 0%, color-mix(in oklab, ${tier.accent} 6%, var(--bg)) 100%)`,
-              border: `1px solid color-mix(in oklab, ${tier.accent} 45%, var(--border))`,
+              background: `linear-gradient(160deg, color-mix(in oklab, ${tier.accent} 22%, #131a14) 0%, color-mix(in oklab, ${tier.accent} 7%, #0a0e0a) 100%)`,
+              border: `1px solid color-mix(in oklab, ${tier.accent} 45%, #2a322c)`,
               borderRadius: "var(--r-lg)",
               display: "flex", flexDirection: "column", gap: 16,
               minHeight: 320,

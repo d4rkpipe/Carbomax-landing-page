@@ -433,7 +433,7 @@ function Contact({ locale }) {
           </div>
         </Reveal>
       )}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 32 }} className="cbx-contact-grid">
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32 }} className="cbx-contact-grid">
         <Reveal>
           <div className="card" style={{ padding: 32, display: "flex", flexDirection: "column", gap: 24, height: "100%" }}>
             <div>
@@ -473,9 +473,9 @@ function Contact({ locale }) {
           </div>
         </Reveal>
 
-        <Reveal delay={120}>
+        <Reveal delay={120} style={{ display: "flex" }}>
           {/* Yandex map — static (pointer-events disabled so it can't be dragged/zoomed) */}
-          <div style={{ position: "relative", aspectRatio: "16/10", borderRadius: "var(--r-lg)", overflow: "hidden", border: "1px solid var(--border)", background: "var(--surface-2)" }}>
+          <div style={{ position: "relative", flex: 1, minHeight: 360, borderRadius: "var(--r-lg)", overflow: "hidden", border: "1px solid var(--border)", background: "var(--surface-2)" }}>
             <iframe
               title={b.name}
               src={mapSrc}

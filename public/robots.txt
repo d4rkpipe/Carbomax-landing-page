@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+# Deploydan keyin domeningizga moslab yangilang
+Sitemap: https://carbomax-landing-page.vercel.app/sitemap.xml

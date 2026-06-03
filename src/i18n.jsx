@@ -57,8 +57,8 @@ const I18N = {
         { name: "Silver", percent: "10%", threshold: "5 000 000 so'm xariddan keyin", desc: "Sodiq mijozlar uchun." },
         { name: "Gold", percent: "15%", threshold: "15 000 000 so'm xariddan keyin", desc: "Eng yaxshi shartlar." },
       ],
-      cta: "Telegram-botda boshlash",
-      qrLabel: "QR-kodni skanerlang",
+      cta: "Telegram bot orqali buyurtma bering",
+      qrLabel: "Skanerlang va buyurtma bering",
     },
     ourWork: {
       title: "Biz qilgan ishlar",
@@ -202,8 +202,8 @@ const I18N = {
         { name: "Silver", percent: "10%", threshold: "После 5 000 000 сум покупок", desc: "Для постоянных клиентов." },
         { name: "Gold", percent: "15%", threshold: "После 15 000 000 сум покупок", desc: "Лучшие условия." },
       ],
-      cta: "Открыть Telegram-бот",
-      qrLabel: "Отсканируйте QR",
+      cta: "Заказывайте через Telegram-бот",
+      qrLabel: "Сканируйте и закажите",
     },
     ourWork: {
       title: "Наши работы",
@@ -342,8 +342,8 @@ const I18N = {
         { name: "Silver", percent: "10%", threshold: "After 5 000 000 UZS in lifetime spend", desc: "For loyal customers." },
         { name: "Gold", percent: "15%", threshold: "After 15 000 000 UZS in lifetime spend", desc: "Our best terms." },
       ],
-      cta: "Open the Telegram bot",
-      qrLabel: "Scan the QR",
+      cta: "Order via our Telegram bot",
+      qrLabel: "Scan to order",
     },
     ourWork: {
       title: "Our completed work",
