@@ -4,4 +4,4 @@ Disallow: /admin
 Disallow: /api/
 
 # Deploydan keyin domeningizga moslab yangilang
-Sitemap: https://carbomax-landing-page.vercel.app/sitemap.xml
+Sitemap: https://carbomax.net/sitemap.xml
