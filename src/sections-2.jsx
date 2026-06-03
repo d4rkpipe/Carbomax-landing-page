@@ -371,61 +371,115 @@ function FAQ({ locale }) {
 }
 
 // ─── Contact + Telegram strip + Footer ────────────────────────────────────────
+const SOCIAL_ICONS = {
+  telegram: <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M9.8 14.6l-.35 4.2c.5 0 .72-.22.98-.48l2.35-2.25 4.87 3.57c.9.5 1.53.24 1.77-.82l3.2-15.04c.29-1.32-.48-1.84-1.34-1.52L1.5 9.36c-1.3.5-1.28 1.22-.22 1.55l4.9 1.53L17.5 5.6c.54-.36 1.03-.16.63.2"/></svg>,
+  instagram: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.8"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg>,
+  facebook: <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7.5H16l.5-3h-3V8.7c0-.85.3-1.4 1.5-1.4H16.6V4.6C16.2 4.55 15.2 4.5 14.1 4.5c-2.3 0-3.85 1.4-3.85 3.95V10.5H7.7v3h2.55V21z"/></svg>,
+  youtube: <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M22 8.2c-.24-1.06-.83-1.66-1.86-1.86C18.34 6 12 6 12 6s-6.34 0-8.14.34C2.83 6.54 2.24 7.14 2 8.2 1.66 10 1.66 12 1.66 12s0 2 .34 3.8c.24 1.06.83 1.66 1.86 1.86C5.66 18 12 18 12 18s6.34 0 8.14-.34c1.03-.2 1.62-.8 1.86-1.86.34-1.8.34-3.8.34-3.8s0-2-.34-3.8zM10 15V9l5.2 3z"/></svg>,
+};
+
 function Contact({ locale }) {
   const t = useT(locale);
+  const L = locale.charAt(0).toUpperCase() + locale.slice(1); // "Uz" | "Ru" | "En"
+  const [rows, setRows] = useState(null);
+  const [idx, setIdx] = useState(0);
+  useEffect(() => {
+    let alive = true;
+    fetch("/api/branches")
+      .then(r => (r.ok ? r.json() : Promise.reject()))
+      .then(d => { if (alive && Array.isArray(d) && d.length) setRows(d); })
+      .catch(() => {});
+    return () => { alive = false; };
+  }, []);
+
+  // Fallback single branch (matches the old hard-coded content) until the API
+  // resolves, and on static hosting.
+  const fallback = useMemo(() => ([{
+    name: "Carbomax", address: t("contact.address"), phone: "+998 (77) 013-07-07", hours: t("contact.hours"),
+    lat: "41.2995", lng: "69.2401",
+    telegram: "https://t.me/CARBOMAX7", instagram: "https://instagram.com/carbomax",
+    facebook: "https://facebook.com/carbomax", youtube: "https://youtube.com/@carbomax",
+  }]), [t]);
+
+  const list = useMemo(() => (rows
+    ? rows.map(b => ({
+        name: b.name, address: b["address" + L] || b.addressUz, phone: b.phone, hours: b["hours" + L] || b.hoursUz,
+        lat: b.lat, lng: b.lng, telegram: b.telegram, instagram: b.instagram, facebook: b.facebook, youtube: b.youtube,
+      }))
+    : fallback), [rows, L, fallback]);
+
+  const b = list[Math.min(idx, list.length - 1)] || list[0];
+  const tel = "tel:" + String(b.phone || "").replace(/[^\d+]/g, "");
+  const socials = [
+    { key: "telegram", label: "Telegram", url: b.telegram },
+    { key: "instagram", label: "Instagram", url: b.instagram },
+    { key: "facebook", label: "Facebook", url: b.facebook },
+    { key: "youtube", label: "YouTube", url: b.youtube },
+  ].filter(s => s.url);
+  const mapSrc = `https://yandex.com/map-widget/v1/?ll=${encodeURIComponent(b.lng)}%2C${encodeURIComponent(b.lat)}&z=16&pt=${b.lng},${b.lat},pm2rdm`;
+  const mapLink = `https://yandex.com/maps/?ll=${b.lng},${b.lat}&z=16&pt=${b.lng},${b.lat}`;
+
   return (
-    <Section id="contact" eyebrow="11 · Visit" title={t("contact.title")} sub={t("contact.sub")}>
+    <Section id="contact" eyebrow="11 · Visit" title={t("contact.title")}>
+      {list.length > 1 && (
+        <Reveal>
+          <div className="field" style={{ maxWidth: 360, marginBottom: 24 }}>
+            <label>{t("contact.branchLabel")}</label>
+            <select value={idx} onChange={(e) => setIdx(Number(e.target.value))}>
+              {list.map((x, i) => <option key={i} value={i}>{x.name}</option>)}
+            </select>
+          </div>
+        </Reveal>
+      )}
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 32 }} className="cbx-contact-grid">
         <Reveal>
           <div className="card" style={{ padding: 32, display: "flex", flexDirection: "column", gap: 24, height: "100%" }}>
             <div>
               <div className="eyebrow" style={{ fontSize: 10 }}>{t("contact.addressLabel")}</div>
-              <div style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 20, marginTop: 6, lineHeight: 1.25 }}>{t("contact.address")}</div>
+              <div style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 20, marginTop: 6, lineHeight: 1.25 }}>{b.address}</div>
             </div>
             <div>
               <div className="eyebrow" style={{ fontSize: 10 }}>{t("contact.phoneLabel")}</div>
-              <a href="tel:+998770130707" style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 20, marginTop: 6, lineHeight: 1.25, color: "var(--fg)", textDecoration: "none", display: "block" }}>+998 (77) 013-07-07</a>
+              <a href={tel} style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 20, marginTop: 6, lineHeight: 1.25, color: "var(--fg)", textDecoration: "none", display: "block" }}>{b.phone}</a>
             </div>
             <div>
               <div className="eyebrow" style={{ fontSize: 10 }}>{t("contact.hoursLabel")}</div>
-              <div style={{ fontSize: 14, marginTop: 6, color: "var(--fg-muted)" }}>{t("contact.hours")}</div>
+              <div style={{ fontSize: 14, marginTop: 6, color: "var(--fg-muted)" }}>{b.hours}</div>
             </div>
-            <div style={{ marginTop: "auto" }}>
-              <div className="eyebrow" style={{ fontSize: 10, marginBottom: 10 }}>{t("contact.socialsLabel")}</div>
-              <div style={{ display: "flex", gap: 8 }}>
-                {[
-                  { name: "Telegram", url: "https://t.me/CARBOMAX7" },
-                  { name: "Instagram", url: "https://instagram.com/carbomax" },
-                  { name: "Facebook", url: "https://facebook.com/carbomax" },
-                  { name: "YouTube", url: "https://youtube.com/@carbomax" },
-                ].map((s) => (
-                  <a key={s.name} href={s.url} target="_blank" rel="noopener noreferrer" style={{ padding: "6px 12px", border: "1px solid var(--border)", borderRadius: 999, fontSize: 12, color: "var(--fg-muted)", textDecoration: "none" }}>{s.name}</a>
-                ))}
+            {socials.length > 0 && (
+              <div style={{ marginTop: "auto" }}>
+                <div className="eyebrow" style={{ fontSize: 10, marginBottom: 10 }}>{t("contact.socialsLabel")}</div>
+                <div style={{ display: "flex", gap: 8 }}>
+                  {socials.map((s) => (
+                    <a key={s.key} href={s.url} target="_blank" rel="noopener noreferrer" title={s.label} aria-label={s.label}
+                       style={{ width: 40, height: 40, borderRadius: 999, border: "1px solid var(--border)", display: "inline-flex", alignItems: "center", justifyContent: "center", color: "var(--fg-muted)", textDecoration: "none", transition: "color .2s, border-color .2s, background .2s" }}
+                       onMouseEnter={(e) => { e.currentTarget.style.color = "var(--primary-bright)"; e.currentTarget.style.borderColor = "color-mix(in oklab, var(--primary) 50%, var(--border))"; }}
+                       onMouseLeave={(e) => { e.currentTarget.style.color = "var(--fg-muted)"; e.currentTarget.style.borderColor = "var(--border)"; }}>
+                      {SOCIAL_ICONS[s.key]}
+                    </a>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </Reveal>
 
         <Reveal delay={120}>
-          {/* Map placeholder — schematic */}
+          {/* Yandex map — static (pointer-events disabled so it can't be dragged/zoomed) */}
           <div style={{ position: "relative", aspectRatio: "16/10", borderRadius: "var(--r-lg)", overflow: "hidden", border: "1px solid var(--border)", background: "var(--surface-2)" }}>
-            <svg viewBox="0 0 600 400" width="100%" height="100%" aria-hidden="true" style={{ display: "block" }}>
-              <defs>
-                <pattern id="map-grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                  <path d="M40 0 L0 0 L0 40" stroke="var(--border)" strokeWidth="0.5" fill="none"/>
-                </pattern>
-              </defs>
-              <rect width="600" height="400" fill="url(#map-grid)"/>
-              <path d="M0 220 Q150 180 300 220 T600 240" stroke="color-mix(in oklab, var(--fg-dim) 60%, transparent)" strokeWidth="2" fill="none" opacity="0.5"/>
-              <path d="M120 0 L120 400 M380 0 L380 400 M0 120 L600 120" stroke="var(--border-strong)" strokeWidth="1" opacity="0.5"/>
-              <circle cx="320" cy="200" r="22" fill="color-mix(in oklab, var(--primary) 20%, transparent)"/>
-              <circle cx="320" cy="200" r="8" fill="var(--primary-bright)"/>
-              <circle cx="320" cy="200" r="3" fill="#fff"/>
-              <text x="320" y="240" textAnchor="middle" fontFamily="var(--font-mono)" fontSize="11" fill="var(--fg-muted)" letterSpacing="0.06em">CARBOMAX · TASHKENT</text>
-            </svg>
-            <div className="mono" style={{ position: "absolute", top: 16, left: 16, padding: "6px 10px", background: "color-mix(in oklab, var(--bg) 78%, transparent)", border: "1px solid var(--border)", borderRadius: 6, fontSize: 11, color: "var(--fg-muted)" }}>
-              ⌖ 41.2995°N · 69.2401°E
+            <iframe
+              title={b.name}
+              src={mapSrc}
+              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: 0, display: "block", pointerEvents: "none" }}
+              loading="lazy"
+            />
+            <div className="mono" style={{ position: "absolute", top: 16, left: 16, padding: "6px 10px", background: "color-mix(in oklab, var(--bg) 78%, transparent)", border: "1px solid var(--border)", borderRadius: 6, fontSize: 11, color: "var(--fg-muted)", pointerEvents: "none" }}>
+              ⌖ {b.lat}°N · {b.lng}°E
             </div>
+            <a href={mapLink} target="_blank" rel="noopener noreferrer"
+               style={{ position: "absolute", bottom: 16, right: 16, padding: "8px 14px", background: "color-mix(in oklab, var(--bg) 82%, transparent)", border: "1px solid var(--border-strong)", borderRadius: 999, fontSize: 12, color: "var(--fg)", textDecoration: "none", backdropFilter: "blur(8px)" }}>
+              Yandex'da ochish ↗
+            </a>
           </div>
         </Reveal>
       </div>

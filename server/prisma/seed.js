@@ -44,6 +44,26 @@ const PORTFOLIO = [
   { carName: 'Ravon R3', captionUz: 'Eko-charm chexol', captionRu: 'Эко-кожаные чехлы', captionEn: 'Eco-leather covers' },
 ]
 
+// Branches — one main branch migrated from the old hard-coded Contact section.
+const BRANCHES = [
+  {
+    name: 'Asosiy filial',
+    addressUz: "Toshkent, Yashnobod tumani, Mustaqillik shoh ko'chasi 142",
+    addressRu: 'Ташкент, Яшнабадский район, ул. Мустакиллик 142',
+    addressEn: 'Tashkent, Yashnabad district, Mustakillik St. 142',
+    phone: '+998 (77) 013-07-07',
+    hoursUz: 'Du–Sha 09:00–19:00 · Yak 10:00–17:00',
+    hoursRu: 'Пн–Сб 09:00–19:00 · Вс 10:00–17:00',
+    hoursEn: 'Mon–Sat 09:00–19:00 · Sun 10:00–17:00',
+    lat: '41.2995',
+    lng: '69.2401',
+    telegram: 'https://t.me/CARBOMAX7',
+    instagram: 'https://instagram.com/carbomax',
+    facebook: 'https://facebook.com/carbomax',
+    youtube: 'https://youtube.com/@carbomax',
+  },
+]
+
 async function main() {
   const existing = await prisma.adminUser.findUnique({ where: { username: ADMIN_USER } })
   if (!existing) {
@@ -92,6 +112,16 @@ async function main() {
     console.log(`✓ ${PORTFOLIO.length} ta portfolio ishi qo'shildi`)
   } else {
     console.log(`• Portfolioda allaqachon ${portfolioCount} ta ish bor — o'tkazib yuborildi`)
+  }
+
+  const branchCount = await prisma.branch.count()
+  if (branchCount === 0) {
+    for (let i = 0; i < BRANCHES.length; i++) {
+      await prisma.branch.create({ data: { ...BRANCHES[i], displayOrder: i } })
+    }
+    console.log(`✓ ${BRANCHES.length} ta filial qo'shildi`)
+  } else {
+    console.log(`• Allaqachon ${branchCount} ta filial bor — o'tkazib yuborildi`)
   }
 }
 

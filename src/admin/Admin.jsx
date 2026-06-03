@@ -6,8 +6,9 @@ import CatalogManager from './CatalogManager.jsx'
 import LoyaltyManager from './LoyaltyManager.jsx'
 import PortfolioManager from './PortfolioManager.jsx'
 import LeadsManager from './LeadsManager.jsx'
+import BranchesManager from './BranchesManager.jsx'
 
-const SECTION_TITLES = { menu: 'Boshqaruv paneli', catalog: 'Katalog', loyalty: 'Keshbek tizimi', portfolio: 'Portfolio', leads: 'Murojaatlar' }
+const SECTION_TITLES = { menu: 'Boshqaruv paneli', catalog: 'Katalog', loyalty: 'Keshbek tizimi', portfolio: 'Portfolio', leads: 'Murojaatlar', branches: 'Filiallar' }
 
 export default function Admin() {
   const [token, setToken] = useState(getToken)
@@ -44,6 +45,7 @@ export default function Admin() {
         {view === 'loyalty' && <LoyaltyManager token={token} notify={notify} />}
         {view === 'portfolio' && <PortfolioManager token={token} notify={notify} />}
         {view === 'leads' && <LeadsManager token={token} notify={notify} />}
+        {view === 'branches' && <BranchesManager token={token} notify={notify} />}
       </div>
       {toast && <Toast {...toast} />}
       <style>{`@media (max-width: 760px) {
@@ -85,10 +87,10 @@ function TopBar({ view, onHome, onLogout }) {
 }
 
 function Menu({ onOpen, token }) {
-  const [counts, setCounts] = useState({ catalog: null, loyalty: null, portfolio: null, leads: null })
+  const [counts, setCounts] = useState({ catalog: null, loyalty: null, portfolio: null, leads: null, branches: null })
   useEffect(() => {
-    Promise.all([api('/products'), api('/loyalty'), api('/portfolio'), api('/leads', { token })])
-      .then(([p, l, pf, ld]) => setCounts({ catalog: p.length, loyalty: l.length, portfolio: pf.length, leads: ld.length }))
+    Promise.all([api('/products'), api('/loyalty'), api('/portfolio'), api('/leads', { token }), api('/branches')])
+      .then(([p, l, pf, ld, br]) => setCounts({ catalog: p.length, loyalty: l.length, portfolio: pf.length, leads: ld.length, branches: br.length }))
       .catch(() => {})
   }, [token])
   const cards = [
@@ -96,6 +98,7 @@ function Menu({ onOpen, token }) {
     { id: 'loyalty', title: 'Keshbek tizimi', desc: "Keshbek pog'onalari, foizlari va shartlari.", count: counts.loyalty, unit: "pog'ona" },
     { id: 'portfolio', title: 'Portfolio', desc: '“Biz qilgan ishlar” — avtomobil ishlari va rasmlari.', count: counts.portfolio, unit: 'ish' },
     { id: 'leads', title: 'Murojaatlar', desc: 'Saytdagi formalardan kelgan so‘rov va vaqt belgilashlar.', count: counts.leads, unit: 'murojaat' },
+    { id: 'branches', title: 'Filiallar', desc: 'Manzil, telefon, ish vaqti, ijtimoiy tarmoqlar va xarita.', count: counts.branches, unit: 'filial' },
   ]
   return (
     <>

@@ -81,3 +81,24 @@ model Lead {
   notes     String?
   createdAt DateTime @default(now())
 }
+
+model Branch {
+  id           Int      @id @default(autoincrement())
+  name         String   // filial name shown in the selector
+  addressUz    String
+  addressRu    String
+  addressEn    String
+  phone        String
+  hoursUz      String
+  hoursRu      String
+  hoursEn      String
+  lat          String   // map coordinates (for the Yandex embed)
+  lng          String
+  telegram     String?
+  instagram    String?
+  facebook     String?
+  youtube      String?
+  displayOrder Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
