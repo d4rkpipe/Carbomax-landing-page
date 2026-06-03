@@ -93,9 +93,9 @@ const I18N = {
     },
     selector: {
       title: "Avtomobilingizga mos mahsulotni topamiz",
-      sub: "Modelingizni kiriting — sizga eng mos variantlarni tanlab beramiz.",
+      sub: "Mashinangizning modelini kiriting — sizga eng mos variantlarni tanlab beramiz.",
       brand: "Brend", year: "Ishlab chiqarilgan yili", cta: "Mahsulotlarni topish",
-      placeholder: "Kerakli modelingizni kiriting",
+      placeholder: "Mashina modelingizni kiriting",
     },
     lead: {
       title: "Telegram orqali bir necha daqiqada javob olamiz",
@@ -233,7 +233,7 @@ const I18N = {
         { title: "Самовывоз или доставка", desc: "Заберёте сами из магазина или доставим по вашему адресу." },
       ],
     },
-    selector: { title: "Подберём товары под ваш автомобиль", sub: "Введите модель — подберём самые подходящие варианты.", brand: "Бренд", year: "Год выпуска", cta: "Найти товары", placeholder: "Введите нужную модель" },
+    selector: { title: "Подберём товары под ваш автомобиль", sub: "Введите модель вашего авто — подберём самые подходящие варианты.", brand: "Бренд", year: "Год выпуска", cta: "Найти товары", placeholder: "Введите модель автомобиля" },
     lead: {
       title: "Получите ответ за минуты через Telegram",
       sub: "Заполните форму — свяжемся в течение 24 часов.",
@@ -370,7 +370,7 @@ const I18N = {
         { title: "Pickup or delivery", desc: "Collect it from the shop, or we deliver to your address." },
       ],
     },
-    selector: { title: "We'll match products to your car", sub: "Enter your model — we'll pick the best-fitting options for you.", brand: "Make", year: "Year", cta: "Find products", placeholder: "Enter your car model" },
+    selector: { title: "We'll match products to your car", sub: "Enter your car's model — we'll pick the best-fitting options for you.", brand: "Make", year: "Year", cta: "Find products", placeholder: "Enter your car model" },
     lead: {
       title: "Get a quote in minutes via Telegram",
       sub: "Fill the form — we reply within 24 hours.",

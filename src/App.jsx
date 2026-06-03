@@ -77,13 +77,16 @@ function App() {
       }
     }, 80);
   };
-  // Car selector now sends the visitor to the contact section to get in touch.
-  const handleCarFind = () => {
-    const el = document.getElementById("contact");
-    if (el) {
-      const y = el.getBoundingClientRect().top + window.scrollY - 80;
-      window.scrollTo({ top: y, behavior: "smooth" });
-    }
+  // Car selector sends the visitor to the "Get a quote" lead form, with the
+  // typed car model pre-filled into the request notes.
+  const handleCarFind = (data) => {
+    setPrefill({ brand: (data && data.model) || "" });
+    setTimeout(() => {
+      if (leadFormRef.current) {
+        const y = leadFormRef.current.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top: y, behavior: "smooth" });
+      }
+    }, 80);
   };
   const handleGetTouchCta = () => {
     if (leadFormRef.current) {
