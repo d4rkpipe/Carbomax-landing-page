@@ -1,0 +1,72 @@
+// Carbomax DB schema
+// Lokal dev: SQLite fayl (server/data.db)
+// Production: PostgreSQL ga oson migratsiya — faqat provider va url o'zgaradi
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Product {
+  id           Int      @id @default(autoincrement())
+  sku          String   @unique
+  category     String   // "covers" | "mats" | "acc"
+  carName      String   // "Chevrolet Cobalt" | "Universal"
+  price        Int      // so'm
+  nameUz       String
+  nameRu       String
+  nameEn       String
+  imageUrl     String?  // /uploads/products/<uuid>.jpg, optional
+  displayOrder Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model PortfolioItem {
+  id           Int      @id @default(autoincrement())
+  carName      String   // "Chevrolet Cobalt"
+  captionUz    String
+  captionRu    String
+  captionEn    String
+  imageUrl     String?  // /uploads/portfolio/<uuid>.jpg
+  displayOrder Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model AdminUser {
+  id           Int      @id @default(autoincrement())
+  username     String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+}
+
+model LoyaltyTier {
+  id           Int      @id @default(autoincrement())
+  name         String   // "Regular" | "Silver" | "Gold"
+  percent      String   // "5%"
+  accent       String   // hex — drives the card's colours
+  descUz       String
+  descRu       String
+  descEn       String
+  thresholdUz  String
+  thresholdRu  String
+  thresholdEn  String
+  displayOrder Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Category {
+  id           Int      @id @default(autoincrement())
+  slug         String   @unique // stable id referenced by Product.category
+  nameUz       String
+  nameRu       String
+  nameEn       String
+  displayOrder Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}

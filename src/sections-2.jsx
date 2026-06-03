@@ -7,16 +7,36 @@ import { IMaskInput } from 'react-imask'
 // ─── Our completed work / portfolio ───────────────────────────────────────────
 function OurWork({ locale }) {
   const t = useT(locale);
-  const items = t("ourWork.items");
+  // Portfolio comes from the admin-managed API; the i18n list is the fallback.
+  const fallback = t("ourWork.items");
+  const [rows, setRows] = useState(null);
+  useEffect(() => {
+    let alive = true;
+    fetch("/api/portfolio")
+      .then(r => (r.ok ? r.json() : Promise.reject()))
+      .then(d => { if (alive && Array.isArray(d) && d.length) setRows(d); })
+      .catch(() => {});
+    return () => { alive = false; };
+  }, []);
+  const L = locale.charAt(0).toUpperCase() + locale.slice(1);
+  const items = useMemo(() => {
+    if (rows) return rows.map(r => ({ car: r.carName, caption: r["caption" + L] || r.captionUz, imageUrl: r.imageUrl || null }));
+    return fallback;
+  }, [rows, L, fallback]);
   return (
     <Section id="about" eyebrow="06 · Portfolio" title={t("ourWork.title")} sub={t("ourWork.sub")}>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }} className="cbx-work-grid">
         {items.map((item, i) => (
           <Reveal key={i} delay={i * 80}>
             <div className="card" style={{ padding: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
-              <div className="ph" style={{ aspectRatio: "4/3", borderRadius: 0, border: 0 }}>
-                {item.car}
-              </div>
+              {item.imageUrl ? (
+                <img src={item.imageUrl} alt={item.car} loading="lazy"
+                  style={{ aspectRatio: "4/3", width: "100%", objectFit: "cover", display: "block" }} />
+              ) : (
+                <div className="ph" style={{ aspectRatio: "4/3", borderRadius: 0, border: 0 }}>
+                  {item.car}
+                </div>
+              )}
               <div style={{ padding: "16px 20px 18px" }}>
                 <div style={{ fontFamily: "var(--font-sans)", fontWeight: 500, fontSize: 16, lineHeight: 1.3 }}>{item.car}</div>
                 <div style={{ color: "var(--fg-muted)", fontSize: 13, marginTop: 2, lineHeight: 1.4 }}>{item.caption}</div>

@@ -9,3 +9,8 @@ node_modules/
 dist/
 *.log
 .vite/
+
+# Server runtime data (SQLite DB + uploaded images — not committed)
+server/data.db
+server/data.db-*
+server/uploads/

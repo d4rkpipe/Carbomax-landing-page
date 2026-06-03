@@ -343,17 +343,48 @@ function Categories({ locale }) {
 // ─── Products carousel + filters ──────────────────────────────────────────────
 function Products({ locale, onAddInquiry }) {
   const t = useT(locale);
-  const filters = t("products.filters");
-  const filterList = [
-    { id: "all", label: filters.all },
-    { id: "covers", label: filters.covers },
-    { id: "mats", label: filters.mats },
-    { id: "acc", label: filters.acc },
-  ];
+  const L = locale.charAt(0).toUpperCase() + locale.slice(1); // "Uz" | "Ru" | "En"
   const [active, setActive] = useState("all");
+  // Category filter buttons come from the admin-managed API; the i18n labels
+  // are the fallback when the backend isn't reachable.
+  const [cats, setCats] = useState(null);
+  useEffect(() => {
+    let alive = true;
+    fetch("/api/categories")
+      .then(r => (r.ok ? r.json() : Promise.reject()))
+      .then(d => { if (alive && Array.isArray(d) && d.length) setCats(d); })
+      .catch(() => {});
+    return () => { alive = false; };
+  }, []);
+  const filterList = useMemo(() => {
+    const f = t("products.filters");
+    const all = { id: "all", label: f.all };
+    if (cats) return [all, ...cats.map(c => ({ id: c.slug, label: c["name" + L] || c.nameUz }))];
+    return [all, { id: "covers", label: f.covers }, { id: "mats", label: f.mats }, { id: "acc", label: f.acc }];
+  }, [cats, t, L]);
+  // Catalog comes from the admin-managed API; the hard-coded PRODUCTS act as a
+  // fallback until the request resolves (and if the backend isn't reachable,
+  // e.g. on static hosting).
+  const [catalog, setCatalog] = useState(PRODUCTS);
+  useEffect(() => {
+    let alive = true;
+    fetch("/api/products")
+      .then(r => (r.ok ? r.json() : Promise.reject()))
+      .then(rows => {
+        if (!alive || !Array.isArray(rows) || rows.length === 0) return;
+        setCatalog(rows.map(p => ({
+          id: p.id, cat: p.category,
+          name: { uz: p.nameUz, ru: p.nameRu, en: p.nameEn },
+          sku: p.sku, price: p.price, car: p.carName,
+          imageUrl: p.imageUrl || null,
+        })));
+      })
+      .catch(() => {}); // keep the fallback list on any failure
+    return () => { alive = false; };
+  }, []);
   const items = useMemo(
-    () => active === "all" ? PRODUCTS : PRODUCTS.filter(p => p.cat === active),
-    [active]
+    () => active === "all" ? catalog : catalog.filter(p => p.cat === active),
+    [active, catalog]
   );
   const scrollerRef = useRef(null);
   const scroll = (dir) => {
@@ -405,11 +436,16 @@ function Products({ locale, onAddInquiry }) {
         {items.map(p => (
           <article key={p.id} className="card"
             style={{ scrollSnapAlign: "start", display: "flex", flexDirection: "column", overflow: "hidden" }}>
-            <div className="ph" style={{
-              aspectRatio: "4/3", borderRadius: 0, borderLeft: 0, borderRight: 0, borderTop: 0,
-            }}>
-              {p.car === "Universal" ? t("products.accessoryPhotoLabel") : `${p.car} ${t("products.photoLabel")}`}
-            </div>
+            {p.imageUrl ? (
+              <img src={p.imageUrl} alt={p.name[locale]} loading="lazy"
+                style={{ aspectRatio: "4/3", width: "100%", objectFit: "cover", display: "block" }} />
+            ) : (
+              <div className="ph" style={{
+                aspectRatio: "4/3", borderRadius: 0, borderLeft: 0, borderRight: 0, borderTop: 0,
+              }}>
+                {p.car === "Universal" ? t("products.accessoryPhotoLabel") : `${p.car} ${t("products.photoLabel")}`}
+              </div>
+            )}
             <div style={{ padding: "18px 20px 20px", display: "flex", flexDirection: "column", gap: 8, flexGrow: 1 }}>
               <div className="mono" style={{ color: "var(--fg-dim)", fontSize: 10, letterSpacing: "0.1em" }}>{p.sku} · {p.car}</div>
               <h3 style={{ fontFamily: "var(--font-sans)", fontSize: 16, fontWeight: 500, margin: 0, lineHeight: 1.3 }}>{p.name[locale]}</h3>
@@ -435,12 +471,27 @@ function Products({ locale, onAddInquiry }) {
 // ─── Loyalty / cashback ───────────────────────────────────────────────────────
 function Loyalty({ locale }) {
   const t = useT(locale);
-  const tiers = t("loyalty.tiers");
-  const tierStyles = [
-    { bg: "linear-gradient(160deg, #1c2520 0%, #131a14 100%)", ring: "#3a4a3e", accent: "#e8eae0" },
-    { bg: "linear-gradient(160deg, #1d3a4a 0%, #0f1f29 100%)", ring: "#4a7a92", accent: "#a8d8ec" },
-    { bg: "linear-gradient(160deg, #4a3514 0%, #2a1d08 100%)", ring: "#f5b023", accent: "#f5b023" },
-  ];
+  // Tiers come from the admin-managed API; the i18n fallback keeps the section
+  // populated until the request resolves (and on static hosting).
+  const fallbackTiers = t("loyalty.tiers");
+  const [rows, setRows] = useState(null);
+  useEffect(() => {
+    let alive = true;
+    fetch("/api/loyalty")
+      .then(r => (r.ok ? r.json() : Promise.reject()))
+      .then(d => { if (alive && Array.isArray(d) && d.length) setRows(d); })
+      .catch(() => {}); // keep the fallback tiers on any failure
+    return () => { alive = false; };
+  }, []);
+  const L = locale.charAt(0).toUpperCase() + locale.slice(1); // "Uz" | "Ru" | "En"
+  const tiers = useMemo(() => {
+    if (rows) return rows.map(r => ({
+      name: r.name, percent: r.percent, accent: r.accent,
+      desc: r["desc" + L] || r.descUz, threshold: r["threshold" + L] || r.thresholdUz,
+    }));
+    const accents = ["#c4ccc0", "#a8d8ec", "#f5b023"];
+    return fallbackTiers.map((tr, i) => ({ ...tr, accent: accents[i % accents.length] }));
+  }, [rows, L, fallbackTiers]);
   return (
     <Section id="loyalty" eyebrow="04 · Loyalty" title={t("loyalty.title")} sub={t("loyalty.sub")}>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }} className="cbx-loyalty-grid">
@@ -448,20 +499,20 @@ function Loyalty({ locale }) {
           <Reveal key={i} delay={i * 80}>
             <div style={{
               padding: "32px 28px 28px",
-              background: tierStyles[i].bg,
-              border: `1px solid ${tierStyles[i].ring}`,
+              background: `linear-gradient(160deg, color-mix(in oklab, ${tier.accent} 20%, var(--surface)) 0%, color-mix(in oklab, ${tier.accent} 6%, var(--bg)) 100%)`,
+              border: `1px solid color-mix(in oklab, ${tier.accent} 45%, var(--border))`,
               borderRadius: "var(--r-lg)",
               display: "flex", flexDirection: "column", gap: 16,
               minHeight: 320,
               position: "relative", overflow: "hidden",
             }}>
               {/* Decorative ring */}
-              <div aria-hidden="true" style={{ position: "absolute", right: -60, top: -60, width: 200, height: 200, borderRadius: "50%", border: `1px solid ${tierStyles[i].ring}`, opacity: 0.4 }}></div>
+              <div aria-hidden="true" style={{ position: "absolute", right: -60, top: -60, width: 200, height: 200, borderRadius: "50%", border: `1px solid color-mix(in oklab, ${tier.accent} 40%, transparent)`, opacity: 0.5 }}></div>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-                <div className="mono" style={{ fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", color: tierStyles[i].accent }}>
+                <div className="mono" style={{ fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", color: tier.accent }}>
                   {tier.name}
                 </div>
-                <div style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 48, color: tierStyles[i].accent, lineHeight: 1 }}>
+                <div style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 48, color: tier.accent, lineHeight: 1 }}>
                   {tier.percent}
                 </div>
               </div>
