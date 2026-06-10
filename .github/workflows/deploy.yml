@@ -23,6 +23,31 @@ jobs:
             npm ci
             npx prisma generate
             npx prisma db push
-            npm run build
+
+            # Build into a staging dir so the live dist/ keeps serving during the
+            # whole build. If the build fails, set -e aborts here and the running
+            # site is left completely untouched.
+            rm -rf dist_next
+            npm run build -- --outDir dist_next --emptyOutDir
+
+            # Swap the new build in, keeping the previous one for rollback.
+            rm -rf dist_prev
+            [ -d dist ] && mv dist dist_prev
+            mv dist_next dist
+
+            # Restart the API (picks up server code changes) and save the process list.
             pm2 reload carbomax-landing || pm2 start npm --name carbomax-landing -- start
             pm2 save
+
+            # Health check — if the app doesn't come up, roll back to the previous
+            # build so visitors keep seeing the last working version, and fail the
+            # deploy so it's visible in GitHub. Port must match the server's PORT.
+            sleep 3
+            if ! curl -fsS http://127.0.0.1:3001/api/health > /dev/null; then
+              echo "Health check failed — rolling back to previous build"
+              rm -rf dist
+              [ -d dist_prev ] && mv dist_prev dist
+              pm2 reload carbomax-landing || true
+              exit 1
+            fi
+            echo "Deploy OK"

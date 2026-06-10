@@ -27,8 +27,17 @@ const UPLOADS_DIR = path.join(__dirname, 'uploads')
 // API_PORT lets dev pin the backend to 3001 even when the harness injects
 // PORT=5173 for Vite; production hosts that set PORT are still honoured.
 const PORT = Number(process.env.API_PORT) || Number(process.env.PORT) || 3001
-const JWT_SECRET = process.env.JWT_SECRET || 'carbomax-dev-secret-change-in-production'
 const isProd = process.env.NODE_ENV === 'production'
+
+// In production a real JWT_SECRET is mandatory. Never sign admin tokens with the
+// committed dev default — anyone with the repo could otherwise forge a 7-day
+// admin token. Fail fast instead of silently falling back.
+const DEV_JWT_SECRET = 'carbomax-dev-secret-change-in-production'
+if (isProd && (!process.env.JWT_SECRET || process.env.JWT_SECRET === DEV_JWT_SECRET)) {
+  console.error('FATAL: a unique JWT_SECRET must be set in production (the dev default is not allowed). Refusing to start.')
+  process.exit(1)
+}
+const JWT_SECRET = process.env.JWT_SECRET || DEV_JWT_SECRET
 
 // Ensure the upload target exists before @fastify/static tries to read it.
 fs.mkdirSync(path.join(UPLOADS_DIR, 'products'), { recursive: true })
