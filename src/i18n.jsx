@@ -111,7 +111,7 @@ const I18N = {
       title: "Tez-tez beriladigan savollar",
       items: [
         { q: "Chexol tikish qancha vaqt oladi?", a: "Standart modellar uchun 3–5 ish kuni. Murakkab buyurtmalar 7 kungacha cho'zilishi mumkin." },
-        { q: "Kafolat qancha?", a: "Chexollarga 1 yil, Magicar mahsulotlariga 2 yil." },
+        { q: "Kafolat qancha?", a: "Barcha chexollarga 1 yil kafolat beramiz." },
         { q: "Qanday to'lash mumkin?", a: "Naqd, plastik karta, Click, Payme va bank o'tkazmasi orqali." },
         { q: "Viloyatlarga yetkazasizmi?", a: "Ha — barcha viloyatlarga BTS yoki Yandex Delivery orqali." },
         { q: "Mening mashinam modeliga chexol bormi?", a: "Chevrolet, Ravon, Hyundai, Kia, Toyota va boshqa keng tarqalgan modellar — bor. Aniqligi uchun yozing." },
@@ -251,7 +251,7 @@ const I18N = {
       title: "Частые вопросы",
       items: [
         { q: "Сколько шьются чехлы?", a: "Стандартные модели — 3–5 рабочих дней. Сложные заказы — до 7 дней." },
-        { q: "Какая гарантия?", a: "На чехлы — 1 год, на Magicar — 2 года." },
+        { q: "Какая гарантия?", a: "На все чехлы даём гарантию 1 год." },
         { q: "Как можно оплатить?", a: "Наличные, карта, Click, Payme, банковский перевод." },
         { q: "Доставляете в регионы?", a: "Да — во все области через BTS или Yandex Delivery." },
         { q: "Есть ли чехлы на модель моей машины?", a: "Chevrolet, Ravon, Hyundai, Kia, Toyota и большинство популярных — есть. Напишите — уточним." },
@@ -391,7 +391,7 @@ const I18N = {
       title: "Frequently asked questions",
       items: [
         { q: "How long does seat-cover tailoring take?", a: "Standard models: 3–5 working days. Complex orders can take up to 7." },
-        { q: "What's the warranty?", a: "Covers: 1 year. Magicar: 2 years." },
+        { q: "What's the warranty?", a: "All seat covers come with a 1-year warranty." },
         { q: "How can I pay?", a: "Cash, card, Click, Payme, bank transfer." },
         { q: "Do you deliver to the regions?", a: "Yes — anywhere in Uzbekistan via BTS or Yandex Delivery." },
         { q: "Do you have covers for my car's model?", a: "Chevrolet, Ravon, Hyundai, Kia, Toyota and most popular models — yes. Drop us a message to confirm." },
