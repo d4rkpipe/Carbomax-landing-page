@@ -77,7 +77,7 @@ const I18N = {
       sub: "Haqiqiy fikrlar, haqiqiy mijozlar.",
       items: [
         { name: "Sherzod A.", car: "Chevrolet Cobalt", quote: "Cobalt'imga Carbomax'dan chexol oldim — 3 yildan beri yangidek turibdi.", initials: "SA" },
-        { name: "Bekzod M.", car: "Kia K5", quote: "Magicar o'rnatishdi va kafolat berishdi — boshqa joyda topa olmadim.", initials: "BM" },
+        { name: "Bekzod M.", car: "Kia K5", quote: "Mashinam uchun aksessuarlarni shu yerdan oldim — keng tanlov va arzon narx. Mamnunman.", initials: "BM" },
         { name: "Nodira K.", car: "Hyundai Tucson", quote: "Onlayn buyurtma berdim, ertasi kuni chexollarni o'rnatib berib ketishdi.", initials: "NK" },
       ],
     },
@@ -222,7 +222,7 @@ const I18N = {
       sub: "Реальные отзывы реальных людей.",
       items: [
         { name: "Шерзод А.", car: "Chevrolet Cobalt", quote: "Взял чехлы на Cobalt — 3 года как новые. Carbomax — топ.", initials: "ША" },
-        { name: "Бекзод М.", car: "Kia K5", quote: "Поставили Magicar и дали гарантию — нигде такого не нашёл.", initials: "БМ" },
+        { name: "Бекзод М.", car: "Kia K5", quote: "Аксессуары для машины брал здесь — большой выбор и доступные цены. Доволен.", initials: "БМ" },
         { name: "Нодира К.", car: "Hyundai Tucson", quote: "Заказала онлайн — на следующий день приехали и установили чехлы.", initials: "НК" },
       ],
     },
@@ -362,7 +362,7 @@ const I18N = {
       sub: "Real reviews from real drivers.",
       items: [
         { name: "Sherzod A.", car: "Chevrolet Cobalt", quote: "Got covers from Carbomax for my Cobalt — three years on and they look new.", initials: "SA" },
-        { name: "Bekzod M.", car: "Kia K5", quote: "Installed my Magicar and stood behind it with a real warranty. Couldn't find that anywhere else.", initials: "BM" },
+        { name: "Bekzod M.", car: "Kia K5", quote: "Got accessories for my car here — great selection and affordable prices. Very happy.", initials: "BM" },
         { name: "Nodira K.", car: "Hyundai Tucson", quote: "Ordered online — the next day they came and installed the covers.", initials: "NK" },
       ],
     },
