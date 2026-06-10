@@ -99,12 +99,12 @@ const I18N = {
     },
     lead: {
       title: "Biz siz bilan tezda bog'lanamiz",
-      sub: "Forma to'ldiring — 24 soat ichida bog'lanamiz.",
+      sub: "Forma to'ldiring — 1 soat ichida bog'lanamiz.",
       first: "Ism va familiya", last: "Familiya", phone: "Telefon raqam", category: "Qiziqtirayotgan yo'nalish", notes: "Qo'shimcha izoh",
       submit: "Yuborish",
       success: "Murojaatingiz qabul qilindi! Tez orada bog'lanamiz.",
       resend: "Yana yuborish",
-      formHint: "Telegram orqali yuboriladi · javob 24 soat ichida",
+      formHint: "Telegram orqali yuboriladi · javob 1 soat ichida",
       catOptions: ["Chexollar", "Pollik qoplamalari", "Aksessuarlar", "Boshqa"],
     },
     faq: {
@@ -239,12 +239,12 @@ const I18N = {
     selector: { title: "Подберём товары под ваш автомобиль", sub: "Введите модель вашего авто — подберём самые подходящие варианты.", brand: "Бренд", year: "Год выпуска", cta: "Найти товары", placeholder: "Введите модель автомобиля" },
     lead: {
       title: "Свяжемся с вами в ближайшее время",
-      sub: "Заполните форму — свяжемся в течение 24 часов.",
+      sub: "Заполните форму — свяжемся в течение 1 часа.",
       first: "Имя и фамилия", last: "Фамилия", phone: "Телефон", category: "Что интересует", notes: "Дополнительно",
       submit: "Отправить",
       success: "Ваша заявка принята! Скоро свяжемся.",
       resend: "Отправить ещё",
-      formHint: "Через Telegram · ответ в течение 24 часов",
+      formHint: "Через Telegram · ответ в течение 1 часа",
       catOptions: ["Чехлы", "Коврики", "Аксессуары", "Другое"],
     },
     faq: {
@@ -379,12 +379,12 @@ const I18N = {
     selector: { title: "We'll match products to your car", sub: "Enter your car's model — we'll pick the best-fitting options for you.", brand: "Make", year: "Year", cta: "Find products", placeholder: "Enter your car model" },
     lead: {
       title: "We'll get in touch with you shortly",
-      sub: "Fill the form — we reply within 24 hours.",
+      sub: "Fill the form — we reply within 1 hour.",
       first: "Full name", last: "Last name", phone: "Phone", category: "Interested in", notes: "Notes (optional)",
       submit: "Send",
       success: "Your request has been received! We'll be in touch soon.",
       resend: "Send another",
-      formHint: "Sent via Telegram · reply within 24 hours",
+      formHint: "Sent via Telegram · reply within 1 hour",
       catOptions: ["Seat covers", "Floor mats", "Accessories", "Other"],
     },
     faq: {
