@@ -115,7 +115,7 @@ const I18N = {
         { q: "Qanday to'lash mumkin?", a: "Naqd, plastik karta, Click, Payme va bank o'tkazmasi orqali." },
         { q: "Viloyatlarga yetkazasizmi?", a: "Ha — barcha viloyatlarga BTS yoki Yandex Delivery orqali." },
         { q: "Mening mashinam modeliga chexol bormi?", a: "Chevrolet, Ravon, Hyundai, Kia, Toyota va boshqa keng tarqalgan modellar — bor. Aniqligi uchun yozing." },
-        { q: "O'rnatishga necha vaqt ketadi?", a: "Chexolni o'rnatish ~1 soat, signalizatsiya 2–3 soat." },
+        { q: "O'rnatishga necha vaqt ketadi?", a: "Chexolni o'rnatish odatda 1,5–2 soat oladi." },
       ],
     },
     contact: {
@@ -255,7 +255,7 @@ const I18N = {
         { q: "Как можно оплатить?", a: "Наличные, карта, Click, Payme, банковский перевод." },
         { q: "Доставляете в регионы?", a: "Да — во все области через BTS или Yandex Delivery." },
         { q: "Есть ли чехлы на модель моей машины?", a: "Chevrolet, Ravon, Hyundai, Kia, Toyota и большинство популярных — есть. Напишите — уточним." },
-        { q: "Сколько занимает установка?", a: "Чехлы — около 1 часа, сигнализация — 2–3 часа." },
+        { q: "Сколько занимает установка?", a: "Установка чехлов обычно занимает 1,5–2 часа." },
       ],
     },
     contact: {
@@ -395,7 +395,7 @@ const I18N = {
         { q: "How can I pay?", a: "Cash, card, Click, Payme, bank transfer." },
         { q: "Do you deliver to the regions?", a: "Yes — anywhere in Uzbekistan via BTS or Yandex Delivery." },
         { q: "Do you have covers for my car's model?", a: "Chevrolet, Ravon, Hyundai, Kia, Toyota and most popular models — yes. Drop us a message to confirm." },
-        { q: "How long is installation?", a: "Covers ~1 hour. Alarm system 2–3 hours." },
+        { q: "How long is installation?", a: "Seat-cover installation usually takes 1.5–2 hours." },
       ],
     },
     contact: {
