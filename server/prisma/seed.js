@@ -14,10 +14,10 @@ const PRODUCTS = [
   { sku: 'CBX-CO-PR-002', category: 'covers', carName: 'Chevrolet Cobalt', price: 1450000, nameUz: 'Cobalt premium chexol', nameRu: 'Чехлы Cobalt Premium', nameEn: 'Cobalt premium covers' },
   { sku: 'CBX-K5-EL-014', category: 'covers', carName: 'Kia K5', price: 1890000, nameUz: "K5 eko-charm to'plam", nameRu: 'K5 Эко-кожа комплект', nameEn: 'K5 eco-leather set' },
   { sku: 'CBX-TC-3D-007', category: 'mats', carName: 'Hyundai Tucson', price: 720000, nameUz: 'Tucson 3D pollik', nameRu: 'Tucson 3D коврики', nameEn: 'Tucson 3D mats' },
-  { sku: 'MGC-M903F', category: 'acc', carName: 'Universal', price: 2350000, nameUz: 'Magicar M903F', nameRu: 'Magicar M903F', nameEn: 'Magicar M903F' },
+  { sku: 'ACC-PH-HLD-01', category: 'acc', carName: 'Universal', price: 120000, nameUz: 'Telefon ushlagich', nameRu: 'Держатель для телефона', nameEn: 'Phone holder' },
   { sku: 'CBX-CY-PR-018', category: 'covers', carName: 'Toyota Camry', price: 2100000, nameUz: 'Camry premium chexol', nameRu: 'Camry premium чехлы', nameEn: 'Camry premium covers' },
   { sku: 'CBX-CO-EV-003', category: 'mats', carName: 'Chevrolet Cobalt', price: 480000, nameUz: 'Cobalt EVA pollik', nameRu: 'Cobalt EVA коврики', nameEn: 'Cobalt EVA mats' },
-  { sku: 'ACC-LED-CAB-04', category: 'acc', carName: 'Universal', price: 320000, nameUz: "LED salon yorug'i", nameRu: 'LED подсветка салона', nameEn: 'LED cabin lighting' },
+  { sku: 'ACC-AF-AQ-01', category: 'acc', carName: 'Universal', price: 45000, nameUz: "Avtomobil xushbo'ylatkichi", nameRu: 'Ароматизатор для авто', nameEn: 'Car air freshener' },
 ]
 
 // Migrated 1:1 from src/i18n.jsx loyalty.tiers (+ an accent colour per tier).

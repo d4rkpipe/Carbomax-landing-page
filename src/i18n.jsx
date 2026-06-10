@@ -27,7 +27,7 @@ const I18N = {
       items: [
         { name: "Avtomobil chexollari", desc: "30+ modelga moslab tikilgan eko-charm va premium chexollar.", tag: "Tayyorlash muddati: 3–5 kun" },
         { name: "Pollik qoplamalari", desc: "EVA, 3D va klassik kovriklar — modelingizga aniq mos.", tag: "Omborda mavjud" },
-        { name: "Aksessuarlar", desc: "Turli avtomobil modellari uchun signalizatsiya, audio, fara va salon aksessuarlari.", tag: "Rasmiy diler" },
+        { name: "Aksessuarlar", desc: "Avtomobil xushbo'ylatkichlari, telefon ushlagichlar, kuzov va salon sochiqlari hamda boshqa salon aksessuarlari.", tag: "Keng tanlov" },
       ],
     },
     products: {
@@ -172,7 +172,7 @@ const I18N = {
       items: [
         { name: "Чехлы на сиденья", desc: "30+ моделей. Экокожа и премиум-материалы.", tag: "Пошив 3–5 дней" },
         { name: "Коврики", desc: "EVA, 3D и классические — точно под вашу модель.", tag: "В наличии" },
-        { name: "Аксессуары", desc: "Сигнализации, аудио, фары и аксессуары салона для разных моделей авто.", tag: "Дилер Magicar" },
+        { name: "Аксессуары", desc: "Ароматизаторы, держатели для телефона, полотенца для кузова и салона и другие аксессуары для салона.", tag: "Большой выбор" },
       ],
     },
     products: {
@@ -312,7 +312,7 @@ const I18N = {
       items: [
         { name: "Seat covers", desc: "30+ models. Eco-leather and premium materials.", tag: "3–5 day tailoring" },
         { name: "Floor mats", desc: "EVA, 3D, and classic — precise fit per model.", tag: "In stock" },
-        { name: "Accessories", desc: "Alarms, audio, headlights and cabin accessories for a wide range of car models.", tag: "Magicar dealer" },
+        { name: "Accessories", desc: "Air fresheners, phone holders, body and interior towels, and other cabin accessories.", tag: "Wide selection" },
       ],
     },
     products: {
@@ -436,10 +436,10 @@ const PRODUCTS = [
   { id: "p1", cat: "covers", name: { uz: "Cobalt premium chexol", ru: "Чехлы Cobalt Premium", en: "Cobalt premium covers" }, sku: "CBX-CO-PR-002", price: 1450000, car: "Chevrolet Cobalt" },
   { id: "p2", cat: "covers", name: { uz: "K5 eko-charm to'plam", ru: "K5 Эко-кожа комплект", en: "K5 eco-leather set" }, sku: "CBX-K5-EL-014", price: 1890000, car: "Kia K5" },
   { id: "p3", cat: "mats", name: { uz: "Tucson 3D pollik", ru: "Tucson 3D коврики", en: "Tucson 3D mats" }, sku: "CBX-TC-3D-007", price: 720000, car: "Hyundai Tucson" },
-  { id: "p4", cat: "acc", name: { uz: "Magicar M903F", ru: "Magicar M903F", en: "Magicar M903F" }, sku: "MGC-M903F", price: 2350000, car: "Universal" },
+  { id: "p4", cat: "acc", name: { uz: "Telefon ushlagich", ru: "Держатель для телефона", en: "Phone holder" }, sku: "ACC-PH-HLD-01", price: 120000, car: "Universal" },
   { id: "p6", cat: "covers", name: { uz: "Camry premium chexol", ru: "Camry premium чехлы", en: "Camry premium covers" }, sku: "CBX-CY-PR-018", price: 2100000, car: "Toyota Camry" },
   { id: "p7", cat: "mats", name: { uz: "Cobalt EVA pollik", ru: "Cobalt EVA коврики", en: "Cobalt EVA mats" }, sku: "CBX-CO-EV-003", price: 480000, car: "Chevrolet Cobalt" },
-  { id: "p8", cat: "acc", name: { uz: "LED salon yorug'i", ru: "LED подсветка салона", en: "LED cabin lighting" }, sku: "ACC-LED-CAB-04", price: 320000, car: "Universal" },
+  { id: "p8", cat: "acc", name: { uz: "Avtomobil xushbo'ylatkichi", ru: "Ароматизатор для авто", en: "Car air freshener" }, sku: "ACC-AF-AQ-01", price: 45000, car: "Universal" },
 ];
 
 // Number formatting — UZS with space-separated thousands
