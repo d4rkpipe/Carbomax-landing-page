@@ -43,7 +43,7 @@ const I18N = {
       sub: "Boshidan oxirigacha — hammasini biz hal qilamiz.",
       items: [
         { name: "Uyga borib o'rnatish", desc: "Bizdan yoki o'zingizdagi chexolni o'rnatib beramiz.", cta: "Vaqt belgilash" },
-        { name: "Do'konda o'rnatish", desc: "Do'konimizda 1 soat ichida o'rnatamiz.", cta: "Vaqt belgilash" },
+        { name: "Do'konda o'rnatish", desc: "Do'konimizda o'rnatamiz — 1,5–2 soat vaqt oladi.", cta: "Vaqt belgilash" },
         { name: "Yetkazib berish", desc: "Toshkent va viloyatlar bo'ylab.", cta: "Hisoblash" },
         { name: "Maslahat", desc: "Modelingizga aynan nima tushadi — aytamiz.", cta: "Yozish" },
         { name: "Olib ketish", desc: "Qulay vaqtda do'kondan.", cta: "Buyurtma berish" },
@@ -188,7 +188,7 @@ const I18N = {
       sub: "От первого звонка до установки — всё на нас.",
       items: [
         { name: "Выезд на дом", desc: "Приедем и установим чехлы — наши или ваши.", cta: "Записаться" },
-        { name: "Установка в магазине", desc: "Профессиональная — за 1 час.", cta: "Записаться" },
+        { name: "Установка в магазине", desc: "Устанавливаем в магазине — занимает 1,5–2 часа.", cta: "Записаться" },
         { name: "Доставка", desc: "Ташкент и регионы.", cta: "Рассчитать" },
         { name: "Консультация", desc: "Подберём именно под вашу модель.", cta: "Написать" },
         { name: "Самовывоз", desc: "В удобное время.", cta: "Оформить" },
@@ -328,7 +328,7 @@ const I18N = {
       sub: "From first call to install — we handle it.",
       items: [
         { name: "Home visit", desc: "We come to install covers — ours or yours.", cta: "Book a slot" },
-        { name: "In-shop installation", desc: "Professional. Done within the hour.", cta: "Book a slot" },
+        { name: "In-shop installation", desc: "We install in-shop — takes 1.5–2 hours.", cta: "Book a slot" },
         { name: "Delivery", desc: "Tashkent and the regions.", cta: "Quote it" },
         { name: "Consultation", desc: "We'll match you to the right product.", cta: "Message us" },
         { name: "Pickup arrangement", desc: "Whenever works for you.", cta: "Arrange" },
