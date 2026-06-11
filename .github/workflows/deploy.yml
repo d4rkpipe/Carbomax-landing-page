@@ -19,9 +19,13 @@ jobs:
           script: |
             set -e
             cd /var/www/carbomax-landing
-            git pull origin main
+            # Hard-reset to origin so any server-side drift can't block the pull.
+            git fetch origin main
+            git reset --hard origin/main
             npm ci
             npx prisma generate
+            # Back up the SQLite DB before any schema change (stays on the VPS).
+            [ -f server/data.db ] && cp server/data.db "server/data.db-bak-$(date +%s)" || true
             npx prisma db push
 
             # Build into a staging dir so the live dist/ keeps serving during the

@@ -14,6 +14,7 @@ export default function CatalogManager({ token, notify }) {
   const [loading, setLoading] = useState(true)
   const [editing, setEditing] = useState(null)       // product
   const [editingCat, setEditingCat] = useState(null) // category
+  const reordering = React.useRef(false)             // blocks overlapping reorder PUTs
 
   const load = useCallback(async () => {
     setLoading(true)
@@ -35,7 +36,7 @@ export default function CatalogManager({ token, notify }) {
       const u = await api(`/products/${form.id}`, { method: 'PUT', body: payload, token })
       setProducts((ps) => ps.map((p) => (p.id === u.id ? u : p))); notify('Mahsulot yangilandi')
     } else {
-      const c = await api('/products', { method: 'POST', body: payload, token })
+      const c = await api('/products', { method: 'POST', body: { ...payload, displayOrder: products.length }, token })
       setProducts((ps) => [...ps, c]); notify("Mahsulot qo'shildi")
     }
     setEditing(null)
@@ -46,10 +47,13 @@ export default function CatalogManager({ token, notify }) {
     catch (e) { notify(e.message, 'err') }
   }
   const moveProduct = async (i, dir) => {
+    if (reordering.current) return
     const j = i + dir; if (j < 0 || j >= products.length) return
     const next = products.slice(); [next[i], next[j]] = [next[j], next[i]]; setProducts(next)
+    reordering.current = true
     try { await api('/products/reorder', { method: 'PUT', body: { ids: next.map((p) => p.id) }, token }) }
     catch (e) { notify(e.message, 'err'); load() }
+    finally { reordering.current = false }
   }
 
   // ── category handlers ──
@@ -58,7 +62,7 @@ export default function CatalogManager({ token, notify }) {
       const u = await api(`/categories/${form.id}`, { method: 'PUT', body: form, token })
       setCategories((cs) => cs.map((c) => (c.id === u.id ? u : c))); notify('Kategoriya yangilandi')
     } else {
-      const c = await api('/categories', { method: 'POST', body: form, token })
+      const c = await api('/categories', { method: 'POST', body: { ...form, displayOrder: categories.length }, token })
       setCategories((cs) => [...cs, c]); notify("Kategoriya qo'shildi")
     }
     setEditingCat(null)
@@ -69,10 +73,13 @@ export default function CatalogManager({ token, notify }) {
     catch (e) { notify(e.message, 'err') }
   }
   const moveCat = async (i, dir) => {
+    if (reordering.current) return
     const j = i + dir; if (j < 0 || j >= categories.length) return
     const next = categories.slice(); [next[i], next[j]] = [next[j], next[i]]; setCategories(next)
+    reordering.current = true
     try { await api('/categories/reorder', { method: 'PUT', body: { ids: next.map((c) => c.id) }, token }) }
     catch (e) { notify(e.message, 'err'); load() }
+    finally { reordering.current = false }
   }
 
   return (

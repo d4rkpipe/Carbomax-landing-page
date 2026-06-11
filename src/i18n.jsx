@@ -147,7 +147,7 @@ const I18N = {
       submit: "So'rov yuborish", cancel: "Bekor qilish",
       success: "Yuborildi. Tez orada bog'lanamiz.",
     },
-    common: { fromPrice: "narxidan", currency: "so'm", learnMore: "Batafsil", close: "Yopish", view: "Ko'rish", sending: "Yuborilmoqda…", error: "Xatolik yuz berdi. Telefon yoki Telegram orqali bog'laning." },
+    common: { fromPrice: "narxidan", currency: "so'm", learnMore: "Batafsil", close: "Yopish", view: "Ko'rish", sending: "Yuborilmoqda…", error: "Xatolik yuz berdi. Telefon yoki Telegram orqali bog'laning.", openMap: "Yandex'da ochish", phoneIncomplete: "Telefon raqamni to'liq kiriting" },
   },
   ru: {
     nav: { home: "Главная", products: "Товары", services: "Услуги", about: "О нас", contact: "Контакты", cta: "Связаться" },
@@ -287,7 +287,7 @@ const I18N = {
       submit: "Отправить заявку", cancel: "Отмена",
       success: "Заявка отправлена. Скоро свяжемся.",
     },
-    common: { fromPrice: "от", currency: "сум", learnMore: "Подробнее", close: "Закрыть", view: "Смотреть", sending: "Отправка…", error: "Произошла ошибка. Свяжитесь по телефону или Telegram." },
+    common: { fromPrice: "от", currency: "сум", learnMore: "Подробнее", close: "Закрыть", view: "Смотреть", sending: "Отправка…", error: "Произошла ошибка. Свяжитесь по телефону или Telegram.", openMap: "Открыть в Yandex", phoneIncomplete: "Введите номер телефона полностью" },
   },
   en: {
     nav: { home: "Home", products: "Products", services: "Services", about: "About", contact: "Contact", cta: "Get in touch" },
@@ -427,7 +427,7 @@ const I18N = {
       submit: "Send request", cancel: "Cancel",
       success: "Request sent. We'll be in touch shortly.",
     },
-    common: { fromPrice: "from", currency: "UZS", learnMore: "Learn more", close: "Close", view: "View", sending: "Sending…", error: "Something went wrong. Please reach us by phone or Telegram." },
+    common: { fromPrice: "from", currency: "UZS", learnMore: "Learn more", close: "Close", view: "View", sending: "Sending…", error: "Something went wrong. Please reach us by phone or Telegram.", openMap: "Open in Yandex", phoneIncomplete: "Please enter the full phone number" },
   },
 };
 

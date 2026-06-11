@@ -13,7 +13,7 @@ export default async function authRoutes(app) {
     const user = await prisma.adminUser.findUnique({ where: { username: String(username) } })
     // Compare against a dummy hash even when the user is missing so response
     // timing doesn't reveal whether the username exists.
-    const hash = user?.passwordHash || '$2a$10$invalidinvalidinvalidinvalidinvalidinvalidinvalidinv'
+    const hash = user?.passwordHash || '$2b$10$3RjV2eUQ63XZbpMpiIFBP.i1MqVBr2O1WQrmYihdIVOroDL6KZK2G'
     const ok = await bcrypt.compare(String(password), hash)
     if (!user || !ok) {
       return reply.code(401).send({ error: "Login yoki parol noto'g'ri" })

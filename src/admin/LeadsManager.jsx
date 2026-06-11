@@ -48,7 +48,7 @@ export default function LeadsManager({ token, notify }) {
       {loading
         ? <Center>Yuklanmoqda…</Center>
         : leads.length === 0
-          ? <Center>Hozircha murojaat yo'q. Saytdagi formalar to'ldirilganda shu yerда paydo bo'ladi.</Center>
+          ? <Center>Hozircha murojaat yo'q. Saytdagi formalar to'ldirilganda shu yerda paydo bo'ladi.</Center>
           : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               {leads.map((l) => (

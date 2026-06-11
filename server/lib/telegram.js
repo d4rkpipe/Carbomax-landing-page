@@ -17,6 +17,7 @@ export async function sendTelegram(text) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ chat_id: CHAT_ID, text, disable_web_page_preview: true }),
+      signal: AbortSignal.timeout(5000),
     })
     const data = await res.json().catch(() => ({}))
     if (!data.ok) console.warn('[telegram] send failed:', data.description || res.status)

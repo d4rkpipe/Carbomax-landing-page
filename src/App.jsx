@@ -20,7 +20,16 @@ const PRIMARY_OPTIONS = [
 ];
 
 function App() {
-  const [tw, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  // Persist the theme (light/dark) like the locale, so a reload keeps the choice.
+  const initialTweaks = React.useMemo(() => {
+    try {
+      const saved = localStorage.getItem("cbx_theme");
+      if (saved === "light" || saved === "dark") return { ...TWEAK_DEFAULTS, theme: saved };
+    } catch (e) {}
+    return TWEAK_DEFAULTS;
+  }, []);
+  const [tw, setTweak] = useTweaks(initialTweaks);
+  React.useEffect(() => { try { localStorage.setItem("cbx_theme", tw.theme); } catch (e) {} }, [tw.theme]);
   const [locale, setLocale] = React.useState(() => {
     try {
       // ?lang= wins (so the hreflang URLs actually serve the right language to

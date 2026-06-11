@@ -17,3 +17,7 @@ dist/
 server/data.db
 server/data.db-*
 server/uploads/
+
+# Dev artifacts — design screenshots & scraps (not needed on the VPS)
+screenshots/
+scraps/

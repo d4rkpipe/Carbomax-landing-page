@@ -15,7 +15,7 @@
 
   --fg: #f1f3ee;
   --fg-muted: #a1a89e;
-  --fg-dim: #6a7167;
+  --fg-dim: #878e84;
 
   --primary: var(--brand-green);
   --primary-bright: var(--brand-green-bright);
@@ -50,7 +50,7 @@
   --border-strong: #cfccc0;
   --fg: #181c19;
   --fg-muted: #5a6058;
-  --fg-dim: #8a8f86;
+  --fg-dim: #686d64;
   --shadow-glass: 0 1px 0 rgba(255,255,255,0.7) inset, 0 24px 80px -20px rgba(20,30,15,0.18);
 }
 

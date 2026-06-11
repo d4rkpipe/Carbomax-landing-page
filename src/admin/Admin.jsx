@@ -1,5 +1,5 @@
 // Admin shell — auth + section menu + routing between managers.
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback, useRef } from 'react'
 import { api, getToken, saveToken, setUnauthorizedHandler } from './lib.js'
 import { Center, Toast } from './ui.jsx'
 import CatalogManager from './CatalogManager.jsx'
@@ -16,9 +16,11 @@ export default function Admin() {
   const [view, setView] = useState('menu')   // 'menu' | 'catalog' | 'loyalty'
   const [toast, setToast] = useState(null)
 
+  const toastTimer = useRef(null)
   const notify = useCallback((msg, kind = 'ok') => {
     setToast({ msg, kind })
-    setTimeout(() => setToast(null), 3200)
+    if (toastTimer.current) clearTimeout(toastTimer.current)
+    toastTimer.current = setTimeout(() => setToast(null), 3200)
   }, [])
 
   // On any 401 (e.g. the 7-day token expired mid-session), drop the token so the

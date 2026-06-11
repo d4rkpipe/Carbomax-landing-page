@@ -18,6 +18,7 @@ export default function LoyaltyManager({ token, notify }) {
   const [tiers, setTiers] = useState([])
   const [loading, setLoading] = useState(true)
   const [editing, setEditing] = useState(null)
+  const reordering = React.useRef(false)
 
   const load = useCallback(async () => {
     setLoading(true)
@@ -34,7 +35,7 @@ export default function LoyaltyManager({ token, notify }) {
       setTiers((ts) => ts.map((t) => (t.id === updated.id ? updated : t)))
       notify('Pog\'ona yangilandi')
     } else {
-      const created = await api('/loyalty', { method: 'POST', body: form, token })
+      const created = await api('/loyalty', { method: 'POST', body: { ...form, displayOrder: tiers.length }, token })
       setTiers((ts) => [...ts, created])
       notify("Pog'ona qo'shildi")
     }
@@ -51,13 +52,16 @@ export default function LoyaltyManager({ token, notify }) {
   }
 
   const move = async (index, dir) => {
+    if (reordering.current) return
     const j = index + dir
     if (j < 0 || j >= tiers.length) return
     const next = tiers.slice()
     ;[next[index], next[j]] = [next[j], next[index]]
     setTiers(next)
+    reordering.current = true
     try { await api('/loyalty/reorder', { method: 'PUT', body: { ids: next.map((t) => t.id) }, token }) }
     catch (e) { notify(e.message, 'err'); load() }
+    finally { reordering.current = false }
   }
 
   return (

@@ -90,14 +90,25 @@ export function ManagerHeader({ title, count, unit, addLabel, onAdd }) {
   )
 }
 
-// Modal overlay — children should be the card/form (it stops propagation itself).
+// Modal overlay — closes only when a click both STARTS and ENDS on the backdrop
+// itself, so selecting text inside the form and releasing the mouse outside it
+// won't discard the form. Also closes on Escape.
 export function Overlay({ onClose, children }) {
+  const downOnSelf = React.useRef(false)
+  React.useEffect(() => {
+    const onKey = (e) => { if (e.key === 'Escape') onClose() }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [onClose])
   return (
-    <div onClick={onClose} style={{
-      position: 'fixed', inset: 0, zIndex: 50, padding: '40px 20px', overflowY: 'auto',
-      background: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)',
-      display: 'flex', alignItems: 'flex-start', justifyContent: 'center',
-    }}>
+    <div
+      onMouseDown={(e) => { downOnSelf.current = e.target === e.currentTarget }}
+      onMouseUp={(e) => { if (downOnSelf.current && e.target === e.currentTarget) onClose() }}
+      style={{
+        position: 'fixed', inset: 0, zIndex: 50, padding: '40px 20px', overflowY: 'auto',
+        background: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)',
+        display: 'flex', alignItems: 'flex-start', justifyContent: 'center',
+      }}>
       {children}
     </div>
   )

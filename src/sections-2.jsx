@@ -223,6 +223,7 @@ function LeadForm({ locale, prefill, leadFormRef }) {
   const t = useT(locale);
   const [first, setFirst] = useState("");
   const [phone, setPhone] = useState("");
+  const [phoneOk, setPhoneOk] = useState(false);
   const [cat, setCat] = useState("");
   const [notes, setNotes] = useState("");
   const [sent, setSent] = useState(false);
@@ -233,12 +234,14 @@ function LeadForm({ locale, prefill, leadFormRef }) {
     e.preventDefault();
     const company = e.currentTarget.company ? e.currentTarget.company.value : ""; // honeypot
     setErr("");
+    if (!phoneOk) { setErr(t("common.phoneIncomplete")); return; }
     setSending(true);
     try {
       const res = await fetch("/api/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ type: "quote", name: first, phone, topic: cat, notes, company }),
+        signal: AbortSignal.timeout(10000),
       });
       if (!res.ok) throw new Error();
       setSent(true);
@@ -249,15 +252,20 @@ function LeadForm({ locale, prefill, leadFormRef }) {
     }
   };
 
+  const appliedPrefill = useRef(null);
   useEffect(() => {
-    if (prefill && prefill.product) {
+    // Apply each prefill only once — re-running on a locale switch would
+    // re-prepend the brand or wipe notes the user already typed.
+    if (!prefill || appliedPrefill.current === prefill) return;
+    appliedPrefill.current = prefill;
+    if (prefill.product) {
       setCat(prefill.product.cat === "covers" ? t("lead.catOptions")[0]
             : prefill.product.cat === "mats" ? t("lead.catOptions")[1]
             : prefill.product.cat === "acc" ? t("lead.catOptions")[2]
             : t("lead.catOptions")[3]);
       setNotes(`${prefill.product.name[locale]} (${prefill.product.sku})`);
     }
-    if (prefill && prefill.brand) {
+    if (prefill.brand) {
       setNotes(prev => prefill.brand + (prev ? `\n${prev}` : ""));
     }
   }, [prefill, locale, t]);
@@ -280,23 +288,23 @@ function LeadForm({ locale, prefill, leadFormRef }) {
             onSubmit={submit}
             className="glass" style={{ padding: 32, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
             <div className="field" style={{ gridColumn: "1 / -1" }}>
-              <label>{t("lead.first")} <span style={{ color: "var(--accent)" }}>*</span></label>
-              <input type="text" required value={first} onChange={(e) => setFirst(e.target.value)} />
+              <label htmlFor="lead-first">{t("lead.first")} <span style={{ color: "var(--accent)" }}>*</span></label>
+              <input id="lead-first" type="text" required value={first} onChange={(e) => setFirst(e.target.value)} />
             </div>
             <div className="field" style={{ gridColumn: "1 / -1" }}>
-              <label>{t("lead.phone")} <span style={{ color: "var(--accent)" }}>*</span></label>
-              <IMaskInput mask="+{998} (00) 000-00-00" value={phone} onAccept={(value) => setPhone(value)} placeholder="+99890 1234567" type="tel" required />
+              <label htmlFor="lead-phone">{t("lead.phone")} <span style={{ color: "var(--accent)" }}>*</span></label>
+              <IMaskInput id="lead-phone" mask="+{998} (00) 000-00-00" value={phone} onAccept={(value) => { setPhone(value); setPhoneOk(false); }} onComplete={() => setPhoneOk(true)} placeholder="+998 (90) 123-45-67" type="tel" required />
             </div>
             <div className="field" style={{ gridColumn: "1 / -1" }}>
-              <label>{t("lead.category")}</label>
-              <select value={cat} onChange={(e) => setCat(e.target.value)}>
+              <label htmlFor="lead-category">{t("lead.category")}</label>
+              <select id="lead-category" value={cat} onChange={(e) => setCat(e.target.value)}>
                 <option value="">—</option>
                 {t("lead.catOptions").map(c => <option key={c} value={c}>{c}</option>)}
               </select>
             </div>
             <div className="field" style={{ gridColumn: "1 / -1" }}>
-              <label>{t("lead.notes")}</label>
-              <textarea value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="…" />
+              <label htmlFor="lead-notes">{t("lead.notes")}</label>
+              <textarea id="lead-notes" value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="…" />
             </div>
             {/* honeypot */}
             <input type="text" name="company" autoComplete="off" tabIndex="-1"
@@ -336,6 +344,7 @@ function FAQ({ locale }) {
               <div style={{ borderBottom: "1px solid var(--border)" }}>
                 <button
                   onClick={() => setOpen(isOpen ? -1 : i)}
+                  aria-expanded={isOpen}
                   style={{ width: "100%", background: "transparent", border: 0, color: "var(--fg)", textAlign: "left", padding: "22px 0", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, font: "inherit" }}>
                   <span style={{ display: "flex", alignItems: "baseline", gap: 16 }}>
                     <span className="mono" style={{ color: "var(--fg-dim)", fontSize: 11, letterSpacing: "0.08em" }}>{String(i + 1).padStart(2, "0")}</span>
@@ -354,7 +363,7 @@ function FAQ({ locale }) {
                   </span>
                 </button>
                 <div style={{
-                  maxHeight: isOpen ? 200 : 0,
+                  maxHeight: isOpen ? 500 : 0,
                   overflow: "hidden",
                   transition: "max-height .3s ease, padding .3s ease",
                   paddingBottom: isOpen ? 24 : 0,
@@ -487,7 +496,7 @@ function Contact({ locale }) {
             </div>
             <a href={mapLink} target="_blank" rel="noopener noreferrer"
                style={{ position: "absolute", bottom: 16, right: 16, padding: "8px 14px", background: "color-mix(in oklab, var(--bg) 82%, transparent)", border: "1px solid var(--border-strong)", borderRadius: 999, fontSize: 12, color: "var(--fg)", textDecoration: "none", backdropFilter: "blur(8px)" }}>
-              Yandex'da ochish ↗
+              {t("common.openMap")} ↗
             </a>
           </div>
         </Reveal>
@@ -579,8 +588,8 @@ function Footer({ locale }) {
           <div>
             <div className="eyebrow" style={{ marginBottom: 14 }}>{t("footer.contact")}</div>
             <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 8 }}>
-              <li style={{ color: "var(--fg-muted)", fontSize: 14 }}>+998 (77) 013-07-07</li>
-              <li style={{ color: "var(--fg-muted)", fontSize: 14 }}>admin@carbomax.net</li>
+              <li><a href="tel:+998770130707" style={{ color: "var(--fg-muted)", fontSize: 14, textDecoration: "none" }}>+998 (77) 013-07-07</a></li>
+              <li><a href="mailto:admin@carbomax.net" style={{ color: "var(--fg-muted)", fontSize: 14, textDecoration: "none" }}>admin@carbomax.net</a></li>
               <li style={{ color: "var(--fg-muted)", fontSize: 13, maxWidth: 220 }}>{t("contact.address")}</li>
             </ul>
           </div>
@@ -656,10 +665,13 @@ function FloatingActions() {
 // ─── Booking modal ────────────────────────────────────────────────────────────
 function BookingModal({ locale, open, defaultService, onClose }) {
   const t = useT(locale);
-  const [form, setForm] = useState({ service: "", date: "", time: "", name: "", phone: "", notes: "" });
+  const [form, setForm] = useState({ service: "", date: "", time: "", name: "", phone: "", notes: "", company: "" });
+  const [phoneOk, setPhoneOk] = useState(false);
+  const todayStr = new Date().toISOString().slice(0, 10);
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
   const [err, setErr] = useState("");
+  const downRef = useRef(false);
   useEffect(() => {
     if (open) {
       setForm(f => ({ ...f, service: defaultService || "" }));
@@ -667,18 +679,30 @@ function BookingModal({ locale, open, defaultService, onClose }) {
       setErr("");
     }
   }, [open, defaultService]);
+  // Escape-to-close + lock background scroll while the modal is open.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { window.removeEventListener("keydown", onKey); document.body.style.overflow = prevOverflow; };
+  }, [open, onClose]);
   if (!open) return null;
   const upd = (k, v) => setForm(f => ({ ...f, [k]: v }));
   const submit = async (e) => {
     e.preventDefault();
     setErr("");
+    if (form.company) { setSent(true); return; }   // honeypot — pretend success
+    if (!phoneOk) { setErr(t("common.phoneIncomplete")); return; }
     setSending(true);
     try {
       const schedule = [form.date, form.time].filter(Boolean).join(" ");
       const res = await fetch("/api/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ type: "booking", name: form.name, phone: form.phone, topic: form.service, schedule, notes: form.notes }),
+        body: JSON.stringify({ type: "booking", name: form.name, phone: form.phone, topic: form.service, schedule, notes: form.notes, company: form.company }),
+        signal: AbortSignal.timeout(10000),
       });
       if (!res.ok) throw new Error();
       setSent(true);
@@ -689,8 +713,11 @@ function BookingModal({ locale, open, defaultService, onClose }) {
     }
   };
   return (
-    <div onClick={onClose} style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.7)", backdropFilter: "blur(8px)", zIndex: 110, display: "flex", alignItems: "center", justifyContent: "center", padding: 20 }}>
-      <div onClick={(e) => e.stopPropagation()} className="card" style={{ background: "var(--surface)", padding: 32, width: "100%", maxWidth: 480, position: "relative", maxHeight: "92vh", overflowY: "auto" }}>
+    <div
+      onMouseDown={(e) => { downRef.current = e.target === e.currentTarget; }}
+      onMouseUp={(e) => { if (downRef.current && e.target === e.currentTarget) onClose(); }}
+      style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.7)", backdropFilter: "blur(8px)", zIndex: 110, display: "flex", alignItems: "center", justifyContent: "center", padding: 20 }}>
+      <div onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-label={t("booking.title")} className="card" style={{ background: "var(--surface)", padding: 32, width: "100%", maxWidth: 480, position: "relative", maxHeight: "92vh", overflowY: "auto" }}>
         <button onClick={onClose} aria-label="Close" style={{ position: "absolute", top: 16, right: 16, background: "transparent", border: 0, color: "var(--fg-muted)", cursor: "pointer", fontSize: 20, width: 32, height: 32, borderRadius: 999 }}>×</button>
         {sent ? (
           <div style={{ textAlign: "center", padding: "20px 0" }}>
@@ -711,12 +738,13 @@ function BookingModal({ locale, open, defaultService, onClose }) {
                 <input type="text" value={form.service} onChange={(e) => upd("service", e.target.value)} required />
               </div>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-                <div className="field"><label>{t("booking.date")}</label><input type="date" value={form.date} onChange={(e) => upd("date", e.target.value)} required /></div>
+                <div className="field"><label>{t("booking.date")}</label><input type="date" min={todayStr} value={form.date} onChange={(e) => upd("date", e.target.value)} required /></div>
                 <div className="field"><label>{t("booking.time")}</label><input type="time" value={form.time} onChange={(e) => upd("time", e.target.value)} required /></div>
               </div>
               <div className="field"><label>{t("booking.name")}</label><input type="text" value={form.name} onChange={(e) => upd("name", e.target.value)} required /></div>
-              <div className="field"><label>{t("booking.phone")}</label><IMaskInput mask="+{998} (00) 000-00-00" value={form.phone} onAccept={(value) => upd("phone", value)} placeholder="+998 (XX) XXX-XX-XX" type="tel" required /></div>
+              <div className="field"><label>{t("booking.phone")}</label><IMaskInput mask="+{998} (00) 000-00-00" value={form.phone} onAccept={(value) => { upd("phone", value); setPhoneOk(false); }} onComplete={() => setPhoneOk(true)} placeholder="+998 (90) 123-45-67" type="tel" required /></div>
               <div className="field"><label>{t("booking.notes")}</label><textarea value={form.notes} onChange={(e) => upd("notes", e.target.value)} /></div>
+              <input type="text" name="company" autoComplete="off" tabIndex="-1" aria-hidden="true" value={form.company} onChange={(e) => upd("company", e.target.value)} style={{ position: "absolute", left: "-9999px", opacity: 0, pointerEvents: "none" }} />
               {err && <div style={{ color: "#e5484d", fontSize: 13 }}>{err}</div>}
               <div style={{ display: "flex", gap: 8, marginTop: 4 }}>
                 <button type="button" onClick={onClose} className="btn btn-ghost" style={{ flex: 1 }}>{t("booking.cancel")}</button>

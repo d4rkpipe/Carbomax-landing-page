@@ -69,11 +69,34 @@ app.decorate('auth', async (req, reply) => {
   }
 })
 
-// Uploaded product images → /media/products/<file>
+// Hide internal error details (e.g. Prisma's argument dump on a NaN :id) from
+// clients: validation errors → clean 400, everything unexpected → generic 500.
+app.setErrorHandler((err, req, reply) => {
+  if (err?.name === 'PrismaClientValidationError') {
+    return reply.code(400).send({ error: "Noto'g'ri so'rov" })
+  }
+  const status = err.statusCode && err.statusCode >= 400 ? err.statusCode : 500
+  if (status >= 500) {
+    req.log.error(err)
+    return reply.code(500).send({ error: 'Server xatosi' })
+  }
+  return reply.code(status).send({ error: err.message || 'Xatolik' })
+})
+
+// Baseline security headers on every response.
+app.addHook('onRequest', async (req, reply) => {
+  reply.header('X-Content-Type-Options', 'nosniff')
+  reply.header('X-Frame-Options', 'SAMEORIGIN')
+  reply.header('Referrer-Policy', 'strict-origin-when-cross-origin')
+})
+
+// Uploaded product images → /media/products/<file> (cached a week — filenames
+// are random UUIDs, so a replaced image gets a brand-new URL anyway).
 await app.register(fastifyStatic, {
   root: UPLOADS_DIR,
   prefix: '/media/',
   decorateReply: false,
+  maxAge: '7d',
 })
 
 await app.register(authRoutes, { prefix: '/api/auth' })
@@ -93,12 +116,26 @@ if (isProd) {
   await app.register(fastifyStatic, {
     root: DIST,
     prefix: '/',
+    cacheControl: false,
+    setHeaders: (res, filePath) => {
+      // Content-hashed bundles (/assets/*) never change under the same name →
+      // cache forever; HTML and other files must revalidate so updates show.
+      if (filePath.includes('/assets/')) {
+        res.setHeader('Cache-Control', 'public, max-age=31536000, immutable')
+      } else {
+        res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
+      }
+    },
   })
-  // Clean /admin URL → the separately-built admin entry.
-  app.get('/admin', (req, reply) => reply.sendFile('admin.html'))
-  // Anything else non-API falls back to the SPA shell.
+  // Clean /admin URL → the separately-built admin entry (with or without slash).
+  const sendAdmin = (req, reply) => reply.sendFile('admin.html')
+  app.get('/admin', sendAdmin)
+  app.get('/admin/', sendAdmin)
+  // Anything else non-API falls back to the SPA shell — but a missing static
+  // file (one with an extension) returns a real 404, not a soft-200 of index.html.
   app.setNotFoundHandler((req, reply) => {
-    if (req.raw.url.startsWith('/api') || req.raw.url.startsWith('/media')) {
+    const url = req.raw.url
+    if (url.startsWith('/api') || url.startsWith('/media') || url.startsWith('/assets/') || /\.[a-zA-Z0-9]+(\?|$)/.test(url)) {
       return reply.code(404).send({ error: 'Not found' })
     }
     return reply.sendFile('index.html')
@@ -111,4 +148,13 @@ try {
 } catch (err) {
   app.log.error(err)
   process.exit(1)
+}
+
+// Graceful shutdown — let in-flight requests finish and close cleanly on deploy.
+for (const sig of ['SIGTERM', 'SIGINT']) {
+  process.once(sig, async () => {
+    app.log.info(`${sig} received — shutting down`)
+    try { await app.close() } catch (e) { app.log.error(e) }
+    process.exit(0)
+  })
 }

@@ -18,6 +18,7 @@ export default function BranchesManager({ token, notify }) {
   const [branches, setBranches] = useState([])
   const [loading, setLoading] = useState(true)
   const [editing, setEditing] = useState(null)
+  const reordering = React.useRef(false)
 
   const load = useCallback(async () => {
     setLoading(true)
@@ -33,7 +34,7 @@ export default function BranchesManager({ token, notify }) {
       const u = await api(`/branches/${form.id}`, { method: 'PUT', body: form, token })
       setBranches((xs) => xs.map((x) => (x.id === u.id ? u : x))); notify('Filial yangilandi')
     } else {
-      const c = await api('/branches', { method: 'POST', body: form, token })
+      const c = await api('/branches', { method: 'POST', body: { ...form, displayOrder: branches.length }, token })
       setBranches((xs) => [...xs, c]); notify("Filial qo'shildi")
     }
     setEditing(null)
@@ -46,10 +47,13 @@ export default function BranchesManager({ token, notify }) {
   }
 
   const move = async (i, dir) => {
+    if (reordering.current) return
     const j = i + dir; if (j < 0 || j >= branches.length) return
     const next = branches.slice(); [next[i], next[j]] = [next[j], next[i]]; setBranches(next)
+    reordering.current = true
     try { await api('/branches/reorder', { method: 'PUT', body: { ids: next.map((x) => x.id) }, token }) }
     catch (e) { notify(e.message, 'err'); load() }
+    finally { reordering.current = false }
   }
 
   return (
