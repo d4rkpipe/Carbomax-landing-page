@@ -23,6 +23,10 @@ function App() {
   const [tw, setTweak] = useTweaks(TWEAK_DEFAULTS);
   const [locale, setLocale] = React.useState(() => {
     try {
+      // ?lang= wins (so the hreflang URLs actually serve the right language to
+      // crawlers/visitors), then the saved preference, then the browser language.
+      const fromUrl = new URLSearchParams(window.location.search).get("lang");
+      if (fromUrl && ["uz", "ru", "en"].includes(fromUrl)) return fromUrl;
       const saved = localStorage.getItem("cbx_locale");
       if (saved && ["uz", "ru", "en"].includes(saved)) return saved;
       const nav = (navigator.language || "uz").slice(0, 2);
@@ -130,6 +134,8 @@ function App() {
         onClose={() => setBookingOpen(false)}
       />
 
+      {/* Dev-only visual tweak panel — gated so it never ships to production. */}
+      {import.meta.env.DEV && (
       <TweaksPanel title="Carbomax tweaks">
         <TweakSection label="Theme" />
         <TweakRadio label="Mode" value={tw.theme}
@@ -153,6 +159,7 @@ function App() {
           options={["compact", "regular", "spacious"]}
           onChange={(v) => setTweak("density", v)} />
       </TweaksPanel>
+      )}
     </div>
   );
 }

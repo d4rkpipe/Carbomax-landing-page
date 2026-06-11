@@ -1,6 +1,6 @@
 // Admin shell — auth + section menu + routing between managers.
 import React, { useState, useEffect, useCallback } from 'react'
-import { api, getToken, saveToken } from './lib.js'
+import { api, getToken, saveToken, setUnauthorizedHandler } from './lib.js'
 import { Center, Toast } from './ui.jsx'
 import CatalogManager from './CatalogManager.jsx'
 import LoyaltyManager from './LoyaltyManager.jsx'
@@ -21,12 +21,20 @@ export default function Admin() {
     setTimeout(() => setToast(null), 3200)
   }, [])
 
-  // Validate any stored token before showing the dashboard.
+  // On any 401 (e.g. the 7-day token expired mid-session), drop the token so the
+  // app falls back to the login screen instead of looping on error toasts.
+  useEffect(() => {
+    setUnauthorizedHandler(() => { saveToken(''); setToken('') })
+    return () => setUnauthorizedHandler(null)
+  }, [])
+
+  // Validate any stored token before showing the dashboard. Only a real 401
+  // clears it — a transient network error shouldn't log the admin out.
   useEffect(() => {
     if (!token) { setReady(true); return }
     let alive = true
     api('/auth/me', { token })
-      .catch(() => { if (alive) { saveToken(''); setToken('') } })
+      .catch((e) => { if (alive && e.status === 401) { saveToken(''); setToken('') } })
       .finally(() => { if (alive) setReady(true) })
     return () => { alive = false }
   }, [token])
@@ -89,9 +97,11 @@ function TopBar({ view, onHome, onLogout }) {
 function Menu({ onOpen, token }) {
   const [counts, setCounts] = useState({ catalog: null, loyalty: null, portfolio: null, leads: null, branches: null })
   useEffect(() => {
-    Promise.all([api('/products'), api('/loyalty'), api('/portfolio'), api('/leads', { token }), api('/branches')])
-      .then(([p, l, pf, ld, br]) => setCounts({ catalog: p.length, loyalty: l.length, portfolio: pf.length, leads: ld.length, branches: br.length }))
-      .catch(() => {})
+    Promise.allSettled([api('/products'), api('/loyalty'), api('/portfolio'), api('/leads', { token }), api('/branches')])
+      .then((rs) => {
+        const n = (r) => (r.status === 'fulfilled' ? r.value.length : null)
+        setCounts({ catalog: n(rs[0]), loyalty: n(rs[1]), portfolio: n(rs[2]), leads: n(rs[3]), branches: n(rs[4]) })
+      })
   }, [token])
   const cards = [
     { id: 'catalog', title: 'Katalog', desc: "Mahsulotlar va kategoriyalar — qo'shish, tahrirlash, rasm, tartiblash.", count: counts.catalog, unit: 'mahsulot' },

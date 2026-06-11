@@ -6,8 +6,16 @@
 import bcrypt from 'bcryptjs'
 import { prisma } from '../lib/prisma.js'
 
+const isProd = process.env.NODE_ENV === 'production'
 const ADMIN_USER = process.env.ADMIN_USER || 'admin'
-const ADMIN_PASS = process.env.ADMIN_PASS || 'carbomax2026'
+const DEFAULT_ADMIN_PASS = 'carbomax2026'
+const ADMIN_PASS = process.env.ADMIN_PASS || DEFAULT_ADMIN_PASS
+
+// In production, refuse the documented default password — force a unique one.
+if (isProd && (!process.env.ADMIN_PASS || process.env.ADMIN_PASS === DEFAULT_ADMIN_PASS)) {
+  console.error('FATAL: set a unique ADMIN_PASS in production (the documented default is not allowed).')
+  process.exit(1)
+}
 
 // Migrated 1:1 from src/i18n.jsx PRODUCTS.
 const PRODUCTS = [
@@ -73,7 +81,7 @@ async function main() {
   if (!existing) {
     const passwordHash = await bcrypt.hash(ADMIN_PASS, 10)
     await prisma.adminUser.create({ data: { username: ADMIN_USER, passwordHash } })
-    console.log(`✓ Admin yaratildi → login: ${ADMIN_USER}  parol: ${ADMIN_PASS}`)
+    console.log(`✓ Admin yaratildi → login: ${ADMIN_USER}`)
   } else {
     console.log(`• Admin allaqachon mavjud: ${ADMIN_USER}`)
   }

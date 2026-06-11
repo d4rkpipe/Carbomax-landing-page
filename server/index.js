@@ -39,12 +39,19 @@ if (isProd && (!process.env.JWT_SECRET || process.env.JWT_SECRET === DEV_JWT_SEC
 }
 const JWT_SECRET = process.env.JWT_SECRET || DEV_JWT_SECRET
 
+// In production, bind to localhost so only the local reverse proxy (Nginx) can
+// reach the API — not the public internet directly. Override with HOST if your
+// setup needs it (e.g. HOST=0.0.0.0 when there is no local proxy).
+const HOST = process.env.HOST || (isProd ? '127.0.0.1' : '0.0.0.0')
+
 // Ensure the upload target exists before @fastify/static tries to read it.
 fs.mkdirSync(path.join(UPLOADS_DIR, 'products'), { recursive: true })
 
 // trustProxy: behind Nginx, read the real client IP from X-Forwarded-For so
 // rate-limiting works per-visitor (not per-proxy).
-const app = Fastify({ logger: true, bodyLimit: 8 * 1024 * 1024, trustProxy: true })
+// trustProxy: in prod trust exactly one hop (the local Nginx) so X-Forwarded-For
+// can't be spoofed to bypass per-IP rate limits; in dev trust all (no proxy).
+const app = Fastify({ logger: true, bodyLimit: 8 * 1024 * 1024, trustProxy: isProd ? 1 : true })
 
 await app.register(cors, { origin: true })
 await app.register(jwt, { secret: JWT_SECRET })
@@ -99,8 +106,8 @@ if (isProd) {
 }
 
 try {
-  await app.listen({ port: PORT, host: '0.0.0.0' })
-  console.log(`Carbomax API → http://localhost:${PORT}`)
+  await app.listen({ port: PORT, host: HOST })
+  console.log(`Carbomax API → http://${HOST}:${PORT}`)
 } catch (err) {
   app.log.error(err)
   process.exit(1)

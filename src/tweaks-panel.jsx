@@ -169,7 +169,8 @@ function useTweaks(defaults) {
     const edits = typeof keyOrEdits === 'object' && keyOrEdits !== null
       ? keyOrEdits : { [keyOrEdits]: val };
     setValues((prev) => ({ ...prev, ...edits }));
-    window.parent.postMessage({ type: '__edit_mode_set_keys', edits }, '*');
+    // Dev-only: tell the editing host to persist the tweak. Never in production.
+    if (import.meta.env.DEV) window.parent.postMessage({ type: '__edit_mode_set_keys', edits }, '*');
     // Same-window signal so in-page listeners (deck-stage rail thumbnails)
     // can react — the parent message only reaches the host, not peers.
     window.dispatchEvent(new CustomEvent('tweakchange', { detail: edits }));
